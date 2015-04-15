@@ -301,30 +301,30 @@
       // summaryToolStripMenuItem
       // 
       this.summaryToolStripMenuItem.Name = "summaryToolStripMenuItem";
-      this.summaryToolStripMenuItem.Size = new System.Drawing.Size(181, 26);
+      this.summaryToolStripMenuItem.Size = new System.Drawing.Size(175, 26);
       this.summaryToolStripMenuItem.Text = "&Sommaire";
       // 
       // indexToolStripMenuItem
       // 
       this.indexToolStripMenuItem.Name = "indexToolStripMenuItem";
-      this.indexToolStripMenuItem.Size = new System.Drawing.Size(181, 26);
+      this.indexToolStripMenuItem.Size = new System.Drawing.Size(175, 26);
       this.indexToolStripMenuItem.Text = "&Index";
       // 
       // searchToolStripMenuItem
       // 
       this.searchToolStripMenuItem.Name = "searchToolStripMenuItem";
-      this.searchToolStripMenuItem.Size = new System.Drawing.Size(181, 26);
+      this.searchToolStripMenuItem.Size = new System.Drawing.Size(175, 26);
       this.searchToolStripMenuItem.Text = "&Rechercher";
       // 
       // toolStripSeparator5
       // 
       this.toolStripSeparator5.Name = "toolStripSeparator5";
-      this.toolStripSeparator5.Size = new System.Drawing.Size(178, 6);
+      this.toolStripSeparator5.Size = new System.Drawing.Size(172, 6);
       // 
       // aboutToolStripMenuItem
       // 
       this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
-      this.aboutToolStripMenuItem.Size = new System.Drawing.Size(181, 26);
+      this.aboutToolStripMenuItem.Size = new System.Drawing.Size(175, 26);
       this.aboutToolStripMenuItem.Text = "À &propos de...";
       this.aboutToolStripMenuItem.Click += new System.EventHandler(this.AboutToolStripMenuItem_Click);
       // 
@@ -343,6 +343,7 @@
       this.textBoxSaveFilePath.Name = "textBoxSaveFilePath";
       this.textBoxSaveFilePath.Size = new System.Drawing.Size(590, 22);
       this.textBoxSaveFilePath.TabIndex = 3;
+      this.textBoxSaveFilePath.Text = "C:\\Users\\User\\Documents\\perso\\magazine\\direct-matin";
       // 
       // buttonPickDirectory
       // 

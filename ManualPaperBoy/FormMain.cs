@@ -22,6 +22,9 @@ using System.Diagnostics;
 using System.Reflection;
 using System.Windows.Forms;
 using ManualPaperBoy.Properties;
+using System.Net;
+using System.Collections.Generic;
+using System.IO;
 
 namespace ManualPaperBoy
 {
@@ -132,13 +135,113 @@ namespace ManualPaperBoy
         return;
       }
 
-      //DateTime selectedDateTime = dateTimePicker1.MaxDate;
+      DateTime selectedDateTime = dateTimePicker1.Value;
+      foreach (string selectedEditionInLB in listBoxSelectedEdition.Items)
+      {
+        string result = string.Empty;
+        // http://kiosque.directmatin.fr/Pdf.aspx?edition=NEP&date=
+        string url = "http://kiosque.directmatin.fr/Pdf.aspx?edition=";
+        string dateEnglish = GetEnglishDate(dateTimePicker1.Value);
 
+        string fileName = "DirectMatin-" +
+          GetEditionCode(selectedEditionInLB) +
+          "-" +
+          dateEnglish + ".pdf";
+        url = AddEditionToUrl(url, GetEditionCode(selectedEditionInLB));
+        url = AddDateToUrl(url, dateTimePicker1.Value);
+        if (GetWebClientBinaries(url, Path.Combine(textBoxSaveFilePath.Text, fileName)))
+        {
+          result = "download ok and file saved";
+        }
+        else
+        {
+          result = "error while downloading";
+        }
+
+        //DisplayMessageOk(result, "result", MessageBoxButtons.OK);
+      }
+    }
+
+    private static string AddEditionToUrl(string url, string edition)
+    {
+      return url += edition;
+    }
+
+    private static string AddDateToUrl(string url, DateTime dt)
+    {
+      return url += "&date=" + GetEnglishDate(dt);
+    }
+
+    private static string GetEnglishDate(DateTime dt)
+    {
+      return dt.Year.ToString() + ToTwoDigits(dt.Month) + ToTwoDigits(dt.Day);
+    }
+
+    private static string GetEditionCode(string editionName)
+    {
+      string result = string.Empty;
+      foreach (var item in LoadEditioncodes())
+      {
+        if (item.Key == editionName)
+        {
+          result = item.Value;
+          break;
+        }
+      }
+
+      return result;
+    }
+
+    private static Dictionary<string, string> LoadEditioncodes()
+    {
+      // TODO could be an XML file
+      var result = new Dictionary<string, string>();
+      result.Add("Direct Matin Edition Nationale", "NEP");
+      result.Add("Direct Matin Bordeaux", "BD");
+      result.Add("Direct Matin Lille", "LIL");
+      result.Add("Direct Matin Lyon", "LYO");
+      result.Add("Direct Matin Provence", "PRO");
+      result.Add("Direct Matin Montpellier", "MTP");
+      result.Add("Direct Matin Grand ouest", "VP1");
+      result.Add("Direct Matin Côte-d'azur", "NP");
+      result.Add("Direct Matin Strasbourg", "SP");
+      result.Add("Direct Matin Toulouse", "TP");
+
+      return result;
     }
 
     private void DisplayMessageOk(string message, string title, MessageBoxButtons buttons)
     {
       MessageBox.Show(this, message, title, buttons);
+    }
+
+    private static string ToTwoDigits(int number)
+    {
+      return number < 10 ? "0" + number : number.ToString();
+    }
+
+    private static bool GetWebClientBinaries(string url = "http://www.google.com/",
+      string fileName = "untitled-file.pdf")
+    {
+      WebClient client = new WebClient();
+      bool result = false;
+      // set the user agent to IE6
+      client.Headers.Add("user-agent", "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; .NET CLR 1.0.3705;)");
+      try
+      {
+        client.DownloadFile(url, fileName);
+        result = true;
+      }
+      catch (WebException)
+      {
+        result = false;
+      }
+      catch (NotSupportedException)
+      {
+        result = false;
+      }
+
+      return result;
     }
   }
 }
