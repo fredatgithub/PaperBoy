@@ -1,2 +1,2 @@
 # PaperBoy
-Get your electronic newpaper every morning automatically with a scheduled job or manually
+Get your electronic newspaper every morning automatically with a scheduled job or manually
