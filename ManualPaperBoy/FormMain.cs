@@ -61,7 +61,7 @@ namespace ManualPaperBoy
       LoadComboBox(comboBoxSelectEdition);
     }
 
-    private void LoadComboBox(ComboBox cb)
+    private static void LoadComboBox(ComboBox cb)
     {
       cb.Items.Clear();
       cb.Items.Add("Direct Matin Edition Nationale");
@@ -135,6 +135,12 @@ namespace ManualPaperBoy
         return;
       }
 
+      if (!Directory.Exists(textBoxSaveFilePath.Text))
+      {
+        DisplayMessageOk("The directory doesn't exist", "Directory not correct", MessageBoxButtons.OK);
+        return;
+      }
+
       DateTime selectedDateTime = dateTimePicker1.Value;
       foreach (string selectedEditionInLb in listBoxSelectedEdition.Items)
       {
@@ -144,7 +150,7 @@ namespace ManualPaperBoy
         string dateEnglish = GetEnglishDate(dateTimePicker1.Value);
 
         string fileName = "DirectMatin-" +
-          GetEditionCode(selectedEditionInLb) +
+          GetEditionName(selectedEditionInLb).Replace("Direct Matin ", "") +
           "-" +
           dateEnglish + ".pdf";
         url = AddEditionToUrl(url, GetEditionCode(selectedEditionInLb));
@@ -185,6 +191,21 @@ namespace ManualPaperBoy
         if (item.Key == editionName)
         {
           result = item.Value;
+          break;
+        }
+      }
+
+      return result;
+    }
+
+    private static string GetEditionName(string editionCode)
+    {
+      string result = string.Empty;
+      foreach (var item in LoadEditioncodes())
+      {
+        if (item.Value == editionCode)
+        {
+          result = item.Key;
           break;
         }
       }

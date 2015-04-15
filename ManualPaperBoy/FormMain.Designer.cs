@@ -384,7 +384,7 @@
       this.buttonSelectEdition.Location = new System.Drawing.Point(309, 73);
       this.buttonSelectEdition.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
       this.buttonSelectEdition.Name = "buttonSelectEdition";
-      this.buttonSelectEdition.Size = new System.Drawing.Size(57, 20);
+      this.buttonSelectEdition.Size = new System.Drawing.Size(57, 25);
       this.buttonSelectEdition.TabIndex = 7;
       this.buttonSelectEdition.Text = "Select ->";
       this.buttonSelectEdition.UseVisualStyleBackColor = true;
