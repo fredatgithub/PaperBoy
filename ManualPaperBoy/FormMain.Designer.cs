@@ -72,6 +72,7 @@
       this.labelSelectDate = new System.Windows.Forms.Label();
       this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
       this.buttonLaunchSelectedEdition = new System.Windows.Forms.Button();
+      this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
       this.menuStrip1.SuspendLayout();
       this.SuspendLayout();
       // 
@@ -351,6 +352,7 @@
       this.buttonPickDirectory.TabIndex = 4;
       this.buttonPickDirectory.Text = "...";
       this.buttonPickDirectory.UseVisualStyleBackColor = true;
+      this.buttonPickDirectory.Click += new System.EventHandler(this.buttonPickDirectory_Click);
       // 
       // labelSelectEdition
       // 
@@ -378,6 +380,7 @@
       this.buttonSelectEdition.TabIndex = 7;
       this.buttonSelectEdition.Text = "Select ->";
       this.buttonSelectEdition.UseVisualStyleBackColor = true;
+      this.buttonSelectEdition.Click += new System.EventHandler(this.buttonSelectEdition_Click);
       // 
       // listBoxSelectedEdition
       // 
@@ -397,6 +400,7 @@
       this.buttonDownloadEditions.TabIndex = 9;
       this.buttonDownloadEditions.Text = "Download selected editions";
       this.buttonDownloadEditions.UseVisualStyleBackColor = true;
+      this.buttonDownloadEditions.Click += new System.EventHandler(this.buttonDownloadEditions_Click);
       // 
       // labelSelectDate
       // 
@@ -500,5 +504,6 @@
     private System.Windows.Forms.Label labelSelectDate;
     private System.Windows.Forms.DateTimePicker dateTimePicker1;
     private System.Windows.Forms.Button buttonLaunchSelectedEdition;
+    private System.Windows.Forms.FolderBrowserDialog folderBrowserDialog1;
   }
 }

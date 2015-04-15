@@ -55,7 +55,23 @@ namespace ManualPaperBoy
       DisplayTitle();
       GetWindowValue();
       comboBoxSelectEdition.Items.Clear();
+      LoadComboBox(comboBoxSelectEdition);
+    }
 
+    private void LoadComboBox(ComboBox cb)
+    {
+      cb.Items.Clear();
+      cb.Items.Add("Direct Matin Edition Nationale");
+      cb.Items.Add("Direct Matin Bordeaux");
+      cb.Items.Add("Direct Matin Lille");
+      cb.Items.Add("Direct Matin Lyon");
+      cb.Items.Add("Direct Matin Provence");
+      cb.Items.Add("Direct Matin Montpellier");
+      cb.Items.Add("Direct Matin Grand ouest");
+      cb.Items.Add("Direct Matin Côte-d'azur");
+      cb.Items.Add("Direct Matin Strasbourg");
+      cb.Items.Add("Direct Matin Toulouse");
+      cb.SelectedIndex = 0;
     }
 
     private void GetWindowValue()
@@ -78,6 +94,51 @@ namespace ManualPaperBoy
     private void FormMainFormClosing(object sender, FormClosingEventArgs e)
     {
       SaveWindowValue();
+    }
+
+    private void buttonSelectEdition_Click(object sender, EventArgs e)
+    {
+      if (!listBoxSelectedEdition.Items.Contains(comboBoxSelectEdition.SelectedItem))
+      {
+        listBoxSelectedEdition.Items.Add(comboBoxSelectEdition.SelectedItem);
+      }
+
+      if (comboBoxSelectEdition.SelectedIndex < comboBoxSelectEdition.Items.Count - 1)
+      {
+        comboBoxSelectEdition.SelectedIndex = comboBoxSelectEdition.SelectedIndex + 1;
+      }
+
+    }
+
+    private void buttonPickDirectory_Click(object sender, EventArgs e)
+    {
+      if (folderBrowserDialog1.ShowDialog() == DialogResult.OK)
+      {
+        textBoxSaveFilePath.Text = folderBrowserDialog1.SelectedPath;
+      }
+    }
+
+    private void buttonDownloadEditions_Click(object sender, EventArgs e)
+    {
+      if (textBoxSaveFilePath.Text == string.Empty)
+      {
+        DisplayMessageOk("The save file path cannot be empty", "Empty field", MessageBoxButtons.OK);
+        return;
+      }
+
+      if (listBoxSelectedEdition.Items.Count == 0)
+      {
+        DisplayMessageOk("You have not selected any edition", "Empty selection", MessageBoxButtons.OK);
+        return;
+      }
+
+      //DateTime selectedDateTime = dateTimePicker1.MaxDate;
+
+    }
+
+    private void DisplayMessageOk(string message, string title, MessageBoxButtons buttons)
+    {
+      MessageBox.Show(this, message, title, buttons);
     }
   }
 }
