@@ -136,7 +136,7 @@ namespace ManualPaperBoy
       }
 
       DateTime selectedDateTime = dateTimePicker1.Value;
-      foreach (string selectedEditionInLB in listBoxSelectedEdition.Items)
+      foreach (string selectedEditionInLb in listBoxSelectedEdition.Items)
       {
         string result = string.Empty;
         // http://kiosque.directmatin.fr/Pdf.aspx?edition=NEP&date=
@@ -144,10 +144,10 @@ namespace ManualPaperBoy
         string dateEnglish = GetEnglishDate(dateTimePicker1.Value);
 
         string fileName = "DirectMatin-" +
-          GetEditionCode(selectedEditionInLB) +
+          GetEditionCode(selectedEditionInLb) +
           "-" +
           dateEnglish + ".pdf";
-        url = AddEditionToUrl(url, GetEditionCode(selectedEditionInLB));
+        url = AddEditionToUrl(url, GetEditionCode(selectedEditionInLb));
         url = AddDateToUrl(url, dateTimePicker1.Value);
         if (GetWebClientBinaries(url, Path.Combine(textBoxSaveFilePath.Text, fileName)))
         {
@@ -174,7 +174,7 @@ namespace ManualPaperBoy
 
     private static string GetEnglishDate(DateTime dt)
     {
-      return dt.Year.ToString() + ToTwoDigits(dt.Month) + ToTwoDigits(dt.Day);
+      return dt.Year + ToTwoDigits(dt.Month) + ToTwoDigits(dt.Day);
     }
 
     private static string GetEditionCode(string editionName)
@@ -195,17 +195,19 @@ namespace ManualPaperBoy
     private static Dictionary<string, string> LoadEditioncodes()
     {
       // TODO could be an XML file
-      var result = new Dictionary<string, string>();
-      result.Add("Direct Matin Edition Nationale", "NEP");
-      result.Add("Direct Matin Bordeaux", "BD");
-      result.Add("Direct Matin Lille", "LIL");
-      result.Add("Direct Matin Lyon", "LYO");
-      result.Add("Direct Matin Provence", "PRO");
-      result.Add("Direct Matin Montpellier", "MTP");
-      result.Add("Direct Matin Grand ouest", "VP1");
-      result.Add("Direct Matin Côte-d'azur", "NP");
-      result.Add("Direct Matin Strasbourg", "SP");
-      result.Add("Direct Matin Toulouse", "TP");
+      var result = new Dictionary<string, string>
+      {
+        {"Direct Matin Edition Nationale", "NEP"},
+        {"Direct Matin Bordeaux", "BDX"},
+        {"Direct Matin Lille", "LIL"},
+        {"Direct Matin Lyon", "LYO"},
+        {"Direct Matin Provence", "PRO"},
+        {"Direct Matin Montpellier", "MTP"},
+        {"Direct Matin Grand ouest", "VP1"},
+        {"Direct Matin Côte-d'azur", "NP"},
+        {"Direct Matin Strasbourg", "SP"},
+        {"Direct Matin Toulouse", "TP"}
+      };
 
       return result;
     }
