@@ -142,18 +142,18 @@ namespace ManualPaperBoy
       }
 
       DateTime selectedDateTime = dateTimePicker1.Value;
-      foreach (string selectedEditionInLb in listBoxSelectedEdition.Items)
+      foreach (string selectedEditionInListBox in listBoxSelectedEdition.Items)
       {
         string result = string.Empty;
-        // http://kiosque.directmatin.fr/Pdf.aspx?edition=NEP&date=
+        // http://kiosque.directmatin.fr/Pdf.aspx?edition=NEP&date=20150416
         string url = "http://kiosque.directmatin.fr/Pdf.aspx?edition=";
         string dateEnglish = GetEnglishDate(dateTimePicker1.Value);
 
         string fileName = "DirectMatin-" +
-          GetEditionName(selectedEditionInLb).Replace("Direct Matin ", "") +
+          GetEditionName(selectedEditionInListBox).Replace("Direct Matin ", "") +
           "-" +
           dateEnglish + ".pdf";
-        url = AddEditionToUrl(url, GetEditionCode(selectedEditionInLb));
+        url = AddEditionToUrl(url, GetEditionCode(selectedEditionInListBox));
         url = AddDateToUrl(url, dateTimePicker1.Value);
         if (GetWebClientBinaries(url, Path.Combine(textBoxSaveFilePath.Text, fileName)))
         {
@@ -164,7 +164,11 @@ namespace ManualPaperBoy
           result = "error while downloading";
         }
 
-        //DisplayMessageOk(result, "result", MessageBoxButtons.OK);
+        if (listBoxSelectedEdition.Items.Count == 1)
+        {
+          DisplayMessageOk(result, "Result", MessageBoxButtons.OK);
+        }
+        
       }
     }
 
@@ -265,6 +269,59 @@ namespace ManualPaperBoy
       }
 
       return result;
+    }
+
+    private void buttonRemove_Click(object sender, EventArgs e)
+    {
+      if (listBoxSelectedEdition.Items.Count == 0)
+      {
+        DisplayMessageOk("There is no element in the list.\nPlease select an edition first.", "No element to choose from", MessageBoxButtons.OK);
+        return;
+      }
+
+      if (listBoxSelectedEdition.SelectedIndex == -1)
+      {
+        DisplayMessageOk("No edition has been selected.", "No selection", MessageBoxButtons.OK);
+        return;
+      }
+
+      listBoxSelectedEdition.Items.Remove(listBoxSelectedEdition.SelectedItem);
+
+    }
+
+    private void buttonLaunchSelectedEdition_Click(object sender, EventArgs e)
+    {
+      if (listBoxSelectedEdition.Items.Count == 0)
+      {
+        DisplayMessageOk("There is no element in the list.\nPlease select an edition first.", "No element to choose from", MessageBoxButtons.OK);
+        return;
+      }
+
+      if (listBoxSelectedEdition.SelectedIndex == -1)
+      {
+        DisplayMessageOk("No edition has been selected.", "No selection", 
+          MessageBoxButtons.OK);
+        return;
+      }
+
+      try
+      {
+
+      }
+      catch (Exception exception)
+      {
+        DisplayMessageOk("There was an error while trying to open the selected edition\n" +
+          exception.Message,
+          "Error", MessageBoxButtons.OK);
+      }
+
+      string dateEnglish = GetEnglishDate(dateTimePicker1.Value);
+      string fileName = "DirectMatin-" +
+          GetEditionName(listBoxSelectedEdition.SelectedItem.ToString()).Replace("Direct Matin ", "") +
+          "-" +
+          dateEnglish + ".pdf";
+      
+        Process.Start(Path.Combine(textBoxSaveFilePath.Text, fileName));
     }
   }
 }
