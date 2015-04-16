@@ -37,6 +37,7 @@ namespace ManualPaperBoy
 
     private void QuitToolStripMenuItem_Click(object sender, EventArgs e)
     {
+      SaveWindowValue();
       Application.Exit();
     }
 
@@ -83,6 +84,7 @@ namespace ManualPaperBoy
       Height = Settings.Default.WindowHeight;
       Top = Settings.Default.WindowTop < 0 ? 0 : Settings.Default.WindowTop;
       Left = Settings.Default.WindowLeft < 0 ? 0 : Settings.Default.WindowLeft;
+      textBoxSaveFilePath.Text = Settings.Default.TextSaveFilePath;
     }
 
     private void SaveWindowValue()
@@ -92,6 +94,7 @@ namespace ManualPaperBoy
       Settings.Default.WindowLeft = Left;
       Settings.Default.WindowTop = Top;
       Settings.Default.Save();
+      Settings.Default.TextSaveFilePath = textBoxSaveFilePath.Text;
     }
 
     private void FormMainFormClosing(object sender, FormClosingEventArgs e)
@@ -141,7 +144,17 @@ namespace ManualPaperBoy
         return;
       }
 
+      bool severalDates = false;
       DateTime selectedDateTime = dateTimePicker1.Value;
+      if (radioButtoSingleDate.Checked)
+      {
+        selectedDateTime = dateTimePicker1.Value;
+      }
+      else
+      {
+        severalDates = true;
+      }
+      
       foreach (string selectedEditionInListBox in listBoxSelectedEdition.Items)
       {
         string result = string.Empty;
@@ -164,7 +177,7 @@ namespace ManualPaperBoy
           result = "error while downloading";
         }
 
-        if (listBoxSelectedEdition.Items.Count == 1)
+        if (listBoxSelectedEdition.Items.Count == 1 && radioButtoSingleDate.Checked == true)
         {
           DisplayMessageOk(result, "Result", MessageBoxButtons.OK);
         }
@@ -286,7 +299,10 @@ namespace ManualPaperBoy
       }
 
       listBoxSelectedEdition.Items.Remove(listBoxSelectedEdition.SelectedItem);
-
+      if (listBoxSelectedEdition.Items.Count != 0)
+      {
+        listBoxSelectedEdition.SelectedIndex = 0;
+      }
     }
 
     private void buttonLaunchSelectedEdition_Click(object sender, EventArgs e)

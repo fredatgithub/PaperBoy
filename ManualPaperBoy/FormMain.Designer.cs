@@ -74,7 +74,15 @@
       this.buttonLaunchSelectedEdition = new System.Windows.Forms.Button();
       this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
       this.buttonRemove = new System.Windows.Forms.Button();
+      this.groupBoxMultiSelectionDate = new System.Windows.Forms.GroupBox();
+      this.radioButtoSingleDate = new System.Windows.Forms.RadioButton();
+      this.radioButtonSeveralDates = new System.Windows.Forms.RadioButton();
+      this.labelFromDate = new System.Windows.Forms.Label();
+      this.dateTimePickerFromDate = new System.Windows.Forms.DateTimePicker();
+      this.dateTimePicker2 = new System.Windows.Forms.DateTimePicker();
+      this.labelEndDate = new System.Windows.Forms.Label();
       this.menuStrip1.SuspendLayout();
+      this.groupBoxMultiSelectionDate.SuspendLayout();
       this.SuspendLayout();
       // 
       // menuStrip1
@@ -452,11 +460,84 @@
       this.buttonRemove.UseVisualStyleBackColor = true;
       this.buttonRemove.Click += new System.EventHandler(this.buttonRemove_Click);
       // 
+      // groupBoxMultiSelectionDate
+      // 
+      this.groupBoxMultiSelectionDate.Controls.Add(this.dateTimePicker2);
+      this.groupBoxMultiSelectionDate.Controls.Add(this.labelEndDate);
+      this.groupBoxMultiSelectionDate.Controls.Add(this.dateTimePickerFromDate);
+      this.groupBoxMultiSelectionDate.Controls.Add(this.labelFromDate);
+      this.groupBoxMultiSelectionDate.Controls.Add(this.radioButtonSeveralDates);
+      this.groupBoxMultiSelectionDate.Controls.Add(this.radioButtoSingleDate);
+      this.groupBoxMultiSelectionDate.Location = new System.Drawing.Point(54, 189);
+      this.groupBoxMultiSelectionDate.Name = "groupBoxMultiSelectionDate";
+      this.groupBoxMultiSelectionDate.Size = new System.Drawing.Size(434, 179);
+      this.groupBoxMultiSelectionDate.TabIndex = 14;
+      this.groupBoxMultiSelectionDate.TabStop = false;
+      this.groupBoxMultiSelectionDate.Text = "Time period";
+      // 
+      // radioButtoSingleDate
+      // 
+      this.radioButtoSingleDate.AutoSize = true;
+      this.radioButtoSingleDate.Checked = true;
+      this.radioButtoSingleDate.Location = new System.Drawing.Point(22, 41);
+      this.radioButtoSingleDate.Name = "radioButtoSingleDate";
+      this.radioButtoSingleDate.Size = new System.Drawing.Size(157, 21);
+      this.radioButtoSingleDate.TabIndex = 0;
+      this.radioButtoSingleDate.TabStop = true;
+      this.radioButtoSingleDate.Text = "Single selected date";
+      this.radioButtoSingleDate.UseVisualStyleBackColor = true;
+      // 
+      // radioButtonSeveralDates
+      // 
+      this.radioButtonSeveralDates.AutoSize = true;
+      this.radioButtonSeveralDates.Location = new System.Drawing.Point(22, 76);
+      this.radioButtonSeveralDates.Name = "radioButtonSeveralDates";
+      this.radioButtonSeveralDates.Size = new System.Drawing.Size(116, 21);
+      this.radioButtonSeveralDates.TabIndex = 1;
+      this.radioButtonSeveralDates.Text = "Several dates";
+      this.radioButtonSeveralDates.UseVisualStyleBackColor = true;
+      // 
+      // labelFromDate
+      // 
+      this.labelFromDate.AutoSize = true;
+      this.labelFromDate.Location = new System.Drawing.Point(19, 113);
+      this.labelFromDate.Name = "labelFromDate";
+      this.labelFromDate.Size = new System.Drawing.Size(74, 17);
+      this.labelFromDate.TabIndex = 15;
+      this.labelFromDate.Text = "Start date:";
+      // 
+      // dateTimePickerFromDate
+      // 
+      this.dateTimePickerFromDate.Location = new System.Drawing.Point(119, 108);
+      this.dateTimePickerFromDate.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+      this.dateTimePickerFromDate.Name = "dateTimePickerFromDate";
+      this.dateTimePickerFromDate.Size = new System.Drawing.Size(233, 22);
+      this.dateTimePickerFromDate.TabIndex = 15;
+      this.dateTimePickerFromDate.Value = new System.DateTime(2015, 4, 15, 0, 0, 0, 0);
+      // 
+      // dateTimePicker2
+      // 
+      this.dateTimePicker2.Location = new System.Drawing.Point(119, 149);
+      this.dateTimePicker2.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+      this.dateTimePicker2.Name = "dateTimePicker2";
+      this.dateTimePicker2.Size = new System.Drawing.Size(233, 22);
+      this.dateTimePicker2.TabIndex = 16;
+      // 
+      // labelEndDate
+      // 
+      this.labelEndDate.AutoSize = true;
+      this.labelEndDate.Location = new System.Drawing.Point(19, 154);
+      this.labelEndDate.Name = "labelEndDate";
+      this.labelEndDate.Size = new System.Drawing.Size(69, 17);
+      this.labelEndDate.TabIndex = 17;
+      this.labelEndDate.Text = "End date:";
+      // 
       // FormMain
       // 
       this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
       this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
       this.ClientSize = new System.Drawing.Size(851, 400);
+      this.Controls.Add(this.groupBoxMultiSelectionDate);
       this.Controls.Add(this.buttonRemove);
       this.Controls.Add(this.buttonLaunchSelectedEdition);
       this.Controls.Add(this.dateTimePicker1);
@@ -479,6 +560,8 @@
       this.Load += new System.EventHandler(this.FormMain_Load);
       this.menuStrip1.ResumeLayout(false);
       this.menuStrip1.PerformLayout();
+      this.groupBoxMultiSelectionDate.ResumeLayout(false);
+      this.groupBoxMultiSelectionDate.PerformLayout();
       this.ResumeLayout(false);
       this.PerformLayout();
 
@@ -532,5 +615,12 @@
     private System.Windows.Forms.Button buttonLaunchSelectedEdition;
     private System.Windows.Forms.FolderBrowserDialog folderBrowserDialog1;
     private System.Windows.Forms.Button buttonRemove;
+    private System.Windows.Forms.GroupBox groupBoxMultiSelectionDate;
+    private System.Windows.Forms.DateTimePicker dateTimePicker2;
+    private System.Windows.Forms.Label labelEndDate;
+    private System.Windows.Forms.DateTimePicker dateTimePickerFromDate;
+    private System.Windows.Forms.Label labelFromDate;
+    private System.Windows.Forms.RadioButton radioButtonSeveralDates;
+    private System.Windows.Forms.RadioButton radioButtoSingleDate;
   }
 }
