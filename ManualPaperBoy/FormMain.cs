@@ -168,6 +168,8 @@ namespace ManualPaperBoy
         
       }
 
+      //FormWait formWait = new FormWait();
+      //formWait.ShowDialog();
       bool severalDates = false;
       DateTime selectedDateTime = dateTimePickerSelectDate.Value;
       if (radioButtoSingleDate.Checked)
@@ -201,6 +203,7 @@ namespace ManualPaperBoy
           result = "error while downloading";
         }
 
+        //formWait.Close();
         if (listBoxSelectedEdition.Items.Count == 1 && radioButtoSingleDate.Checked == true)
         {
           DisplayMessageOk(result, "Result", MessageBoxButtons.OK);
