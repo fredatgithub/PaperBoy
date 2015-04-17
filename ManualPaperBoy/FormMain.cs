@@ -124,6 +124,16 @@ namespace ManualPaperBoy
       }
     }
 
+    public static bool OutsideWeekEnd()
+    {
+      return (DateTime.Now.DayOfWeek != DayOfWeek.Sunday) && (DateTime.Now.DayOfWeek != DayOfWeek.Saturday);
+    }
+
+    public static bool IsWeekEnd()
+    {
+      return !OutsideWeekEnd();
+    }
+
     private void buttonDownloadEditions_Click(object sender, EventArgs e)
     {
       if (textBoxSaveFilePath.Text == string.Empty)
@@ -144,11 +154,25 @@ namespace ManualPaperBoy
         return;
       }
 
+      // test if today is a weekend, if so move to the last Friday
+      if (IsWeekEnd())
+      {
+        if (dateTimePickerSelectDate.Value.DayOfWeek == DayOfWeek.Saturday)
+        {
+          dateTimePickerSelectDate.Value = dateTimePickerSelectDate.Value.Add(new TimeSpan(-1, 0, 0, 0));
+        }
+        else
+        {
+          dateTimePickerSelectDate.Value = dateTimePickerSelectDate.Value.Add(new TimeSpan(-2, 0, 0, 0));
+        }
+        
+      }
+
       bool severalDates = false;
-      DateTime selectedDateTime = dateTimePicker1.Value;
+      DateTime selectedDateTime = dateTimePickerSelectDate.Value;
       if (radioButtoSingleDate.Checked)
       {
-        selectedDateTime = dateTimePicker1.Value;
+        selectedDateTime = dateTimePickerSelectDate.Value;
       }
       else
       {
@@ -160,14 +184,14 @@ namespace ManualPaperBoy
         string result = string.Empty;
         // http://kiosque.directmatin.fr/Pdf.aspx?edition=NEP&date=20150416
         string url = "http://kiosque.directmatin.fr/Pdf.aspx?edition=";
-        string dateEnglish = GetEnglishDate(dateTimePicker1.Value);
+        string dateEnglish = GetEnglishDate(dateTimePickerSelectDate.Value);
 
         string fileName = "DirectMatin-" +
           GetEditionName(selectedEditionInListBox).Replace("Direct Matin ", "") +
           "-" +
           dateEnglish + ".pdf";
         url = AddEditionToUrl(url, GetEditionCode(selectedEditionInListBox));
-        url = AddDateToUrl(url, dateTimePicker1.Value);
+        url = AddDateToUrl(url, dateTimePickerSelectDate.Value);
         if (GetWebClientBinaries(url, Path.Combine(textBoxSaveFilePath.Text, fileName)))
         {
           result = "download ok and file saved";
@@ -331,7 +355,7 @@ namespace ManualPaperBoy
           "Error", MessageBoxButtons.OK);
       }
 
-      string dateEnglish = GetEnglishDate(dateTimePicker1.Value);
+      string dateEnglish = GetEnglishDate(dateTimePickerSelectDate.Value);
       string fileName = "DirectMatin-" +
           GetEditionName(listBoxSelectedEdition.SelectedItem.ToString()).Replace("Direct Matin ", "") +
           "-" +
