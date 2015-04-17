@@ -60,6 +60,11 @@ namespace ManualPaperBoy
       GetWindowValue();
       comboBoxSelectEdition.Items.Clear();
       LoadComboBox(comboBoxSelectEdition);
+      SetSingleDateOutOfWeekEnd();
+      dateTimePickerFromDate.MinDate = new DateTime(2013, 1, 1); // first edition
+      dateTimePickerFromDate.MaxDate = DateTime.Today;
+      dateTimePickerEndDate.MinDate = new DateTime(2013, 1, 2);
+      dateTimePickerEndDate.MaxDate = DateTime.Today;
     }
 
     private static void LoadComboBox(ComboBox cb)
@@ -113,7 +118,6 @@ namespace ManualPaperBoy
       {
         comboBoxSelectEdition.SelectedIndex = comboBoxSelectEdition.SelectedIndex + 1;
       }
-
     }
 
     private void buttonPickDirectory_Click(object sender, EventArgs e)
@@ -144,6 +148,18 @@ namespace ManualPaperBoy
       return !OutsideWeekEnd();
     }
 
+    private void SetSingleDateOutOfWeekEnd()
+    {
+      if (!IsWeekEnd()) return;
+      dateTimePickerSelectDate.Value = dateTimePickerSelectDate.Value.Add(dateTimePickerSelectDate.Value.DayOfWeek == DayOfWeek.Saturday ? new TimeSpan(-1, 0, 0, 0) : new TimeSpan(-2, 0, 0, 0));
+    }
+
+    private static string GetEditionFileName(string selectedEditionInListBox, string dateEnglish)
+    {
+      // TODO remove other windows forbidden characters
+      return selectedEditionInListBox.Replace(" ", "_").Replace("'", "_") + "-" + dateEnglish + ".pdf";
+    }
+
     private void buttonDownloadEditions_Click(object sender, EventArgs e)
     {
       if (textBoxSaveFilePath.Text == string.Empty)
@@ -169,22 +185,15 @@ namespace ManualPaperBoy
         DisplayMessageOk("The end date is earlier than the start date", "End date too early", MessageBoxButtons.OK);
         return;
       }
+
       // test if today is a weekend, if so move to the last Friday
-      if (IsWeekEnd())
+      if (IsWeekEnd(dateTimePickerSelectDate.Value))
       {
-        if (dateTimePickerSelectDate.Value.DayOfWeek == DayOfWeek.Saturday)
-        {
-          dateTimePickerSelectDate.Value = dateTimePickerSelectDate.Value.Add(new TimeSpan(-1, 0, 0, 0));
-        }
-        else
-        {
-          dateTimePickerSelectDate.Value = dateTimePickerSelectDate.Value.Add(new TimeSpan(-2, 0, 0, 0));
-        }
+        SetSingleDateOutOfWeekEnd();
       }
 
       //FormWait formWait = new FormWait();
       //formWait.ShowDialog();
-      //bool severalDates = false;
       List<DateTime> listOfDates = new List<DateTime>();
       if (radioButtoSingleDate.Checked)
       {
@@ -200,40 +209,36 @@ namespace ManualPaperBoy
             listOfDates.Add(selectedDate);
           }
 
-          selectedDate = dateTimePickerFromDate.Value.Add(new TimeSpan(1, 0, 0, 0));
-        } while (selectedDate == dateTimePickerEndDate.Value);
+          selectedDate = selectedDate.Add(new TimeSpan(1, 0, 0, 0));
+        } while (selectedDate < dateTimePickerEndDate.Value);
+      }
+
+      string result = string.Empty;
+      if (listOfDates.Count == 0)
+      {
+        DisplayMessageOk("There is no week days selected in the period", "No week days", MessageBoxButtons.OK);
+        return;
       }
 
       foreach (DateTime dateTimeInRange in listOfDates)
       {
         foreach (string selectedEditionInListBox in listBoxSelectedEdition.Items)
         {
-          string result = string.Empty;
           // http://kiosque.directmatin.fr/Pdf.aspx?edition=NEP&date=20150416
           string url = "http://kiosque.directmatin.fr/Pdf.aspx?edition=";
-          string dateEnglish = GetEnglishDate(dateTimePickerSelectDate.Value);
+          string dateEnglish = GetEnglishDate(dateTimeInRange);
 
-          string fileName = "DirectMatin-" +
-                            GetEditionName(selectedEditionInListBox).Replace("Direct Matin ", "") +
-                            "-" +
-                            dateEnglish + ".pdf";
+          string fileName = GetEditionFileName(selectedEditionInListBox, dateEnglish);
           url = AddEditionToUrl(url, GetEditionCode(selectedEditionInListBox));
-          url = AddDateToUrl(url, dateTimePickerSelectDate.Value);
-          if (GetWebClientBinaries(url, Path.Combine(textBoxSaveFilePath.Text, fileName)))
-          {
-            result = "download ok and file saved";
-          }
-          else
-          {
-            result = "error while downloading";
-          }
-
-          //formWait.Close();
-          if (listBoxSelectedEdition.Items.Count == 1 && radioButtoSingleDate.Checked)
-          {
-            DisplayMessageOk(result, "Result", MessageBoxButtons.OK);
-          }
+          url = AddDateToUrl(url, dateTimeInRange);
+          result = GetWebClientBinaries(url, Path.Combine(textBoxSaveFilePath.Text, fileName)) ? "download ok and file saved" : "error while downloading";
         }
+      }
+
+      //formWait.Close();
+      if (listBoxSelectedEdition.Items.Count == 1 && radioButtoSingleDate.Checked) // TODO add number of file downloaded
+      {
+        DisplayMessageOk(result, "Result", MessageBoxButtons.OK);
       }
     }
 
@@ -384,11 +389,7 @@ namespace ManualPaperBoy
       }
 
       string dateEnglish = GetEnglishDate(dateTimePickerSelectDate.Value);
-      string fileName = "DirectMatin-" +
-          GetEditionName(listBoxSelectedEdition.SelectedItem.ToString()).Replace("Direct Matin ", "") +
-          "-" +
-          dateEnglish + ".pdf";
-
+      string fileName = GetEditionFileName(listBoxSelectedEdition.SelectedItem.ToString(), dateEnglish);
       Process.Start(Path.Combine(textBoxSaveFilePath.Text, fileName));
     }
   }
