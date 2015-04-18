@@ -35,6 +35,8 @@ namespace ManualPaperBoy
       InitializeComponent();
     }
 
+    private bool editionDuringWeekEnd;
+
     private void QuitToolStripMenuItem_Click(object sender, EventArgs e)
     {
       SaveWindowValue();
@@ -187,9 +189,12 @@ namespace ManualPaperBoy
       }
 
       // test if today is a weekend, if so move to the last Friday
-      if (IsWeekEnd(dateTimePickerSelectDate.Value))
+      if (!editionDuringWeekEnd)
       {
-        SetSingleDateOutOfWeekEnd();
+        if (IsWeekEnd(dateTimePickerSelectDate.Value))
+        {
+          SetSingleDateOutOfWeekEnd();
+        }
       }
 
       //FormWait formWait = new FormWait();
@@ -208,6 +213,10 @@ namespace ManualPaperBoy
           {
             listOfDates.Add(selectedDate);
           }
+          else if(editionDuringWeekEnd)  
+          {
+            listOfDates.Add(selectedDate);
+          }
 
           selectedDate = selectedDate.Add(new TimeSpan(1, 0, 0, 0));
         } while (selectedDate < dateTimePickerEndDate.Value);
@@ -216,7 +225,7 @@ namespace ManualPaperBoy
       string result = string.Empty;
       if (listOfDates.Count == 0)
       {
-        DisplayMessageOk("There is no week days selected in the period", "No week days", MessageBoxButtons.OK);
+        DisplayMessageOk("There is no selected day in the period", "No selection", MessageBoxButtons.OK);
         return;
       }
 
@@ -240,6 +249,8 @@ namespace ManualPaperBoy
       {
         DisplayMessageOk(result, "Result", MessageBoxButtons.OK);
       }
+
+      DisplayMessageOk("all downloads are done", "Download is over", MessageBoxButtons.OK);
     }
 
     private static string AddEditionToUrl(string url, string edition)
@@ -391,6 +402,11 @@ namespace ManualPaperBoy
       string dateEnglish = GetEnglishDate(dateTimePickerSelectDate.Value);
       string fileName = GetEditionFileName(listBoxSelectedEdition.SelectedItem.ToString(), dateEnglish);
       Process.Start(Path.Combine(textBoxSaveFilePath.Text, fileName));
+    }
+
+    private void checkBoxEditionDuringWeekEnd_CheckedChanged(object sender, EventArgs e)
+    {
+      editionDuringWeekEnd = checkBoxEditionDuringWeekEnd.Checked;
     }
   }
 }

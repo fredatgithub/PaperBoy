@@ -81,6 +81,7 @@
       this.labelFromDate = new System.Windows.Forms.Label();
       this.radioButtonSeveralDates = new System.Windows.Forms.RadioButton();
       this.radioButtoSingleDate = new System.Windows.Forms.RadioButton();
+      this.checkBoxEditionDuringWeekEnd = new System.Windows.Forms.CheckBox();
       this.menuStrip1.SuspendLayout();
       this.groupBoxMultiSelectionDate.SuspendLayout();
       this.SuspendLayout();
@@ -351,7 +352,7 @@
       // textBoxSaveFilePath
       // 
       this.textBoxSaveFilePath.Location = new System.Drawing.Point(120, 40);
-      this.textBoxSaveFilePath.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+      this.textBoxSaveFilePath.Margin = new System.Windows.Forms.Padding(2);
       this.textBoxSaveFilePath.Name = "textBoxSaveFilePath";
       this.textBoxSaveFilePath.Size = new System.Drawing.Size(472, 20);
       this.textBoxSaveFilePath.TabIndex = 3;
@@ -360,7 +361,7 @@
       // buttonPickDirectory
       // 
       this.buttonPickDirectory.Location = new System.Drawing.Point(596, 41);
-      this.buttonPickDirectory.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+      this.buttonPickDirectory.Margin = new System.Windows.Forms.Padding(2);
       this.buttonPickDirectory.Name = "buttonPickDirectory";
       this.buttonPickDirectory.Size = new System.Drawing.Size(28, 19);
       this.buttonPickDirectory.TabIndex = 4;
@@ -382,7 +383,7 @@
       // 
       this.comboBoxSelectEdition.FormattingEnabled = true;
       this.comboBoxSelectEdition.Location = new System.Drawing.Point(120, 72);
-      this.comboBoxSelectEdition.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+      this.comboBoxSelectEdition.Margin = new System.Windows.Forms.Padding(2);
       this.comboBoxSelectEdition.Name = "comboBoxSelectEdition";
       this.comboBoxSelectEdition.Size = new System.Drawing.Size(176, 21);
       this.comboBoxSelectEdition.TabIndex = 6;
@@ -391,7 +392,7 @@
       // 
       this.buttonSelectEdition.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
       this.buttonSelectEdition.Location = new System.Drawing.Point(309, 73);
-      this.buttonSelectEdition.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+      this.buttonSelectEdition.Margin = new System.Windows.Forms.Padding(2);
       this.buttonSelectEdition.Name = "buttonSelectEdition";
       this.buttonSelectEdition.Size = new System.Drawing.Size(84, 25);
       this.buttonSelectEdition.TabIndex = 7;
@@ -403,7 +404,7 @@
       // 
       this.listBoxSelectedEdition.FormattingEnabled = true;
       this.listBoxSelectedEdition.Location = new System.Drawing.Point(407, 73);
-      this.listBoxSelectedEdition.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+      this.listBoxSelectedEdition.Margin = new System.Windows.Forms.Padding(2);
       this.listBoxSelectedEdition.Name = "listBoxSelectedEdition";
       this.listBoxSelectedEdition.Size = new System.Drawing.Size(217, 160);
       this.listBoxSelectedEdition.TabIndex = 8;
@@ -411,8 +412,8 @@
       // buttonDownloadEditions
       // 
       this.buttonDownloadEditions.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-      this.buttonDownloadEditions.Location = new System.Drawing.Point(407, 245);
-      this.buttonDownloadEditions.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+      this.buttonDownloadEditions.Location = new System.Drawing.Point(407, 250);
+      this.buttonDownloadEditions.Margin = new System.Windows.Forms.Padding(2);
       this.buttonDownloadEditions.Name = "buttonDownloadEditions";
       this.buttonDownloadEditions.Size = new System.Drawing.Size(216, 24);
       this.buttonDownloadEditions.TabIndex = 9;
@@ -433,7 +434,7 @@
       // dateTimePickerSelectDate
       // 
       this.dateTimePickerSelectDate.Location = new System.Drawing.Point(120, 112);
-      this.dateTimePickerSelectDate.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+      this.dateTimePickerSelectDate.Margin = new System.Windows.Forms.Padding(2);
       this.dateTimePickerSelectDate.Name = "dateTimePickerSelectDate";
       this.dateTimePickerSelectDate.Size = new System.Drawing.Size(176, 20);
       this.dateTimePickerSelectDate.TabIndex = 11;
@@ -441,8 +442,8 @@
       // buttonLaunchSelectedEdition
       // 
       this.buttonLaunchSelectedEdition.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-      this.buttonLaunchSelectedEdition.Location = new System.Drawing.Point(407, 275);
-      this.buttonLaunchSelectedEdition.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+      this.buttonLaunchSelectedEdition.Location = new System.Drawing.Point(408, 287);
+      this.buttonLaunchSelectedEdition.Margin = new System.Windows.Forms.Padding(2);
       this.buttonLaunchSelectedEdition.Name = "buttonLaunchSelectedEdition";
       this.buttonLaunchSelectedEdition.Size = new System.Drawing.Size(216, 24);
       this.buttonLaunchSelectedEdition.TabIndex = 12;
@@ -454,7 +455,7 @@
       // 
       this.buttonRemove.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
       this.buttonRemove.Location = new System.Drawing.Point(309, 112);
-      this.buttonRemove.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+      this.buttonRemove.Margin = new System.Windows.Forms.Padding(2);
       this.buttonRemove.Name = "buttonRemove";
       this.buttonRemove.Size = new System.Drawing.Size(84, 25);
       this.buttonRemove.TabIndex = 13;
@@ -470,10 +471,10 @@
       this.groupBoxMultiSelectionDate.Controls.Add(this.labelFromDate);
       this.groupBoxMultiSelectionDate.Controls.Add(this.radioButtonSeveralDates);
       this.groupBoxMultiSelectionDate.Controls.Add(this.radioButtoSingleDate);
-      this.groupBoxMultiSelectionDate.Location = new System.Drawing.Point(40, 154);
-      this.groupBoxMultiSelectionDate.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+      this.groupBoxMultiSelectionDate.Location = new System.Drawing.Point(40, 168);
+      this.groupBoxMultiSelectionDate.Margin = new System.Windows.Forms.Padding(2);
       this.groupBoxMultiSelectionDate.Name = "groupBoxMultiSelectionDate";
-      this.groupBoxMultiSelectionDate.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+      this.groupBoxMultiSelectionDate.Padding = new System.Windows.Forms.Padding(2);
       this.groupBoxMultiSelectionDate.Size = new System.Drawing.Size(353, 145);
       this.groupBoxMultiSelectionDate.TabIndex = 14;
       this.groupBoxMultiSelectionDate.TabStop = false;
@@ -482,7 +483,7 @@
       // dateTimePickerEndDate
       // 
       this.dateTimePickerEndDate.Location = new System.Drawing.Point(89, 121);
-      this.dateTimePickerEndDate.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+      this.dateTimePickerEndDate.Margin = new System.Windows.Forms.Padding(2);
       this.dateTimePickerEndDate.Name = "dateTimePickerEndDate";
       this.dateTimePickerEndDate.Size = new System.Drawing.Size(176, 20);
       this.dateTimePickerEndDate.TabIndex = 16;
@@ -500,7 +501,7 @@
       // dateTimePickerFromDate
       // 
       this.dateTimePickerFromDate.Location = new System.Drawing.Point(89, 88);
-      this.dateTimePickerFromDate.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+      this.dateTimePickerFromDate.Margin = new System.Windows.Forms.Padding(2);
       this.dateTimePickerFromDate.Name = "dateTimePickerFromDate";
       this.dateTimePickerFromDate.Size = new System.Drawing.Size(176, 20);
       this.dateTimePickerFromDate.TabIndex = 15;
@@ -520,7 +521,7 @@
       // 
       this.radioButtonSeveralDates.AutoSize = true;
       this.radioButtonSeveralDates.Location = new System.Drawing.Point(16, 62);
-      this.radioButtonSeveralDates.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+      this.radioButtonSeveralDates.Margin = new System.Windows.Forms.Padding(2);
       this.radioButtonSeveralDates.Name = "radioButtonSeveralDates";
       this.radioButtonSeveralDates.Size = new System.Drawing.Size(90, 17);
       this.radioButtonSeveralDates.TabIndex = 1;
@@ -532,7 +533,7 @@
       this.radioButtoSingleDate.AutoSize = true;
       this.radioButtoSingleDate.Checked = true;
       this.radioButtoSingleDate.Location = new System.Drawing.Point(16, 33);
-      this.radioButtoSingleDate.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+      this.radioButtoSingleDate.Margin = new System.Windows.Forms.Padding(2);
       this.radioButtoSingleDate.Name = "radioButtoSingleDate";
       this.radioButtoSingleDate.Size = new System.Drawing.Size(121, 17);
       this.radioButtoSingleDate.TabIndex = 0;
@@ -540,11 +541,23 @@
       this.radioButtoSingleDate.Text = "Single selected date";
       this.radioButtoSingleDate.UseVisualStyleBackColor = true;
       // 
+      // checkBoxEditionDuringWeekEnd
+      // 
+      this.checkBoxEditionDuringWeekEnd.AutoSize = true;
+      this.checkBoxEditionDuringWeekEnd.Location = new System.Drawing.Point(41, 146);
+      this.checkBoxEditionDuringWeekEnd.Name = "checkBoxEditionDuringWeekEnd";
+      this.checkBoxEditionDuringWeekEnd.Size = new System.Drawing.Size(158, 17);
+      this.checkBoxEditionDuringWeekEnd.TabIndex = 15;
+      this.checkBoxEditionDuringWeekEnd.Text = "Edition during the weekend.";
+      this.checkBoxEditionDuringWeekEnd.UseVisualStyleBackColor = true;
+      this.checkBoxEditionDuringWeekEnd.CheckedChanged += new System.EventHandler(this.checkBoxEditionDuringWeekEnd_CheckedChanged);
+      // 
       // FormMain
       // 
       this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
       this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-      this.ClientSize = new System.Drawing.Size(658, 325);
+      this.ClientSize = new System.Drawing.Size(658, 346);
+      this.Controls.Add(this.checkBoxEditionDuringWeekEnd);
       this.Controls.Add(this.groupBoxMultiSelectionDate);
       this.Controls.Add(this.buttonRemove);
       this.Controls.Add(this.buttonLaunchSelectedEdition);
@@ -560,7 +573,7 @@
       this.Controls.Add(this.labelSaveFilePath);
       this.Controls.Add(this.menuStrip1);
       this.MainMenuStrip = this.menuStrip1;
-      this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+      this.Margin = new System.Windows.Forms.Padding(2);
       this.Name = "FormMain";
       this.ShowIcon = false;
       this.Text = "Manual Paper Boy";
@@ -630,5 +643,6 @@
     private System.Windows.Forms.Label labelFromDate;
     private System.Windows.Forms.RadioButton radioButtonSeveralDates;
     private System.Windows.Forms.RadioButton radioButtoSingleDate;
+    private System.Windows.Forms.CheckBox checkBoxEditionDuringWeekEnd;
   }
 }
