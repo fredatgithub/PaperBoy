@@ -15,7 +15,7 @@
       <Value Profile="(Default)">0</Value>
     </Setting>
     <Setting Name="TextSaveFilePath" Type="System.String" Scope="User">
-      <Value Profile="(Default)" />
+      <Value Profile="(Default)">C:\Users\fred\Documents\magazines\Direct_Matin</Value>
     </Setting>
   </Settings>
 </SettingsFile>
