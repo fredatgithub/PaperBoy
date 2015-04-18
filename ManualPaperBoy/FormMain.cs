@@ -158,8 +158,16 @@ namespace ManualPaperBoy
 
     private static string GetEditionFileName(string selectedEditionInListBox, string dateEnglish)
     {
-      // TODO remove other windows forbidden characters
-      return selectedEditionInListBox.Replace(" ", "_").Replace("'", "_") + "-" + dateEnglish + ".pdf";
+      // Remove Windows forbidden characters
+      string result = selectedEditionInListBox.Replace(" ", "_").Replace("'", "_") + "-" + dateEnglish + ".pdf";
+      char[] forbiddenWindowsFilenameCharacters = { '\\', '/', ':', '*', '?', '\"', '<', '>', '|' };
+      // return forbiddenWindowsFilenameCharacters.Aggregate(result, (current, item) => current.Replace(item, '_'));
+      foreach (char item in forbiddenWindowsFilenameCharacters)
+      {
+        result = result.Replace(item, '_');
+      }
+
+      return result;
     }
 
     private void buttonDownloadEditions_Click(object sender, EventArgs e)
