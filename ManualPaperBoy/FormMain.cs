@@ -492,5 +492,67 @@ namespace ManualPaperBoy
           return number > 1 ? "s" : string.Empty;
       }
     }
+
+    private void cutToolStripMenuItem_Click(object sender, EventArgs e)
+    {
+      CutToClipboard(textBoxSaveFilePath, "no text");
+    }
+
+    private void copyToolStripMenuItem_Click(object sender, EventArgs e)
+    {
+      CopytToClipboard(textBoxSaveFilePath, "no text");
+    }
+
+    private void pasteToolStripMenuItem_Click(object sender, EventArgs e)
+    {
+      PasteFromClipboard(textBoxSaveFilePath);
+    }
+
+    private void selectAllToolStripMenuItem_Click(object sender, EventArgs e)
+    {
+      if (textBoxSaveFilePath == ActiveControl)
+      {
+        textBoxSaveFilePath.SelectAll();
+      }
+    }
+
+    private void CopytToClipboard(TextBoxBase tb, string message = "Nothing")
+    {
+      if (tb != ActiveControl) return;
+      if (tb.Text == string.Empty)
+      {
+        DisplayMessageOk("There is nothing to copy ", message, MessageBoxButtons.OK);
+        return;
+      }
+
+      Clipboard.SetText(tb.SelectedText);
+    }
+
+    private void CutToClipboard(TextBoxBase tb, string errorMessage = "Nothing")
+    {
+      if (tb != ActiveControl) return;
+      if (tb.Text == string.Empty)
+      {
+        DisplayMessageOk("There is " + errorMessage + " to cut ", errorMessage, MessageBoxButtons.OK);
+        return;
+      }
+
+      if (tb.SelectedText == string.Empty)
+      {
+        DisplayMessageOk("No text has been selected", errorMessage, MessageBoxButtons.OK);
+        return;
+      }
+
+      Clipboard.SetText(tb.SelectedText);
+      tb.SelectedText = string.Empty;
+    }
+
+    private void PasteFromClipboard(TextBoxBase tb)
+    {
+      if (tb != ActiveControl) return;
+      var selectionIndex = tb.SelectionStart;
+      tb.Text = tb.Text.Insert(selectionIndex, Clipboard.GetText());
+      tb.SelectionStart = selectionIndex + Clipboard.GetText().Length;
+    }
   }
 }
