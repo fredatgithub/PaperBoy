@@ -82,6 +82,7 @@
       this.radioButtonSeveralDates = new System.Windows.Forms.RadioButton();
       this.radioButtoSingleDate = new System.Windows.Forms.RadioButton();
       this.checkBoxEditionDuringWeekEnd = new System.Windows.Forms.CheckBox();
+      this.buttonLaunchTargetDirectory = new System.Windows.Forms.Button();
       this.menuStrip1.SuspendLayout();
       this.groupBoxMultiSelectionDate.SuspendLayout();
       this.SuspendLayout();
@@ -416,7 +417,7 @@
       // buttonDownloadEditions
       // 
       this.buttonDownloadEditions.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-      this.buttonDownloadEditions.Location = new System.Drawing.Point(407, 250);
+      this.buttonDownloadEditions.Location = new System.Drawing.Point(407, 238);
       this.buttonDownloadEditions.Margin = new System.Windows.Forms.Padding(2);
       this.buttonDownloadEditions.Name = "buttonDownloadEditions";
       this.buttonDownloadEditions.Size = new System.Drawing.Size(216, 24);
@@ -446,7 +447,7 @@
       // buttonLaunchSelectedEdition
       // 
       this.buttonLaunchSelectedEdition.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-      this.buttonLaunchSelectedEdition.Location = new System.Drawing.Point(408, 287);
+      this.buttonLaunchSelectedEdition.Location = new System.Drawing.Point(408, 264);
       this.buttonLaunchSelectedEdition.Margin = new System.Windows.Forms.Padding(2);
       this.buttonLaunchSelectedEdition.Name = "buttonLaunchSelectedEdition";
       this.buttonLaunchSelectedEdition.Size = new System.Drawing.Size(216, 24);
@@ -556,11 +557,24 @@
       this.checkBoxEditionDuringWeekEnd.UseVisualStyleBackColor = true;
       this.checkBoxEditionDuringWeekEnd.CheckedChanged += new System.EventHandler(this.checkBoxEditionDuringWeekEnd_CheckedChanged);
       // 
+      // buttonLaunchTargetDirectory
+      // 
+      this.buttonLaunchTargetDirectory.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+      this.buttonLaunchTargetDirectory.Location = new System.Drawing.Point(408, 289);
+      this.buttonLaunchTargetDirectory.Margin = new System.Windows.Forms.Padding(2);
+      this.buttonLaunchTargetDirectory.Name = "buttonLaunchTargetDirectory";
+      this.buttonLaunchTargetDirectory.Size = new System.Drawing.Size(216, 24);
+      this.buttonLaunchTargetDirectory.TabIndex = 16;
+      this.buttonLaunchTargetDirectory.Text = "Launch target directory";
+      this.buttonLaunchTargetDirectory.UseVisualStyleBackColor = true;
+      this.buttonLaunchTargetDirectory.Click += new System.EventHandler(this.buttonLaunchTargetDirectory_Click);
+      // 
       // FormMain
       // 
       this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
       this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
       this.ClientSize = new System.Drawing.Size(658, 346);
+      this.Controls.Add(this.buttonLaunchTargetDirectory);
       this.Controls.Add(this.checkBoxEditionDuringWeekEnd);
       this.Controls.Add(this.groupBoxMultiSelectionDate);
       this.Controls.Add(this.buttonRemove);
@@ -648,5 +662,6 @@
     private System.Windows.Forms.RadioButton radioButtonSeveralDates;
     private System.Windows.Forms.RadioButton radioButtoSingleDate;
     private System.Windows.Forms.CheckBox checkBoxEditionDuringWeekEnd;
+    private System.Windows.Forms.Button buttonLaunchTargetDirectory;
   }
 }

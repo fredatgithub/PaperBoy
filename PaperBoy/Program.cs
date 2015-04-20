@@ -30,19 +30,12 @@ namespace PaperBoy
       Display("Getting Direct Matin electronic PDF newspaper");
       // http://kiosque.directmatin.fr/Pdf.aspx?edition=NEP&date=20150415
       string url = "http://kiosque.directmatin.fr/Pdf.aspx?edition=NEP&date=";
-      string dateEnglish = DateTime.Now.Year.ToString() +
+      string dateEnglish = DateTime.Now.Year +
         ToTwoDigits(DateTime.Now.Month) +
         ToTwoDigits(DateTime.Now.Day);
       url += dateEnglish;
       string fileName = "DirectMatin-" + dateEnglish + ".pdf";
-      if (GetWebClientBinaries(url, fileName))
-      {
-        Display("download ok and file saved");
-      }
-      else
-      {
-        Display("error while downloading");
-      }
+      Display(GetWebClientBinaries(url, fileName) ? "download ok and file saved" : "error while downloading");
 
       Display("Press a key to exit:");
       Console.ReadKey();
@@ -67,7 +60,7 @@ namespace PaperBoy
       }
       catch (WebException we)
       {
-        Console.WriteLine(we.Message + "\n" + we.Status.ToString());
+        Console.WriteLine(we.Message + "\n" + we.Status);
         result = false;
       }
       catch (NotSupportedException ne)

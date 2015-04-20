@@ -250,6 +250,7 @@ namespace ManualPaperBoy
           url = AddEditionToUrl(url, GetEditionCode(selectedEditionInListBox));
           url = AddDateToUrl(url, dateTimeInRange);
           result = GetWebClientBinaries(url, Path.Combine(textBoxSaveFilePath.Text, fileName)) ? "download ok and file saved" : "error while downloading";
+          // TODO remove file if length is zero.
           numberOfdownloadedFile++;
         }
       }
@@ -561,6 +562,12 @@ namespace ManualPaperBoy
       var selectionIndex = tb.SelectionStart;
       tb.Text = tb.Text.Insert(selectionIndex, Clipboard.GetText());
       tb.SelectionStart = selectionIndex + Clipboard.GetText().Length;
+    }
+
+    private void buttonLaunchTargetDirectory_Click(object sender, EventArgs e)
+    {
+      // TODO to be implemented
+
     }
   }
 }
