@@ -18,7 +18,9 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 using System;
+using System.IO;
 using System.Net;
+using System.Threading;
 
 namespace PaperBoy
 {
@@ -36,10 +38,27 @@ namespace PaperBoy
       url += dateEnglish;
       string fileName = "DirectMatin-" + dateEnglish + ".pdf";
       Display(GetWebClientBinaries(url, fileName) ? "download ok and file saved" : "error while downloading");
-      // TODO delete file if size equals zero
+      Thread.Sleep(5000);
+      long fileSize = FileGetSize(fileName);
+      if (fileSize == 0)
+      {
+        File.Delete(fileName);
+      }
 
       Display("Press a key to exit:");
       Console.ReadKey();
+    }
+
+    private static long FileGetSize(string filePath)
+    {
+      try
+      {
+        return File.Exists(filePath) ? new FileInfo(filePath).Length : 0;
+      }
+      catch (Exception)
+      {
+        return -1;
+      }
     }
 
     private static string ToTwoDigits(int number)

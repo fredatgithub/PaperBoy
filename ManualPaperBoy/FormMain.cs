@@ -25,6 +25,7 @@ using ManualPaperBoy.Properties;
 using System.Net;
 using System.Collections.Generic;
 using System.IO;
+using System.Threading;
 
 namespace ManualPaperBoy
 {
@@ -251,6 +252,12 @@ namespace ManualPaperBoy
           url = AddDateToUrl(url, dateTimeInRange);
           result = GetWebClientBinaries(url, Path.Combine(textBoxSaveFilePath.Text, fileName)) ? "download ok and file saved" : "error while downloading";
           // TODO remove file if length is zero.
+          Thread.Sleep(5000);
+          long fileSize = FileGetSize(fileName);
+          if (fileSize == 0)
+          {
+            File.Delete(fileName);
+          }
           numberOfdownloadedFile++;
         }
       }
@@ -258,6 +265,18 @@ namespace ManualPaperBoy
       //formWait.Close();
       DisplayMessageOk("The download" + Plural(numberOfdownloadedFile) + " " +
         Plural(numberOfdownloadedFile, "is") + " done", "Download is over", MessageBoxButtons.OK);
+    }
+
+    private static long FileGetSize(string filePath)
+    {
+      try
+      {
+        return File.Exists(filePath) ? new FileInfo(filePath).Length : 0;
+      }
+      catch (Exception)
+      {
+        return -1;
+      }
     }
 
     private static string AddEditionToUrl(string url, string edition)
