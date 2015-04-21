@@ -63,11 +63,20 @@ namespace ManualPaperBoy
       GetWindowValue();
       comboBoxSelectEdition.Items.Clear();
       LoadComboBox(comboBoxSelectEdition);
+      LoadNewspaper(comboBoxSelectNewspaper);
       SetSingleDateOutOfWeekEnd();
       dateTimePickerFromDate.MinDate = new DateTime(2013, 1, 1); // first edition
       dateTimePickerFromDate.MaxDate = DateTime.Today;
       dateTimePickerEndDate.MinDate = new DateTime(2013, 1, 2);
       dateTimePickerEndDate.MaxDate = DateTime.Today;
+    }
+
+    private static void LoadNewspaper(ComboBox cb)
+    {
+      cb.Items.Clear();
+      cb.Items.Add("Direct Matin");
+      cb.Items.Add("20 minutes");
+      cb.SelectedIndex = 0;
     }
 
     private static void LoadComboBox(ComboBox cb)
