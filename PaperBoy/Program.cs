@@ -36,6 +36,7 @@ namespace PaperBoy
       url += dateEnglish;
       string fileName = "DirectMatin-" + dateEnglish + ".pdf";
       Display(GetWebClientBinaries(url, fileName) ? "download ok and file saved" : "error while downloading");
+      // TODO delete file if size equals zero
 
       Display("Press a key to exit:");
       Console.ReadKey();
