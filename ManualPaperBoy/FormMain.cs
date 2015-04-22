@@ -206,7 +206,7 @@ namespace ManualPaperBoy
         return;
       }
 
-      // test if today is a weekend, if so move to the last Friday
+      // test if today is a weekend, if so move to the last Friday if no weekend print
       if (!editionDuringWeekEnd)
       {
         if (IsWeekEnd(dateTimePickerSelectDate.Value))
