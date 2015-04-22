@@ -262,12 +262,11 @@ namespace ManualPaperBoy
           url = AddEditionToUrl(url, GetEditionCode(selectedEditionInListBox));
           url = AddDateToUrl(url, dateTimeInRange);
           result = GetWebClientBinaries(url, Path.Combine(textBoxSaveFilePath.Text, fileName)) ? "download ok and file saved" : "error while downloading";
-          // TODO remove file if length is zero.
           Thread.Sleep(5000);
-          long fileSize = FileGetSize(fileName);
+          long fileSize = FileGetSize(Path.Combine(textBoxSaveFilePath.Text, fileName));
           if (fileSize == 0)
           {
-            File.Delete(fileName);
+            File.Delete(Path.Combine(textBoxSaveFilePath.Text, fileName));
             fileDeleted = true;
           }
           numberOfdownloadedFile++;
