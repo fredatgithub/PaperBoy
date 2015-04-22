@@ -215,8 +215,10 @@ namespace ManualPaperBoy
         }
       }
 
+      // TODO should display waiting window
       //FormWait formWait = new FormWait();
       //formWait.ShowDialog();
+      bool fileDeleted = false;
       int numberOfdownloadedFile = 0;
       List<DateTime> listOfDates = new List<DateTime>();
       if (radioButtoSingleDate.Checked)
@@ -266,14 +268,24 @@ namespace ManualPaperBoy
           if (fileSize == 0)
           {
             File.Delete(fileName);
+            fileDeleted = true;
           }
           numberOfdownloadedFile++;
         }
       }
 
       //formWait.Close();
-      DisplayMessageOk("The download" + Plural(numberOfdownloadedFile) + " " +
+      if (fileDeleted)
+      {
+        DisplayMessageOk("The download file has a size of zero byte so it has been deleted",
+          "File deleted", MessageBoxButtons.OK);
+      }
+      else
+      {
+        DisplayMessageOk("The download" + Plural(numberOfdownloadedFile) + " " +
         Plural(numberOfdownloadedFile, "is") + " done", "Download is over", MessageBoxButtons.OK);
+      }
+      
     }
 
     private static long FileGetSize(string filePath)

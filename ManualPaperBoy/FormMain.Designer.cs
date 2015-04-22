@@ -357,10 +357,10 @@
       // 
       // textBoxSaveFilePath
       // 
-      this.textBoxSaveFilePath.Location = new System.Drawing.Point(160, 49);
+      this.textBoxSaveFilePath.Location = new System.Drawing.Point(183, 49);
       this.textBoxSaveFilePath.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
       this.textBoxSaveFilePath.Name = "textBoxSaveFilePath";
-      this.textBoxSaveFilePath.Size = new System.Drawing.Size(628, 22);
+      this.textBoxSaveFilePath.Size = new System.Drawing.Size(605, 22);
       this.textBoxSaveFilePath.TabIndex = 3;
       this.textBoxSaveFilePath.Text = "C:\\Users\\User\\Documents\\perso\\magazine\\direct-matin";
       // 
@@ -548,7 +548,7 @@
       // 
       this.checkBoxEditionDuringWeekEnd.AutoSize = true;
       this.checkBoxEditionDuringWeekEnd.Location = new System.Drawing.Point(55, 236);
-      this.checkBoxEditionDuringWeekEnd.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+      this.checkBoxEditionDuringWeekEnd.Margin = new System.Windows.Forms.Padding(4);
       this.checkBoxEditionDuringWeekEnd.Name = "checkBoxEditionDuringWeekEnd";
       this.checkBoxEditionDuringWeekEnd.Size = new System.Drawing.Size(205, 21);
       this.checkBoxEditionDuringWeekEnd.TabIndex = 15;
