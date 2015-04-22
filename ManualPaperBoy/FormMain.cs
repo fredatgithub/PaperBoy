@@ -594,8 +594,10 @@ namespace ManualPaperBoy
 
     private void buttonLaunchTargetDirectory_Click(object sender, EventArgs e)
     {
-      // TODO to be implemented
-
+      if (Directory.Exists(textBoxSaveFilePath.Text))
+      {
+        Process.Start(textBoxSaveFilePath.Text);
+      }
     }
   }
 }
