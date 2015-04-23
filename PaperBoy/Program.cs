@@ -37,16 +37,25 @@ namespace PaperBoy
         ToTwoDigits(DateTime.Now.Day);
       url += dateEnglish;
       string fileName = "DirectMatin-" + dateEnglish + ".pdf";
-      Display(GetWebClientBinaries(url, fileName) ? "download ok and file saved" : "error while downloading");
+      bool fileDeleted = false;
+      string result = GetWebClientBinaries(url, fileName) ? "download ok and file saved" : "error while downloading";
       Thread.Sleep(5000);
       long fileSize = FileGetSize(fileName);
       if (fileSize == 0)
       {
         File.Delete(fileName);
+        fileDeleted = true;
       }
+
+      Display(fileDeleted == true ? "The download file has a size of zero byte so it has been deleted" : result);
 
       Display("Press a key to exit:");
       Console.ReadKey();
+    }
+
+    private void DisplayMessageOk(string message)
+    {
+      Console.WriteLine(message);
     }
 
     private static long FileGetSize(string filePath)
