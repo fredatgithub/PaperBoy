@@ -34,7 +34,8 @@ namespace PaperBoy
       string editionRequested = string.Empty;
       if (arguments.Length != 0)
       {
-        if (arguments[0].Contains("help") || arguments[0].Contains("?"))
+        if (arguments[0].Contains("help") || arguments[0].Contains("?") ||
+          arguments[0].Contains("Help") || arguments[0].Contains("HELP") )
         {
           Usage();
           return;
@@ -49,17 +50,21 @@ namespace PaperBoy
           saveFilePath = Properties.Settings.Default.saveFilePath;
         }
 
-        if (arguments.Length >= 1)
+        if (arguments.Length >= 2)
         {
 
-          if (LoadEditioncodes().ContainsValue(arguments[1].Substring(10)))
+          if (LoadEditioncodes().ContainsValue(arguments[1].Substring(9)))
           {
-            editionRequested = arguments[1].Substring(10);
+            editionRequested = arguments[1].Substring(9);
           }
           else
           {
             editionRequested = "NEP";
           }
+        }
+        else
+        {
+          editionRequested = "NEP";
         }
       }
       else
@@ -71,12 +76,16 @@ namespace PaperBoy
       
       Display("Getting Direct Matin electronic PDF newspaper");
       // http://kiosque.directmatin.fr/Pdf.aspx?edition=NEP&date=20150415
-      string url = "http://kiosque.directmatin.fr/Pdf.aspx?edition=NEP&date=";
+      string url = "http://kiosque.directmatin.fr/Pdf.aspx?edition=";
       string dateEnglish = DateTime.Now.Year +
         ToTwoDigits(DateTime.Now.Month) +
         ToTwoDigits(DateTime.Now.Day);
+      url += editionRequested + "&date=";
       url += dateEnglish;
-      string fileName = "DirectMatin_Edition_Nationale-" + dateEnglish + ".pdf";
+      string editionName = string.Empty;
+      editionName = GetEditionName(editionRequested).Replace(" ", "_").Replace("'", "_");
+      editionName = ReplaceWindowsForbiddenCharacters(editionName);
+      string fileName = Path.Combine(saveFilePath, editionName + "-" + dateEnglish + ".pdf");
       bool fileDeleted = false;
       string result = GetWebClientBinaries(url, fileName) ? "download ok and file saved" : "error while downloading";
       Thread.Sleep(5000);
@@ -130,6 +139,21 @@ namespace PaperBoy
       Console.ReadKey();
     }
 
+    private static string GetEditionName(string editionCode)
+    {
+      string result = string.Empty;
+      foreach (var item in LoadEditioncodes())
+      {
+        if (item.Value == editionCode)
+        {
+          result = item.Key;
+          break;
+        }
+      }
+
+      return result;
+    }
+
     private static Dictionary<string, string> LoadEditioncodes()
     {
       // TODO could be an XML file or property settings
@@ -146,6 +170,18 @@ namespace PaperBoy
         {"Direct Matin Strasbourg", "SP"},
         {"Direct Matin Toulouse", "TP"}
       };
+
+      return result;
+    }
+
+    private static string ReplaceWindowsForbiddenCharacters(string input, string charToBeReplaced = "")
+    {
+      string result = input;
+      string[] forbiddenWindowsFilenameCharacters = { "\\", "/", ":", "*", "?", "\"", "<", ">", "|" };
+      foreach (var item in forbiddenWindowsFilenameCharacters)
+      {
+        result = result.Replace(item, charToBeReplaced);
+      }
 
       return result;
     }
