@@ -346,7 +346,7 @@ namespace ManualPaperBoy
 
     private static Dictionary<string, string> LoadEditioncodes()
     {
-      // TODO could be an XML file
+      // TODO could be an XML file or property settings
       var result = new Dictionary<string, string>
       {
         {"Direct Matin Edition Nationale", "NEP"},

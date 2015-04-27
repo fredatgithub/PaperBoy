@@ -18,6 +18,7 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Net;
 using System.Threading;
@@ -29,17 +30,45 @@ namespace PaperBoy
     static void Main(string[] arguments)
     {
       Action<string> Display = s => Console.WriteLine(s);
+      string saveFilePath = string.Empty;
+      string editionRequested = string.Empty;
       if (arguments.Length != 0)
       {
-        if (arguments[0].Contains("help"))
+        if (arguments[0].Contains("help") || arguments[0].Contains("?"))
         {
           Usage();
           return;
         }
+
+        if (Directory.Exists(arguments[0].Substring(6)))
+        {
+          saveFilePath = arguments[0].Substring(6);
+        }
+        else
+        {
+          saveFilePath = Properties.Settings.Default.saveFilePath;
+        }
+
+        if (arguments.Length >= 1)
+        {
+
+          if (LoadEditioncodes().ContainsValue(arguments[1].Substring(10)))
+          {
+            editionRequested = arguments[1].Substring(10);
+          }
+          else
+          {
+            editionRequested = "NEP";
+          }
+        }
       }
-
+      else
+      {
+        // default values
+        saveFilePath = Properties.Settings.Default.saveFilePath;
+        editionRequested = "NEP";
+      }
       
-
       Display("Getting Direct Matin electronic PDF newspaper");
       // http://kiosque.directmatin.fr/Pdf.aspx?edition=NEP&date=20150415
       string url = "http://kiosque.directmatin.fr/Pdf.aspx?edition=NEP&date=";
@@ -67,17 +96,58 @@ namespace PaperBoy
     private static void Usage()
     {
       Action<string> Display = s => Console.WriteLine(s);
-      Display("Paperboy is an application to get your electronic newspaper automatically");
+      Display("paperboy is an application to get your electronic newspaper automatically");
+      Display("Application created by Freddy juhel in April 2015. Copyright (c) 2015 MIT");
       Display("");
       Display("Usage:");
       Display("");
-      Display("Paperboy -path=<path to save the PDF file.>");
+      Display("paperboy -help");
+      Display("paperboy -?");
+      Display("paperboy -Help");
+      Display("This help");
+      Display("");
+      Display("paperboy -path=<path to save the PDF file.> -edition=<edition code>");
       Display("Example: ");
       Display("");
-      Display("Paperboy -path=c:\temp");
+      Display("paperboy -path=c:\\temp -edition=NEP");
+      Display("");
+      Display("Direct Matin editions Code in UPPERCASE:");
+      Display("----------------------------------------");
+      Display("Direct Matin Edition Nationale is the default edition");
+      Display("");
+      Display("Direct Matin Edition Nationale NEP");
+      Display("Direct Matin Bordeaux          BDX");
+      Display("Direct Matin Lille             LIL");
+      Display("Direct Matin Lyon              LYO");
+      Display("Direct Matin Provence          PRO");
+      Display("Direct Matin Montpellier       MTP");
+      Display("Direct Matin Grand ouest       VP1");
+      Display("Direct Matin Côte-d'azur       NP");
+      Display("Direct Matin Strasbourg        SP");
+      Display("Direct Matin Toulouse          TP");
       Display("");
       Display("Press a key to exit:");
       Console.ReadKey();
+    }
+
+    private static Dictionary<string, string> LoadEditioncodes()
+    {
+      // TODO could be an XML file or property settings
+      var result = new Dictionary<string, string>
+      {
+        {"Direct Matin Edition Nationale", "NEP"},
+        {"Direct Matin Bordeaux", "BDX"},
+        {"Direct Matin Lille", "LIL"},
+        {"Direct Matin Lyon", "LYO"},
+        {"Direct Matin Provence", "PRO"},
+        {"Direct Matin Montpellier", "MTP"},
+        {"Direct Matin Grand ouest", "VP1"},
+        {"Direct Matin Côte-d'azur", "NP"},
+        {"Direct Matin Strasbourg", "SP"},
+        {"Direct Matin Toulouse", "TP"}
+      };
+
+      return result;
     }
 
     private void DisplayMessageOk(string message)
