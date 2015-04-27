@@ -26,9 +26,20 @@ namespace PaperBoy
 {
   class Program
   {
-    static void Main()
+    static void Main(string[] arguments)
     {
       Action<string> Display = s => Console.WriteLine(s);
+      if (arguments.Length != 0)
+      {
+        if (arguments[0].Contains("help"))
+        {
+          Usage();
+          return;
+        }
+      }
+
+      
+
       Display("Getting Direct Matin electronic PDF newspaper");
       // http://kiosque.directmatin.fr/Pdf.aspx?edition=NEP&date=20150415
       string url = "http://kiosque.directmatin.fr/Pdf.aspx?edition=NEP&date=";
@@ -36,7 +47,7 @@ namespace PaperBoy
         ToTwoDigits(DateTime.Now.Month) +
         ToTwoDigits(DateTime.Now.Day);
       url += dateEnglish;
-      string fileName = "DirectMatin-" + dateEnglish + ".pdf";
+      string fileName = "DirectMatin_Edition_Nationale-" + dateEnglish + ".pdf";
       bool fileDeleted = false;
       string result = GetWebClientBinaries(url, fileName) ? "download ok and file saved" : "error while downloading";
       Thread.Sleep(5000);
@@ -49,6 +60,22 @@ namespace PaperBoy
 
       Display(fileDeleted == true ? "The download file has a size of zero byte so it has been deleted" : result);
 
+      Display("Press a key to exit:");
+      Console.ReadKey();
+    }
+
+    private static void Usage()
+    {
+      Action<string> Display = s => Console.WriteLine(s);
+      Display("Paperboy is an application to get your electronic newspaper automatically");
+      Display("");
+      Display("Usage:");
+      Display("");
+      Display("Paperboy -path=<path to save the PDF file.>");
+      Display("Example: ");
+      Display("");
+      Display("Paperboy -path=c:\temp");
+      Display("");
       Display("Press a key to exit:");
       Console.ReadKey();
     }
