@@ -87,7 +87,7 @@ namespace PaperBoy
       editionName = ReplaceWindowsForbiddenCharacters(editionName);
       string fileName = Path.Combine(saveFilePath, editionName + "-" + dateEnglish + ".pdf");
       bool fileDeleted = false;
-      string result = GetWebClientBinaries(url, fileName) ? "download ok and file saved" : "error while downloading";
+      string result = GetWebClientBinaries(url, fileName) ? "download ok and file saved in " + fileName : "error while downloading";
       Thread.Sleep(5000);
       long fileSize = FileGetSize(fileName);
       if (fileSize == 0)
