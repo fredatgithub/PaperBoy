@@ -29,7 +29,7 @@ namespace PaperBoy
   {
     static void Main(string[] arguments)
     {
-      Action<string> Display = s => Console.WriteLine(s);
+      Action<string> display = Console.WriteLine;
       string saveFilePath = string.Empty;
       string editionRequested = string.Empty;
       if (arguments.Length != 0)
@@ -74,7 +74,7 @@ namespace PaperBoy
         editionRequested = "NEP";
       }
       
-      Display("Getting Direct Matin electronic PDF newspaper");
+      display("Getting Direct Matin electronic PDF newspaper");
       // http://kiosque.directmatin.fr/Pdf.aspx?edition=NEP&date=20150415
       string url = "http://kiosque.directmatin.fr/Pdf.aspx?edition=";
       string dateEnglish = DateTime.Now.Year +
@@ -96,46 +96,46 @@ namespace PaperBoy
         fileDeleted = true;
       }
 
-      Display(fileDeleted == true ? "The download file has a size of zero byte so it has been deleted" : result);
+      display(fileDeleted == true ? "The download file has a size of zero byte so it has been deleted" : result);
 
-      Display("Press a key to exit:");
+      display("Press a key to exit:");
       Console.ReadKey();
     }
 
     private static void Usage()
     {
-      Action<string> Display = s => Console.WriteLine(s);
-      Display("paperboy is an application to get your electronic newspaper automatically");
-      Display("Application created by Freddy juhel in April 2015. Copyright (c) 2015 MIT");
-      Display("");
-      Display("Usage:");
-      Display("");
-      Display("paperboy -help");
-      Display("paperboy -?");
-      Display("paperboy -Help");
-      Display("This help");
-      Display("");
-      Display("paperboy -path=<path to save the PDF file.> -edition=<edition code>");
-      Display("Example: ");
-      Display("");
-      Display("paperboy -path=c:\\temp -edition=NEP");
-      Display("");
-      Display("Direct Matin editions Code in UPPERCASE:");
-      Display("----------------------------------------");
-      Display("Direct Matin Edition Nationale is the default edition");
-      Display("");
-      Display("Direct Matin Edition Nationale NEP");
-      Display("Direct Matin Bordeaux          BDX");
-      Display("Direct Matin Lille             LIL");
-      Display("Direct Matin Lyon              LYO");
-      Display("Direct Matin Provence          PRO");
-      Display("Direct Matin Montpellier       MTP");
-      Display("Direct Matin Grand ouest       VP1");
-      Display("Direct Matin Côte-d'azur       NP");
-      Display("Direct Matin Strasbourg        SP");
-      Display("Direct Matin Toulouse          TP");
-      Display("");
-      Display("Press a key to exit:");
+      Action<string> display = Console.WriteLine;
+      display("paperboy is an application to get your electronic newspaper automatically");
+      display("Application created by Freddy juhel in April 2015. Copyright (c) 2015 MIT");
+      display("");
+      display("Usage:");
+      display("");
+      display("paperboy -help");
+      display("paperboy -?");
+      display("paperboy -Help");
+      display("This help");
+      display("");
+      display("paperboy -path=<path to save the PDF file.> -edition=<edition code>");
+      display("Example: ");
+      display("");
+      display("paperboy -path=c:\\temp -edition=NEP");
+      display("");
+      display("Direct Matin editions Code in UPPERCASE:");
+      display("----------------------------------------");
+      display("Direct Matin Edition Nationale is the default edition");
+      display("");
+      display("Direct Matin Edition Nationale NEP");
+      display("Direct Matin Bordeaux          BDX");
+      display("Direct Matin Lille             LIL");
+      display("Direct Matin Lyon              LYO");
+      display("Direct Matin Provence          PRO");
+      display("Direct Matin Montpellier       MTP");
+      display("Direct Matin Grand ouest       VP1");
+      display("Direct Matin Côte-d'azur       NP");
+      display("Direct Matin Strasbourg        SP");
+      display("Direct Matin Toulouse          TP");
+      display("");
+      display("Press a key to exit:");
       Console.ReadKey();
     }
 
