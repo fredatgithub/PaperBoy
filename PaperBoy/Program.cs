@@ -96,12 +96,12 @@ namespace PaperBoy
         fileDeleted = true;
       }
 
-      display(fileDeleted == true ? "The download file has a size of zero byte so it has been deleted" : result);
+      display(fileDeleted ? "The download file has a size of zero byte so it has been deleted" : result);
 
       display("Press a key to exit:");
       Console.ReadKey();
     }
-
+    
     private static void Usage()
     {
       Action<string> display = Console.WriteLine;

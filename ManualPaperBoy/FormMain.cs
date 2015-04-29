@@ -281,8 +281,7 @@ namespace ManualPaperBoy
       }
       else
       {
-        DisplayMessageOk("The download" + Plural(numberOfdownloadedFile) + " " +
-        Plural(numberOfdownloadedFile, "is") + " done", "Download is over", MessageBoxButtons.OK);
+        DisplayMessageOk("The download" + Plural(numberOfdownloadedFile, " is") + " done", "Download is over", MessageBoxButtons.OK);
       }
       
     }
@@ -535,6 +534,8 @@ namespace ManualPaperBoy
         // English
         case "is":
           return number > 1 ? "are" : "is";
+        case " is":
+          return number > 1 ? "s are" : " is";
 
         default:
           return number > 1 ? "s" : string.Empty;
