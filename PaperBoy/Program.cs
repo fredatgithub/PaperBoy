@@ -99,7 +99,7 @@ namespace PaperBoy
 
       // check if file already downloaded
       string result = string.Empty;
-      if (File.Exists(fileName))
+      if (File.Exists(fileName) && FileGetSize(fileName) != 0)
       {
         result = "The file " + fileName + " has already been downloaded.";
       }
