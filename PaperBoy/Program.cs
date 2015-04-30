@@ -87,7 +87,27 @@ namespace PaperBoy
       editionName = ReplaceWindowsForbiddenCharacters(editionName);
       string fileName = Path.Combine(saveFilePath, editionName + "-" + dateEnglish + ".pdf");
       bool fileDeleted = false;
-      string result = GetWebClientBinaries(url, fileName) ? "download ok and file saved in " + fileName : "error while downloading";
+      // test internet connexion
+      bool internetConnexion = false;
+      while (!internetConnexion)
+      {
+        if (IsInternetConnected())
+        {
+          internetConnexion = true;
+        }
+      }
+
+      // check if file already downloaded
+      string result = string.Empty;
+      if (File.Exists(fileName))
+      {
+        result = "The file " + fileName + " has already been downloaded.";
+      }
+      else
+      {
+        result = GetWebClientBinaries(url, fileName) ? "download ok and file saved in " + fileName : "error while downloading";
+      }
+      
       Thread.Sleep(5000);
       long fileSize = FileGetSize(fileName);
       if (fileSize == 0)
@@ -101,7 +121,22 @@ namespace PaperBoy
       display("Press a key to exit:");
       Console.ReadKey();
     }
-    
+
+    private static bool IsInternetConnected()
+    {
+      HttpWebRequest request = (HttpWebRequest)WebRequest.Create("http://www.google.fr");
+
+      try
+      {
+        HttpWebResponse response = (HttpWebResponse)request.GetResponse();
+        return true;
+      }
+      catch (Exception)
+      {
+        return false;
+      }
+    }
+
     private static void Usage()
     {
       Action<string> display = Console.WriteLine;
