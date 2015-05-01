@@ -95,6 +95,8 @@ namespace PaperBoy
         {
           internetConnexion = true;
         }
+
+        display("Waiting for Internet connexion ....");
       }
 
       // check if file already downloaded
