@@ -94,9 +94,13 @@ namespace PaperBoy
         if (IsInternetConnected())
         {
           internetConnexion = true;
+          display("Now connected to Internet.");
         }
-
-        display("Waiting for Internet connexion ....");
+        else
+        {
+          display("Waiting for Internet connexion ...");
+          Thread.Sleep(1000);
+        }
       }
 
       // check if file already downloaded
