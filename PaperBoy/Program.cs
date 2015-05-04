@@ -41,26 +41,12 @@ namespace PaperBoy
           return;
         }
 
-        if (Directory.Exists(arguments[0].Substring(6)))
-        {
-          saveFilePath = arguments[0].Substring(6);
-        }
-        else
-        {
-          saveFilePath = Properties.Settings.Default.saveFilePath;
-        }
+        saveFilePath = Directory.Exists(arguments[0].Substring(6)) ? arguments[0].Substring(6) : Properties.Settings.Default.saveFilePath;
 
         if (arguments.Length >= 2)
         {
 
-          if (LoadEditioncodes().ContainsValue(arguments[1].Substring(9)))
-          {
-            editionRequested = arguments[1].Substring(9);
-          }
-          else
-          {
-            editionRequested = "NEP";
-          }
+          editionRequested = LoadEditioncodes().ContainsValue(arguments[1].Substring(9)) ? arguments[1].Substring(9) : "NEP";
         }
         else
         {
