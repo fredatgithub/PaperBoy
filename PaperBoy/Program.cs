@@ -73,6 +73,15 @@ namespace PaperBoy
         saveFilePath = Properties.Settings.Default.saveFilePath;
         editionRequested = "NEP";
       }
+
+      //Checking if save path is correct
+      while (!Directory.Exists(saveFilePath))
+      {
+        display("The save file path variable is not correct: " + saveFilePath);
+        display("Please enter the path to save the file:");
+        saveFilePath = Console.ReadLine();
+        Properties.Settings.Default.saveFilePath = saveFilePath;
+      }
       
       display("Getting Direct Matin electronic PDF newspaper");
       // http://kiosque.directmatin.fr/Pdf.aspx?edition=NEP&date=20150415
