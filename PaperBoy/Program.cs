@@ -81,6 +81,7 @@ namespace PaperBoy
         display("Please enter the path to save the file:");
         saveFilePath = Console.ReadLine();
         Properties.Settings.Default.saveFilePath = saveFilePath;
+        Properties.Settings.Default.Save();
       }
       
       display("Getting Direct Matin electronic PDF newspaper");
