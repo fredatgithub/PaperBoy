@@ -61,6 +61,9 @@ namespace PaperBoy
       }
 
       //Checking if save path is correct
+      string myDocumentsDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+      // if copy is not easy then get my documents directory as default
+      //saveFilePath = myDocumentsDirectory;
       while (!Directory.Exists(saveFilePath))
       {
         display("The save file path variable is not correct: " + saveFilePath);
