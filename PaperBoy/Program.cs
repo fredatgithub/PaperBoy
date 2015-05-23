@@ -35,7 +35,7 @@ namespace PaperBoy
       if (arguments.Length != 0)
       {
         if (arguments[0].Contains("help") || arguments[0].Contains("?") ||
-          arguments[0].Contains("Help") || arguments[0].Contains("HELP") )
+          arguments[0].Contains("Help") || arguments[0].Contains("HELP"))
         {
           Usage();
           return;
@@ -72,7 +72,7 @@ namespace PaperBoy
         Properties.Settings.Default.saveFilePath = saveFilePath;
         Properties.Settings.Default.Save();
       }
-      
+
       display("Getting Direct Matin electronic PDF newspaper");
       // http://kiosque.directmatin.fr/Pdf.aspx?edition=NEP&date=20150415
       string url = "http://kiosque.directmatin.fr/Pdf.aspx?edition=";
@@ -104,15 +104,22 @@ namespace PaperBoy
 
       // check if file already downloaded
       string result = string.Empty;
-      if (File.Exists(fileName) && FileGetSize(fileName) != 0)
+      if (File.Exists(fileName) && FileGetSize(fileName) >= 5)
       {
         result = "The file " + fileName + " has already been downloaded.";
       }
-      else
+      else       // exclude week-end
       {
-        result = GetWebClientBinaries(url, fileName) ? "download ok and file saved in " + fileName : "error while downloading";
+        if (OutsideWeekEnd())
+        {
+          result = GetWebClientBinaries(url, fileName) ? "download ok and file saved in " + fileName : "error while downloading";
+        }
+        else
+        {
+          result = "No magazine during the weekend.";
+        }
       }
-      
+
       Thread.Sleep(5000);
       long fileSize = FileGetSize(fileName);
       if (fileSize == 0)
@@ -125,6 +132,11 @@ namespace PaperBoy
 
       display("Press a key to exit:");
       Console.ReadKey();
+    }
+
+    public static bool OutsideWeekEnd()
+    {
+      return (DateTime.Now.DayOfWeek != DayOfWeek.Sunday) && (DateTime.Now.DayOfWeek != DayOfWeek.Saturday);
     }
 
     private static bool IsInternetConnected()
