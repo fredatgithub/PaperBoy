@@ -90,6 +90,7 @@ namespace PaperBoy
       bool internetConnexion = false;
       while (!internetConnexion)
       {
+        int numberOfLoop = 1;
         if (IsInternetConnected())
         {
           internetConnexion = true;
@@ -98,7 +99,7 @@ namespace PaperBoy
         else
         {
           display("Waiting for Internet connexion ...");
-          Thread.Sleep(1000);
+          Thread.Sleep(numberOfLoop++ * 1000);
         }
       }
 
@@ -112,7 +113,8 @@ namespace PaperBoy
       {
         if (OutsideWeekEnd())
         {
-          result = GetWebClientBinaries(url, fileName) ? "download ok and file saved in " + fileName : "error while downloading";
+          result = GetWebClientBinaries(url, fileName) ? "download ok and file saved in " + fileName + 
+            "\nThe size of the file is " + FileGetSize(fileName) : "error while downloading";
         }
         else
         {
