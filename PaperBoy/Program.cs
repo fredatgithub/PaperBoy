@@ -113,7 +113,7 @@ namespace PaperBoy
       {
         if (OutsideWeekEnd())
         {
-          result = GetWebClientBinaries(url, fileName) ? string.Format("download ok and file saved in {0}\nThe size of the file is {1} bytes.", fileName,
+          result = GetWebClientBinaries(url, fileName) ? string.Format("download ok and file saved in {0}\nThe size of the file is {1:n0} bytes.", fileName,
              FileGetSize(fileName)) : "error while downloading";
         }
         else
