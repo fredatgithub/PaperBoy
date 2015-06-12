@@ -105,7 +105,7 @@ namespace PaperBoy
 
       // check if file already downloaded
       string result = string.Empty;
-      if (File.Exists(fileName) && FileGetSize(fileName) >= 5)
+      if (File.Exists(fileName) && FileGetSize(fileName) >= 99)
       {
         result = "The file " + fileName + " has already been downloaded.";
       }
@@ -113,8 +113,8 @@ namespace PaperBoy
       {
         if (OutsideWeekEnd())
         {
-          result = GetWebClientBinaries(url, fileName) ? string.Format("download ok and file saved in {0}\nThe size of the file is {1:n0} bytes.", fileName,
-             FileGetSize(fileName)) : "error while downloading";
+          result = GetWebClientBinaries(url, fileName) ? string.Format("download ok and file saved in {0}{2}The size of the file is {1:n0} bytes.", fileName,
+             FileGetSize(fileName), Environment.NewLine) : "error while downloading";
         }
         else
         {
