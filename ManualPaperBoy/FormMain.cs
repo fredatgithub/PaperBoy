@@ -426,6 +426,11 @@ namespace ManualPaperBoy
         return;
       }
 
+      if (listBoxSelectedEdition.SelectedIndex == -1 && listBoxSelectedEdition.Items.Count == 1)
+      {
+        listBoxSelectedEdition.SelectedIndex = 0;
+      }
+
       if (listBoxSelectedEdition.SelectedIndex == -1)
       {
         DisplayMessageOk("No edition has been selected.", "No selection",
