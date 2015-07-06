@@ -17,5 +17,11 @@
     <Setting Name="TextSaveFilePath" Type="System.String" Scope="User">
       <Value Profile="(Default)">C:\Users\fred\Documents\magazines\Direct_Matin</Value>
     </Setting>
+    <Setting Name="LanguageFileName" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Translations.xml</Value>
+    </Setting>
+    <Setting Name="LastLanguageUsed" Type="System.String" Scope="User">
+      <Value Profile="(Default)">English</Value>
+    </Setting>
   </Settings>
 </SettingsFile>
