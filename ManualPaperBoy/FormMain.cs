@@ -211,7 +211,8 @@ namespace ManualPaperBoy
 
       if (listBoxSelectedEdition.Items.Count == 0)
       {
-        DisplayMessageOk("You have not selected any edition", "Empty selection", MessageBoxButtons.OK);
+        DisplayMessageOk(GetTranslatedString("You have not selected any edition"), 
+          GetTranslatedString("Empty selection"), MessageBoxButtons.OK);
         return;
       }
 
@@ -227,7 +228,7 @@ namespace ManualPaperBoy
         return;
       }
 
-      // test if today is a weekend, if so move to the last Friday if no weekend print
+      // test if today is a weekend, if so, move to the last Friday if no weekend print
       if (!editionDuringWeekEnd)
       {
         if (IsWeekEnd(dateTimePickerSelectDate.Value))
@@ -445,7 +446,9 @@ namespace ManualPaperBoy
     {
       if (listBoxSelectedEdition.Items.Count == 0)
       {
-        DisplayMessageOk("There is no element in the list.\nPlease select an edition first.", "No element to choose from", MessageBoxButtons.OK);
+        DisplayMessageOk(GetTranslatedString("There is no element in the list") + ".\n" +
+          GetTranslatedString("Please select an edition first"), GetTranslatedString("No element to choose from"),
+          MessageBoxButtons.OK);
         return;
       }
 
@@ -456,40 +459,38 @@ namespace ManualPaperBoy
 
       if (listBoxSelectedEdition.SelectedIndex == -1)
       {
-        DisplayMessageOk("No edition has been selected.", "No selection",
+        DisplayMessageOk(GetTranslatedString("No edition has been selected") + ".", GetTranslatedString("No selection"),
           MessageBoxButtons.OK);
         return;
       }
 
       try
       {
-
-      }
-      catch (Exception exception)
-      {
-        DisplayMessageOk("There was an error while trying to open the selected edition\n" +
-          exception.Message,
-          "Error", MessageBoxButtons.OK);
-      }
-
-      string dateEnglish = GetEnglishDate(dateTimePickerSelectDate.Value);
-      string fileName = GetEditionFileName(listBoxSelectedEdition.SelectedItem.ToString(), dateEnglish);
-      if (Directory.Exists(textBoxSaveFilePath.Text))
-      {
-        if (File.Exists(Path.Combine(textBoxSaveFilePath.Text, fileName)))
+        string dateEnglish = GetEnglishDate(dateTimePickerSelectDate.Value);
+        string fileName = GetEditionFileName(listBoxSelectedEdition.SelectedItem.ToString(), dateEnglish);
+        if (Directory.Exists(textBoxSaveFilePath.Text))
         {
-          Process.Start(Path.Combine(textBoxSaveFilePath.Text, fileName));
+          if (File.Exists(Path.Combine(textBoxSaveFilePath.Text, fileName)))
+          {
+            Process.Start(Path.Combine(textBoxSaveFilePath.Text, fileName));
+          }
+          else
+          {
+            DisplayMessageOk(GetTranslatedString("The file") + Space() + Path.Combine(textBoxSaveFilePath.Text, fileName) +
+              Space() + GetTranslatedString("doesn't exist"), GetTranslatedString("No file"), MessageBoxButtons.OK);
+          }
         }
         else
         {
-          DisplayMessageOk(GetTranslatedString("The file") + Space()+ Path.Combine(textBoxSaveFilePath.Text, fileName) + 
-            Space() + GetTranslatedString("doesn't exist"), GetTranslatedString("No file"), MessageBoxButtons.OK);
+          DisplayMessageOk(GetTranslatedString("The directory") + Space() + textBoxSaveFilePath.Text +
+              Space() + GetTranslatedString("doesn't exist"), GetTranslatedString("No directory"), MessageBoxButtons.OK);
         }
       }
-      else
+      catch (Exception exception)
       {
-        DisplayMessageOk(GetTranslatedString("The directory") + Space() + textBoxSaveFilePath.Text +
-            Space() + GetTranslatedString("doesn't exist"), GetTranslatedString("No directory"), MessageBoxButtons.OK);
+        DisplayMessageOk(GetTranslatedString("There was an error while trying to open the selected edition") +
+          exception.Message,
+          GetTranslatedString("Error"), MessageBoxButtons.OK);
       }
     }
 
@@ -747,6 +748,21 @@ namespace ManualPaperBoy
           searchToolStripMenuItem.Text = languageDicoEn["MenuHelpSearch"];
           aboutToolStripMenuItem.Text = languageDicoEn["MenuHelpAbout"];
 
+          labelSaveFilePath.Text = languageDicoEn["Save File Path:"];
+          labelSelectNewspaper.Text = languageDicoEn["Select Newspaper:"];
+          labelSelectEdition.Text = languageDicoEn["Select Edition:"];
+          buttonSelectEdition.Text = languageDicoEn["Select ->"];
+          labelSelectDate.Text = languageDicoEn["Select date:"];
+          buttonRemove.Text = languageDicoEn["Remove"];
+          checkBoxEditionDuringWeekEnd.Text = languageDicoEn["Edition during the weekend"];
+          groupBoxMultiSelectionDate.Text = languageDicoEn["Time period"];
+          radioButtoSingleDate.Text = languageDicoEn["Single selected date"];
+          radioButtonSeveralDates.Text = languageDicoEn["Several dates"];
+          labelFromDate.Text = languageDicoEn["Start date:"];
+          labelEndDate.Text = languageDicoEn["End date:"];
+          buttonDownloadEditions.Text = languageDicoEn["Download selected editions"];
+          buttonLaunchSelectedEdition.Text = languageDicoEn["Launch selected editions"];
+          buttonLaunchTargetDirectory.Text = languageDicoEn["Launch target directory"];
           break;
         case "French":
           frenchToolStripMenuItem.Checked = true;
@@ -778,6 +794,21 @@ namespace ManualPaperBoy
           searchToolStripMenuItem.Text = languageDicoFr["MenuHelpSearch"];
           aboutToolStripMenuItem.Text = languageDicoFr["MenuHelpAbout"];
 
+          labelSaveFilePath.Text = languageDicoFr["Save File Path:"];
+          labelSelectNewspaper.Text = languageDicoFr["Select Newspaper:"];
+          labelSelectEdition.Text = languageDicoFr["Select Edition:"];
+          buttonSelectEdition.Text = languageDicoFr["Select ->"];
+          labelSelectDate.Text = languageDicoFr["Select date:"];
+          buttonRemove.Text = languageDicoFr["Remove"];
+          checkBoxEditionDuringWeekEnd.Text = languageDicoFr["Edition during the weekend"];
+          groupBoxMultiSelectionDate.Text = languageDicoFr["Time period"];
+          radioButtoSingleDate.Text = languageDicoFr["Single selected date"];
+          radioButtonSeveralDates.Text = languageDicoFr["Several dates"];
+          labelFromDate.Text = languageDicoFr["Start date:"];
+          labelEndDate.Text = languageDicoFr["End date:"];
+          buttonDownloadEditions.Text = languageDicoFr["Download selected editions"];
+          buttonLaunchSelectedEdition.Text = languageDicoFr["Launch selected editions"];
+          buttonLaunchTargetDirectory.Text = languageDicoFr["Launch target directory"];
           break;
       }
     }

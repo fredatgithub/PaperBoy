@@ -139,25 +139,145 @@
       <englishValue>The file</englishValue>
       <frenchValue>Le fichier</frenchValue>
     </term>
-  <term>
+    <term>
       <name>doesn't exist</name>
       <englishValue>doesn't exist</englishValue>
       <frenchValue>n'existe pas</frenchValue>
     </term>
-<term>
+    <term>
       <name>No file</name>
       <englishValue>No file</englishValue>
       <frenchValue>Pas de fichier</frenchValue>
     </term>
-<term>
+    <term>
       <name>The directory</name>
       <englishValue>The directory</englishValue>
       <frenchValue>Le répertoire</frenchValue>
     </term>
-<term>
+    <term>
       <name>No directory</name>
       <englishValue>No directory</englishValue>
       <frenchValue>Pas de répertoire</frenchValue>
+    </term>
+    <term>
+      <name>There was an error while trying to open the selected edition</name>
+      <englishValue>There was an error while trying to open the selected edition</englishValue>
+      <frenchValue>Il y a eu une erreur lors de l'ouverture de l'édition choisie</frenchValue>
+    </term>
+    <term>
+      <name>Error</name>
+      <englishValue>Error</englishValue>
+      <frenchValue>Erreur</frenchValue>
+    </term>
+    <term>
+      <name>There is no element in the list</name>
+      <englishValue>There is no element in the list</englishValue>
+      <frenchValue>Il n'y a pas d'élément dans la liste</frenchValue>
+    </term>
+    <term>
+      <name>Please select an edition first</name>
+      <englishValue>Please select an edition first</englishValue>
+      <frenchValue>Veuillez sélectionner d'abord une édition</frenchValue>
+    </term>
+    <term>
+      <name>No element to choose from</name>
+      <englishValue>No element to choose from</englishValue>
+      <frenchValue>Pas d'élément à choisir</frenchValue>
+    </term>
+    <term>
+      <name>No edition has been selected</name>
+      <englishValue>No edition has been selected</englishValue>
+      <frenchValue>Aucune édition n'a été choisi</frenchValue>
+    </term>
+    <term>
+      <name>No selection</name>
+      <englishValue>No selection</englishValue>
+      <frenchValue>Rien choisi</frenchValue>
+    </term>
+    <term>
+      <name>Save File Path:</name>
+      <englishValue>Save File Path:</englishValue>
+      <frenchValue>Chemin fichier:</frenchValue>
+    </term>
+    <term>
+      <name>Select Newspaper:</name>
+      <englishValue>Select Newspaper:</englishValue>
+      <frenchValue>Choisir le journal</frenchValue>
+    </term>
+    <term>
+      <name>Select Edition:</name>
+      <englishValue>Select Edition:</englishValue>
+      <frenchValue>Choisir édition:</frenchValue>
+    </term>
+    <term>
+      <name>Select -></name>
+      <englishValue>Select -></englishValue>
+      <frenchValue>Sélectionner -></frenchValue>
+    </term>
+    <term>
+      <name>Select date:</name>
+      <englishValue>Select date:</englishValue>
+      <frenchValue>Choisir la date</frenchValue>
+    </term>
+    <term>
+      <name>Remove</name>
+      <englishValue>Remove</englishValue>
+      <frenchValue>Enlever</frenchValue>
+    </term>
+    <term>
+      <name>Edition during the weekend</name>
+      <englishValue>Edition during the weekend</englishValue>
+      <frenchValue>Edition pendant le weekend</frenchValue>
+    </term>
+    <term>
+      <name>Time period</name>
+      <englishValue>Time period</englishValue>
+      <frenchValue>Période</frenchValue>
+    </term>
+    <term>
+      <name>Single selected date</name>
+      <englishValue>Single selected date</englishValue>
+      <frenchValue>Une seule date</frenchValue>
+    </term>
+    <term>
+      <name>Several dates</name>
+      <englishValue>Several dates</englishValue>
+      <frenchValue>Plusieurs dates</frenchValue>
+    </term>
+    <term>
+      <name>Start date:</name>
+      <englishValue>Start date:</englishValue>
+      <frenchValue>Date de début:</frenchValue>
+    </term>
+    <term>
+      <name>End date:</name>
+      <englishValue>End date:</englishValue>
+      <frenchValue>Date de fin:</frenchValue>
+    </term>
+    <term>
+      <name>Download selected editions</name>
+      <englishValue>Download selected editions</englishValue>
+      <frenchValue>Download éditions choisies</frenchValue>
+    </term>
+    <term>
+      <name>Launch selected editions</name>
+      <englishValue>Launch selected editions</englishValue>
+      <frenchValue>Lancer éditions choisies</frenchValue>
+    </term>
+    <term>
+      <name>Launch target directory</name>
+      <englishValue>Launch target directory</englishValue>
+      <frenchValue>Lancer répertoire cible</frenchValue>
+    </term>
+  <term>
+      <name>You have not selected any edition</name>
+      <englishValue>You have not selected any edition</englishValue>
+      <frenchValue>Vous n'avez pas sélectionné une édition</frenchValue>
+    </term>
+    <term>
+      <name>Empty selection</name>
+      <englishValue>Empty selection</englishValue>
+      <frenchValue>Sélection vide</frenchValue>
     </term>
   </terms>
 </Document>

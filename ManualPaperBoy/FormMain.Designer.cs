@@ -101,7 +101,7 @@
       this.menuStrip1.Location = new System.Drawing.Point(0, 0);
       this.menuStrip1.Name = "menuStrip1";
       this.menuStrip1.Padding = new System.Windows.Forms.Padding(5, 2, 0, 2);
-      this.menuStrip1.Size = new System.Drawing.Size(877, 28);
+      this.menuStrip1.Size = new System.Drawing.Size(910, 28);
       this.menuStrip1.TabIndex = 1;
       this.menuStrip1.Text = "menuStrip1";
       // 
@@ -362,13 +362,13 @@
       this.textBoxSaveFilePath.Location = new System.Drawing.Point(183, 49);
       this.textBoxSaveFilePath.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
       this.textBoxSaveFilePath.Name = "textBoxSaveFilePath";
-      this.textBoxSaveFilePath.Size = new System.Drawing.Size(605, 22);
+      this.textBoxSaveFilePath.Size = new System.Drawing.Size(649, 22);
       this.textBoxSaveFilePath.TabIndex = 3;
       this.textBoxSaveFilePath.Text = "C:\\Users\\User\\Documents\\perso\\magazine\\direct-matin";
       // 
       // buttonPickDirectory
       // 
-      this.buttonPickDirectory.Location = new System.Drawing.Point(795, 50);
+      this.buttonPickDirectory.Location = new System.Drawing.Point(838, 49);
       this.buttonPickDirectory.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
       this.buttonPickDirectory.Name = "buttonPickDirectory";
       this.buttonPickDirectory.Size = new System.Drawing.Size(37, 23);
@@ -401,7 +401,7 @@
       this.buttonSelectEdition.Location = new System.Drawing.Point(430, 140);
       this.buttonSelectEdition.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
       this.buttonSelectEdition.Name = "buttonSelectEdition";
-      this.buttonSelectEdition.Size = new System.Drawing.Size(94, 31);
+      this.buttonSelectEdition.Size = new System.Drawing.Size(126, 31);
       this.buttonSelectEdition.TabIndex = 7;
       this.buttonSelectEdition.Text = "Select ->";
       this.buttonSelectEdition.UseVisualStyleBackColor = true;
@@ -411,7 +411,7 @@
       // 
       this.listBoxSelectedEdition.FormattingEnabled = true;
       this.listBoxSelectedEdition.ItemHeight = 16;
-      this.listBoxSelectedEdition.Location = new System.Drawing.Point(543, 100);
+      this.listBoxSelectedEdition.Location = new System.Drawing.Point(587, 100);
       this.listBoxSelectedEdition.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
       this.listBoxSelectedEdition.Name = "listBoxSelectedEdition";
       this.listBoxSelectedEdition.Size = new System.Drawing.Size(288, 244);
@@ -422,7 +422,7 @@
       // buttonDownloadEditions
       // 
       this.buttonDownloadEditions.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-      this.buttonDownloadEditions.Location = new System.Drawing.Point(543, 349);
+      this.buttonDownloadEditions.Location = new System.Drawing.Point(587, 349);
       this.buttonDownloadEditions.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
       this.buttonDownloadEditions.Name = "buttonDownloadEditions";
       this.buttonDownloadEditions.Size = new System.Drawing.Size(288, 30);
@@ -451,7 +451,7 @@
       // buttonLaunchSelectedEdition
       // 
       this.buttonLaunchSelectedEdition.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-      this.buttonLaunchSelectedEdition.Location = new System.Drawing.Point(544, 381);
+      this.buttonLaunchSelectedEdition.Location = new System.Drawing.Point(588, 381);
       this.buttonLaunchSelectedEdition.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
       this.buttonLaunchSelectedEdition.Name = "buttonLaunchSelectedEdition";
       this.buttonLaunchSelectedEdition.Size = new System.Drawing.Size(288, 30);
@@ -466,7 +466,7 @@
       this.buttonRemove.Location = new System.Drawing.Point(430, 194);
       this.buttonRemove.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
       this.buttonRemove.Name = "buttonRemove";
-      this.buttonRemove.Size = new System.Drawing.Size(94, 31);
+      this.buttonRemove.Size = new System.Drawing.Size(126, 31);
       this.buttonRemove.TabIndex = 13;
       this.buttonRemove.Text = "<- Remove";
       this.buttonRemove.UseVisualStyleBackColor = true;
@@ -563,7 +563,7 @@
       // buttonLaunchTargetDirectory
       // 
       this.buttonLaunchTargetDirectory.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-      this.buttonLaunchTargetDirectory.Location = new System.Drawing.Point(544, 412);
+      this.buttonLaunchTargetDirectory.Location = new System.Drawing.Point(588, 412);
       this.buttonLaunchTargetDirectory.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
       this.buttonLaunchTargetDirectory.Name = "buttonLaunchTargetDirectory";
       this.buttonLaunchTargetDirectory.Size = new System.Drawing.Size(288, 30);
@@ -578,7 +578,7 @@
       this.comboBoxSelectNewspaper.Location = new System.Drawing.Point(183, 100);
       this.comboBoxSelectNewspaper.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
       this.comboBoxSelectNewspaper.Name = "comboBoxSelectNewspaper";
-      this.comboBoxSelectNewspaper.Size = new System.Drawing.Size(341, 24);
+      this.comboBoxSelectNewspaper.Size = new System.Drawing.Size(373, 24);
       this.comboBoxSelectNewspaper.TabIndex = 18;
       // 
       // labelSelectNewspaper
@@ -594,7 +594,7 @@
       // 
       this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
       this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-      this.ClientSize = new System.Drawing.Size(877, 462);
+      this.ClientSize = new System.Drawing.Size(910, 462);
       this.Controls.Add(this.comboBoxSelectNewspaper);
       this.Controls.Add(this.labelSelectNewspaper);
       this.Controls.Add(this.buttonLaunchTargetDirectory);
