@@ -307,11 +307,12 @@ namespace ManualPaperBoy
       }
       else
       {
-        string tmpMsg1 = GetTranslatedString("The download");
+        string tmpMsg0 = Plural(numberOfdownloadedFile, GetTranslatedString("The"));
+        string tmpMsg1 = Plural(numberOfdownloadedFile, GetTranslatedString("download"));
         string tmpMsg2 = Space();
         string tmpMsg3 = Plural(numberOfdownloadedFile, GetTranslatedString("is"));
         string tmpMsg4 = GetTranslatedString("done");
-        string message = tmpMsg1 + tmpMsg2 + tmpMsg3 + tmpMsg2 + tmpMsg4;
+        string message = string.Format("{0}{2}{1}{2}{3}{2}{4}", tmpMsg0,tmpMsg1, tmpMsg2, tmpMsg3, tmpMsg4);
         DisplayMessageOk(message, GetTranslatedString("Download is over"), MessageBoxButtons.OK);
       }
     }
@@ -587,11 +588,14 @@ namespace ManualPaperBoy
           return number > 1 ? "poux" : "pou";
 
         // English
-        case "is":
-          return number > 1 ? "are" : "is";
         case " is":
-          return number > 1 ? "s are" : " is";
-
+          return number > 1 ? "s are" : " is"; // with a space before
+        case "is":
+          return number > 1 ? "are" : "is"; // without a space before
+        case "The":
+          return number > 1 ? "The" : "The"; // CAPITAL
+        case "the":
+          return number > 1 ? "the" : "the"; // lower case
         default:
           return number > 1 ? "s" : string.Empty;
       }
@@ -599,12 +603,12 @@ namespace ManualPaperBoy
 
     private void cutToolStripMenuItem_Click(object sender, EventArgs e)
     {
-      CutToClipboard(textBoxSaveFilePath, "no text");
+      CutToClipboard(textBoxSaveFilePath, GetTranslatedString("no text"));
     }
 
     private void copyToolStripMenuItem_Click(object sender, EventArgs e)
     {
-      CopytToClipboard(textBoxSaveFilePath, "no text");
+      CopytToClipboard(textBoxSaveFilePath, GetTranslatedString("no text"));
     }
 
     private void pasteToolStripMenuItem_Click(object sender, EventArgs e)

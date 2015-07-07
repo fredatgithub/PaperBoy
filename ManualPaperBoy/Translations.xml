@@ -192,7 +192,7 @@
     <term>
       <name>No selection</name>
       <englishValue>No selection</englishValue>
-      <frenchValue>Rien choisi</frenchValue>
+      <frenchValue>Pas de sélection</frenchValue>
     </term>
     <term>
       <name>Save File Path:</name>
@@ -269,7 +269,7 @@
       <englishValue>Launch target directory</englishValue>
       <frenchValue>Lancer répertoire cible</frenchValue>
     </term>
-  <term>
+    <term>
       <name>You have not selected any edition</name>
       <englishValue>You have not selected any edition</englishValue>
       <frenchValue>Vous n'avez pas sélectionné une édition</frenchValue>
@@ -278,6 +278,81 @@
       <name>Empty selection</name>
       <englishValue>Empty selection</englishValue>
       <frenchValue>Sélection vide</frenchValue>
+    </term>
+    <term>
+      <name>The directory doesn't exist</name>
+      <englishValue>The directory doesn't exist</englishValue>
+      <frenchValue>Le répertoire n'existe pas</frenchValue>
+    </term>
+    <term>
+      <name>Directory not correct</name>
+      <englishValue>Directory not correct</englishValue>
+      <frenchValue>Répertoire incorrect</frenchValue>
+    </term>
+    <term>
+      <name>The end date is earlier than the start date</name>
+      <englishValue>The end date is earlier than the start date</englishValue>
+      <frenchValue>La date de fin est antérieure à la date de fin</frenchValue>
+    </term>
+    <term>
+      <name>End date too early</name>
+      <englishValue>End date too early</englishValue>
+      <frenchValue>Date de fin trop tôt</frenchValue>
+    </term>
+    <term>
+      <name>There is no selected day in the period</name>
+      <englishValue>There is no selected day in the period</englishValue>
+      <frenchValue>Il n'y a pas de jour séléctionné dans la période</frenchValue>
+    </term>
+    <term>
+      <name>The download file has a size of zero byte so it has been deleted</name>
+      <englishValue>The download file has a size of zero byte so it has been deleted</englishValue>
+      <frenchValue>Le fichier téléchargé a une taille vide donc a été effacé</frenchValue>
+    </term>
+    <term>
+      <name>File deleted</name>
+      <englishValue>File deleted</englishValue>
+      <frenchValue>Fichier effacé</frenchValue>
+    </term>
+    <term>
+      <name>The download</name>
+      <englishValue>The download</englishValue>
+      <frenchValue>Le téléchargement</frenchValue>
+    </term>
+<term>
+      <name>download</name>
+      <englishValue>download</englishValue>
+      <frenchValue>téléchargement</frenchValue>
+    </term>
+<term>
+      <name>The</name>
+      <englishValue>The</englishValue>
+      <frenchValue>Le</frenchValue>
+    </term>
+<term>
+      <name>done</name>
+      <englishValue>done</englishValue>
+      <frenchValue>fini</frenchValue>
+    </term>
+<term>
+      <name>is</name>
+      <englishValue>is</englishValue>
+      <frenchValue>est</frenchValue>
+    </term>
+<term>
+      <name></name>
+      <englishValue></englishValue>
+      <frenchValue></frenchValue>
+    </term>
+<term>
+      <name>Download is over</name>
+      <englishValue>Download is over</englishValue>
+      <frenchValue>Téléchargement fini</frenchValue>
+    </term>
+<term>
+      <name>no text</name>
+      <englishValue>no text</englishValue>
+      <frenchValue>pas de texte</frenchValue>
     </term>
   </terms>
 </Document>
