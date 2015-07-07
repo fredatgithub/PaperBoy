@@ -42,6 +42,7 @@ namespace ManualPaperBoy
     readonly Dictionary<string, string> languageDicoFr = new Dictionary<string, string>();
 
     private bool editionDuringWeekEnd;
+    private const string OneSpace = " ";
 
     private string Space(int number = 1)
     {
@@ -218,13 +219,15 @@ namespace ManualPaperBoy
 
       if (!Directory.Exists(textBoxSaveFilePath.Text))
       {
-        DisplayMessageOk("The directory doesn't exist", "Directory not correct", MessageBoxButtons.OK);
+        DisplayMessageOk(GetTranslatedString("The directory doesn't exist"),
+          GetTranslatedString("Directory not correct"), MessageBoxButtons.OK);
         return;
       }
 
       if (radioButtonSeveralDates.Checked && dateTimePickerFromDate.Value > dateTimePickerEndDate.Value)
       {
-        DisplayMessageOk("The end date is earlier than the start date", "End date too early", MessageBoxButtons.OK);
+        DisplayMessageOk(GetTranslatedString("The end date is earlier than the start date"),
+          GetTranslatedString("End date too early"), MessageBoxButtons.OK);
         return;
       }
 
@@ -268,7 +271,8 @@ namespace ManualPaperBoy
       string result = string.Empty;
       if (listOfDates.Count == 0)
       {
-        DisplayMessageOk("There is no selected day in the period", "No selection", MessageBoxButtons.OK);
+        DisplayMessageOk(GetTranslatedString("There is no selected day in the period"),
+          GetTranslatedString("No selection"), MessageBoxButtons.OK);
         return;
       }
 
@@ -283,7 +287,7 @@ namespace ManualPaperBoy
           string fileName = GetEditionFileName(selectedEditionInListBox, dateEnglish);
           url = AddEditionToUrl(url, GetEditionCode(selectedEditionInListBox));
           url = AddDateToUrl(url, dateTimeInRange);
-          result = GetWebClientBinaries(url, Path.Combine(textBoxSaveFilePath.Text, fileName)) ? "download ok and file saved" : "error while downloading";
+          result = GetWebClientBinaries(url, Path.Combine(textBoxSaveFilePath.Text, fileName)) ? GetTranslatedString("download ok and file saved") : GetTranslatedString("error while downloading");
           Thread.Sleep(5000);
           long fileSize = FileGetSize(Path.Combine(textBoxSaveFilePath.Text, fileName));
           if (fileSize == 0)
@@ -298,14 +302,18 @@ namespace ManualPaperBoy
       //formWait.Close();
       if (fileDeleted)
       {
-        DisplayMessageOk("The download file has a size of zero byte so it has been deleted",
-          "File deleted", MessageBoxButtons.OK);
+        DisplayMessageOk(GetTranslatedString("The download file has a size of zero byte so it has been deleted"),
+          GetTranslatedString("File deleted"), MessageBoxButtons.OK);
       }
       else
       {
-        DisplayMessageOk("The download" + Plural(numberOfdownloadedFile, " is") + " done", "Download is over", MessageBoxButtons.OK);
+        string tmpMsg1 = GetTranslatedString("The download");
+        string tmpMsg2 = Space();
+        string tmpMsg3 = Plural(numberOfdownloadedFile, GetTranslatedString("is"));
+        string tmpMsg4 = GetTranslatedString("done");
+        string message = tmpMsg1 + tmpMsg2 + tmpMsg3 + tmpMsg2 + tmpMsg4;
+        DisplayMessageOk(message, GetTranslatedString("Download is over"), MessageBoxButtons.OK);
       }
-
     }
 
     private static long FileGetSize(string filePath)
@@ -505,6 +513,8 @@ namespace ManualPaperBoy
       {
         case "":
           return number > 1 ? "s" : string.Empty;
+        case "est":
+          return number > 1 ? "sont" : "est";
         case "al":
           return number > 1 ? "aux" : "al";
         case "au":
