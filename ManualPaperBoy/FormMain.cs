@@ -110,7 +110,7 @@ namespace ManualPaperBoy
       Left = Settings.Default.WindowLeft < 0 ? 0 : Settings.Default.WindowLeft;
       textBoxSaveFilePath.Text = Settings.Default.TextSaveFilePath;
     }
-    
+
     private void SaveWindowValue()
     {
       Settings.Default.WindowHeight = Height;
@@ -138,6 +138,8 @@ namespace ManualPaperBoy
       {
         comboBoxSelectEdition.SelectedIndex = comboBoxSelectEdition.SelectedIndex + 1;
       }
+
+      UpdateButtons();
     }
 
     private void buttonPickDirectory_Click(object sender, EventArgs e)
@@ -242,7 +244,7 @@ namespace ManualPaperBoy
           {
             listOfDates.Add(selectedDate);
           }
-          else if(editionDuringWeekEnd)  
+          else if (editionDuringWeekEnd)
           {
             listOfDates.Add(selectedDate);
           }
@@ -291,7 +293,7 @@ namespace ManualPaperBoy
       {
         DisplayMessageOk("The download" + Plural(numberOfdownloadedFile, " is") + " done", "Download is over", MessageBoxButtons.OK);
       }
-      
+
     }
 
     private static long FileGetSize(string filePath)
@@ -424,6 +426,8 @@ namespace ManualPaperBoy
       {
         listBoxSelectedEdition.SelectedIndex = 0;
       }
+
+      UpdateButtons();
     }
 
     private void buttonLaunchSelectedEdition_Click(object sender, EventArgs e)
@@ -459,7 +463,21 @@ namespace ManualPaperBoy
 
       string dateEnglish = GetEnglishDate(dateTimePickerSelectDate.Value);
       string fileName = GetEditionFileName(listBoxSelectedEdition.SelectedItem.ToString(), dateEnglish);
-      Process.Start(Path.Combine(textBoxSaveFilePath.Text, fileName));
+      if (Directory.Exists(textBoxSaveFilePath.Text))
+      {
+        if (File.Exists(Path.Combine(textBoxSaveFilePath.Text, fileName)))
+        {
+          Process.Start(Path.Combine(textBoxSaveFilePath.Text, fileName));
+        }
+        else
+        {
+          DisplayMessageOk("The file " + Path.Combine(textBoxSaveFilePath.Text, fileName) + " doesn't exist", "No file", MessageBoxButtons.OK);
+        }
+      }
+      else
+      {
+        DisplayMessageOk("The directory " + textBoxSaveFilePath.Text + " doesn't exist", "No directory", MessageBoxButtons.OK);
+      }
     }
 
     private void checkBoxEditionDuringWeekEnd_CheckedChanged(object sender, EventArgs e)
@@ -543,7 +561,7 @@ namespace ManualPaperBoy
           return number > 1 ? "joujoux" : "joujou";
         case "pou":
           return number > 1 ? "poux" : "pou";
-          
+
         // English
         case "is":
           return number > 1 ? "are" : "is";
@@ -760,5 +778,27 @@ namespace ManualPaperBoy
     {
       SetLanguage(Language.English.ToString());
     }
+
+    private void listBoxSelectedEdition_SizeChanged(object sender, EventArgs e)
+    {
+      UpdateButtons();
+    }
+
+    private void UpdateButtons()
+    {
+      if (listBoxSelectedEdition.Items.Count == 0)
+      {
+        buttonLaunchSelectedEdition.Enabled = false;
+      }
+      else
+      {
+        buttonLaunchSelectedEdition.Enabled = true;
+      }
+    }
+
+    private void listBoxSelectedEdition_SelectedIndexChanged(object sender, EventArgs e)
+    {
+      UpdateButtons();
+    }
   }
- }
+}

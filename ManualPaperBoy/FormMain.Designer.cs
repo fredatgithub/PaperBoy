@@ -295,14 +295,14 @@
       // frenchToolStripMenuItem
       // 
       this.frenchToolStripMenuItem.Name = "frenchToolStripMenuItem";
-      this.frenchToolStripMenuItem.Size = new System.Drawing.Size(181, 26);
+      this.frenchToolStripMenuItem.Size = new System.Drawing.Size(137, 26);
       this.frenchToolStripMenuItem.Text = "Français";
       this.frenchToolStripMenuItem.Click += new System.EventHandler(this.frenchToolStripMenuItem_Click_1);
       // 
       // englishToolStripMenuItem
       // 
       this.englishToolStripMenuItem.Name = "englishToolStripMenuItem";
-      this.englishToolStripMenuItem.Size = new System.Drawing.Size(181, 26);
+      this.englishToolStripMenuItem.Size = new System.Drawing.Size(137, 26);
       this.englishToolStripMenuItem.Text = "Anglais";
       this.englishToolStripMenuItem.Click += new System.EventHandler(this.englishToolStripMenuItem_Click_1);
       // 
@@ -416,6 +416,8 @@
       this.listBoxSelectedEdition.Name = "listBoxSelectedEdition";
       this.listBoxSelectedEdition.Size = new System.Drawing.Size(288, 244);
       this.listBoxSelectedEdition.TabIndex = 8;
+      this.listBoxSelectedEdition.SelectedIndexChanged += new System.EventHandler(this.listBoxSelectedEdition_SelectedIndexChanged);
+      this.listBoxSelectedEdition.SizeChanged += new System.EventHandler(this.listBoxSelectedEdition_SizeChanged);
       // 
       // buttonDownloadEditions
       // 
