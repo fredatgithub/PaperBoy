@@ -134,5 +134,30 @@
       <englishValue>About</englishValue>
       <frenchValue>A propos de ...</frenchValue>
     </term>
+    <term>
+      <name>The file</name>
+      <englishValue>The file</englishValue>
+      <frenchValue>Le fichier</frenchValue>
+    </term>
+  <term>
+      <name>doesn't exist</name>
+      <englishValue>doesn't exist</englishValue>
+      <frenchValue>n'existe pas</frenchValue>
+    </term>
+<term>
+      <name>No file</name>
+      <englishValue>No file</englishValue>
+      <frenchValue>Pas de fichier</frenchValue>
+    </term>
+<term>
+      <name>The directory</name>
+      <englishValue>The directory</englishValue>
+      <frenchValue>Le répertoire</frenchValue>
+    </term>
+<term>
+      <name>No directory</name>
+      <englishValue>No directory</englishValue>
+      <frenchValue>Pas de répertoire</frenchValue>
+    </term>
   </terms>
 </Document>

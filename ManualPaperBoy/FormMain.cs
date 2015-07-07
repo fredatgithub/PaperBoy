@@ -43,6 +43,17 @@ namespace ManualPaperBoy
 
     private bool editionDuringWeekEnd;
 
+    private string Space(int number = 1)
+    {
+      string result = string.Empty;
+      for (int i = 0; i < number; i++)
+      {
+        result += " ";
+      }
+
+      return result;
+    }
+
     private void QuitToolStripMenuItem_Click(object sender, EventArgs e)
     {
       SaveWindowValue();
@@ -471,12 +482,14 @@ namespace ManualPaperBoy
         }
         else
         {
-          DisplayMessageOk("The file " + Path.Combine(textBoxSaveFilePath.Text, fileName) + " doesn't exist", "No file", MessageBoxButtons.OK);
+          DisplayMessageOk(GetTranslatedString("The file") + Space()+ Path.Combine(textBoxSaveFilePath.Text, fileName) + 
+            Space() + GetTranslatedString("doesn't exist"), GetTranslatedString("No file"), MessageBoxButtons.OK);
         }
       }
       else
       {
-        DisplayMessageOk("The directory " + textBoxSaveFilePath.Text + " doesn't exist", "No directory", MessageBoxButtons.OK);
+        DisplayMessageOk(GetTranslatedString("The directory") + Space() + textBoxSaveFilePath.Text +
+            Space() + GetTranslatedString("doesn't exist"), GetTranslatedString("No directory"), MessageBoxButtons.OK);
       }
     }
 
@@ -799,6 +812,26 @@ namespace ManualPaperBoy
     private void listBoxSelectedEdition_SelectedIndexChanged(object sender, EventArgs e)
     {
       UpdateButtons();
+    }
+
+    private string GetTranslatedString(string index)
+    {
+      string result = string.Empty;
+      string language = frenchToolStripMenuItem.Checked ? "french" : "english";
+
+      switch (language.ToLower())
+      {
+        case "english":
+          result = languageDicoEn.ContainsKey(index) ? languageDicoEn[index] :
+           "the term: \"" + index + "\" has not been translated yet.\nPlease tell the developer to translate this term";
+          break;
+        case "french":
+          result = languageDicoFr.ContainsKey(index) ? languageDicoFr[index] :
+            "the term: \"" + index + "\" has not been translated yet.\nPlease tell the developer to translate this term";
+          break;
+      }
+
+      return result;
     }
   }
 }
