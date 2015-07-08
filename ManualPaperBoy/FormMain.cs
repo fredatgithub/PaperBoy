@@ -43,6 +43,10 @@ namespace ManualPaperBoy
 
     private bool editionDuringWeekEnd;
     private const string OneSpace = " ";
+    private const string period = ".";
+    private const string newLine = "\n";
+    private const string Colon = ":";
+    private const string doubleQuote = "\""; 
 
     private string Space(int number = 1)
     {
@@ -213,7 +217,7 @@ namespace ManualPaperBoy
 
       if (listBoxSelectedEdition.Items.Count == 0)
       {
-        DisplayMessageOk(GetTranslatedString("You have not selected any edition"), 
+        DisplayMessageOk(GetTranslatedString("You have not selected any edition"),
           GetTranslatedString("Empty selection"), MessageBoxButtons.OK);
         return;
       }
@@ -313,7 +317,7 @@ namespace ManualPaperBoy
         string tmpMsg2 = Space();
         string tmpMsg3 = Plural(numberOfdownloadedFile, GetTranslatedString("is"));
         string tmpMsg4 = GetTranslatedString("done");
-        string message = string.Format("{0}{2}{1}{2}{3}{2}{4}", tmpMsg0,tmpMsg1, tmpMsg2, tmpMsg3, tmpMsg4);
+        string message = string.Format("{0}{2}{1}{2}{3}{2}{4}", tmpMsg0, tmpMsg1, tmpMsg2, tmpMsg3, tmpMsg4);
         DisplayMessageOk(message, GetTranslatedString("Download is over"), MessageBoxButtons.OK);
       }
     }
@@ -433,13 +437,16 @@ namespace ManualPaperBoy
     {
       if (listBoxSelectedEdition.Items.Count == 0)
       {
-        DisplayMessageOk("There is no element in the list.\nPlease select an edition first.", "No element to choose from", MessageBoxButtons.OK);
+        DisplayMessageOk(GetTranslatedString("There is no element in the list") + period + newLine +
+          GetTranslatedString("Please select an edition first") + period,
+          GetTranslatedString("No element to choose from"), MessageBoxButtons.OK);
         return;
       }
 
       if (listBoxSelectedEdition.SelectedIndex == -1)
       {
-        DisplayMessageOk("No edition has been selected.", "No selection", MessageBoxButtons.OK);
+        DisplayMessageOk(GetTranslatedString("No edition has been selected") + period,
+          GetTranslatedString("No selection"), MessageBoxButtons.OK);
         return;
       }
 
@@ -456,7 +463,7 @@ namespace ManualPaperBoy
     {
       if (listBoxSelectedEdition.Items.Count == 0)
       {
-        DisplayMessageOk(GetTranslatedString("There is no element in the list") + ".\n" +
+        DisplayMessageOk(GetTranslatedString("There is no element in the list") + period + newLine +
           GetTranslatedString("Please select an edition first"), GetTranslatedString("No element to choose from"),
           MessageBoxButtons.OK);
         return;
@@ -469,7 +476,7 @@ namespace ManualPaperBoy
 
       if (listBoxSelectedEdition.SelectedIndex == -1)
       {
-        DisplayMessageOk(GetTranslatedString("No edition has been selected") + ".", GetTranslatedString("No selection"),
+        DisplayMessageOk(GetTranslatedString("No edition has been selected") + period, GetTranslatedString("No selection"),
           MessageBoxButtons.OK);
         return;
       }
@@ -630,7 +637,7 @@ namespace ManualPaperBoy
       if (tb != ActiveControl) return;
       if (tb.Text == string.Empty)
       {
-        DisplayMessageOk("There is nothing to copy ", message, MessageBoxButtons.OK);
+        DisplayMessageOk(GetTranslatedString("There is nothing to copy"), message, MessageBoxButtons.OK);
         return;
       }
 
@@ -642,13 +649,14 @@ namespace ManualPaperBoy
       if (tb != ActiveControl) return;
       if (tb.Text == string.Empty)
       {
-        DisplayMessageOk("There is " + errorMessage + " to cut ", errorMessage, MessageBoxButtons.OK);
+        DisplayMessageOk(GetTranslatedString("There is") + OneSpace + errorMessage + OneSpace +
+          GetTranslatedString("to cut") + OneSpace, errorMessage, MessageBoxButtons.OK);
         return;
       }
 
       if (tb.SelectedText == string.Empty)
       {
-        DisplayMessageOk("No text has been selected", errorMessage, MessageBoxButtons.OK);
+        DisplayMessageOk(GetTranslatedString("No text has been selected"), errorMessage, MessageBoxButtons.OK);
         return;
       }
 
@@ -869,11 +877,15 @@ namespace ManualPaperBoy
       {
         case "english":
           result = languageDicoEn.ContainsKey(index) ? languageDicoEn[index] :
-           "the term: \"" + index + "\" has not been translated yet.\nPlease tell the developer to translate this term";
+           GetTranslatedString("the term") + Colon + doubleQuote + index + doubleQuote + OneSpace +
+           GetTranslatedString("has not been translated yet") + period + newLine +
+           GetTranslatedString("Please add an entry in the translation XML file or tell the developer to translate this term");
           break;
         case "french":
           result = languageDicoFr.ContainsKey(index) ? languageDicoFr[index] :
-            "the term: \"" + index + "\" has not been translated yet.\nPlease tell the developer to translate this term";
+            GetTranslatedString("the term") + Colon + doubleQuote + index + doubleQuote + OneSpace +
+           GetTranslatedString("has not been translated yet") + period + newLine +
+           GetTranslatedString("Please add an entry in the translation XML file or tell the developer to translate this term");
           break;
       }
 

@@ -364,5 +364,40 @@
       <englishValue>Empty field</englishValue>
       <frenchValue>Champs vide</frenchValue>
     </term>
+    <term>
+      <name>There is nothing to copy</name>
+      <englishValue>There is nothing to copy</englishValue>
+      <frenchValue>Il n'y a rien à copier</frenchValue>
+    </term>
+    <term>
+      <name>There is</name>
+      <englishValue>There is</englishValue>
+      <frenchValue>Il y a</frenchValue>
+    </term>
+    <term>
+      <name>to cut</name>
+      <englishValue>to cut</englishValue>
+      <frenchValue>à couper</frenchValue>
+    </term>
+    <term>
+      <name>No text has been selected</name>
+      <englishValue>No text has been selected</englishValue>
+      <frenchValue>Pas de texte n'a été sélectionné</frenchValue>
+    </term>
+    <term>
+      <name>the term</name>
+      <englishValue>the term</englishValue>
+      <frenchValue>le terme</frenchValue>
+    </term>
+    <term>
+      <name>has not been translated yet</name>
+      <englishValue>has not been translated yet</englishValue>
+      <frenchValue>n'a pas encore été traduit</frenchValue>
+    </term>
+    <term>
+      <name>Please add an entry in the translation XML file or tell the developer to translate this term</name>
+      <englishValue>Please add an entry in the translation XML file or tell the developer to translate this term</englishValue>
+      <frenchValue>Veuillez ajouter une entrée dans le fichier de traduction XML ou dire au développeur de le traduire</frenchValue>
+    </term>
   </terms>
 </Document>
