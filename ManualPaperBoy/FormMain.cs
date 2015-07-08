@@ -206,7 +206,8 @@ namespace ManualPaperBoy
     {
       if (textBoxSaveFilePath.Text == string.Empty)
       {
-        DisplayMessageOk("The save file path cannot be empty", "Empty field", MessageBoxButtons.OK);
+        DisplayMessageOk(GetTranslatedString("The save file path cannot be empty"),
+          GetTranslatedString("Empty field"), MessageBoxButtons.OK);
         return;
       }
 

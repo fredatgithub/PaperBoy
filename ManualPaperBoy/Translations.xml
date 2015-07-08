@@ -319,40 +319,50 @@
       <englishValue>The download</englishValue>
       <frenchValue>Le téléchargement</frenchValue>
     </term>
-<term>
+    <term>
       <name>download</name>
       <englishValue>download</englishValue>
       <frenchValue>téléchargement</frenchValue>
     </term>
-<term>
+    <term>
       <name>The</name>
       <englishValue>The</englishValue>
       <frenchValue>Le</frenchValue>
     </term>
-<term>
+    <term>
       <name>done</name>
       <englishValue>done</englishValue>
       <frenchValue>fini</frenchValue>
     </term>
-<term>
+    <term>
       <name>is</name>
       <englishValue>is</englishValue>
       <frenchValue>est</frenchValue>
     </term>
-<term>
+    <term>
       <name></name>
       <englishValue></englishValue>
       <frenchValue></frenchValue>
     </term>
-<term>
+    <term>
       <name>Download is over</name>
       <englishValue>Download is over</englishValue>
       <frenchValue>Téléchargement fini</frenchValue>
     </term>
-<term>
+    <term>
       <name>no text</name>
       <englishValue>no text</englishValue>
       <frenchValue>pas de texte</frenchValue>
+    </term>
+    <term>
+      <name>The save file path cannot be empty</name>
+      <englishValue>The save file path cannot be empty</englishValue>
+      <frenchValue>Le chemin de sauvegarde du fichier ne peut être vide</frenchValue>
+    </term>
+    <term>
+      <name>Empty field</name>
+      <englishValue>Empty field</englishValue>
+      <frenchValue>Champs vide</frenchValue>
     </term>
   </terms>
 </Document>
