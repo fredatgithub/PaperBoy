@@ -1,5 +1,5 @@
 # PaperBoy
-Get your electronic newspaper every morning automatically with a scheduled job or manually to catch up previous editions
+Get your electronic newspaper every morning automatically with a scheduled job or manually to catch up back issues
 
 # License
 [![License status] (https://img.shields.io/badge/License-MIT License-blue.svg)] (https://github.com/fredatgithub/UsefulFunctions#License status)
