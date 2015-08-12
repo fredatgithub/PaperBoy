@@ -38,17 +38,17 @@ namespace ManualPaperBoy
       InitializeComponent();
     }
 
-    readonly Dictionary<string, string> languageDicoEn = new Dictionary<string, string>();
-    readonly Dictionary<string, string> languageDicoFr = new Dictionary<string, string>();
+    readonly Dictionary<string, string> _languageDicoEn = new Dictionary<string, string>();
+    readonly Dictionary<string, string> _languageDicoFr = new Dictionary<string, string>();
 
-    private bool editionDuringWeekEnd;
+    private bool _editionDuringWeekEnd;
     private const string OneSpace = " ";
-    private const string period = ".";
-    private const string newLine = "\n";
+    private const string Period = ".";
+    private const string NewLine = "\n";
     private const string Colon = ":";
-    private const string doubleQuote = "\""; 
+    private const string DoubleQuote = "\"";
 
-    private string Space(int number = 1)
+    private static string Space(int number = 1)
     {
       string result = string.Empty;
       for (int i = 0; i < number; i++)
@@ -210,34 +210,34 @@ namespace ManualPaperBoy
     {
       if (textBoxSaveFilePath.Text == string.Empty)
       {
-        DisplayMessageOk(GetTranslatedString("The save file path cannot be empty"),
-          GetTranslatedString("Empty field"), MessageBoxButtons.OK);
+        DisplayMessageOk(Translate("The save file path cannot be empty"),
+          Translate("Empty field"), MessageBoxButtons.OK);
         return;
       }
 
       if (listBoxSelectedEdition.Items.Count == 0)
       {
-        DisplayMessageOk(GetTranslatedString("You have not selected any edition"),
-          GetTranslatedString("Empty selection"), MessageBoxButtons.OK);
+        DisplayMessageOk(Translate("You have not selected any edition"),
+          Translate("Empty selection"), MessageBoxButtons.OK);
         return;
       }
 
       if (!Directory.Exists(textBoxSaveFilePath.Text))
       {
-        DisplayMessageOk(GetTranslatedString("The directory doesn't exist"),
-          GetTranslatedString("Directory not correct"), MessageBoxButtons.OK);
+        DisplayMessageOk(Translate("The directory doesn't exist"),
+          Translate("Directory not correct"), MessageBoxButtons.OK);
         return;
       }
 
       if (radioButtonSeveralDates.Checked && dateTimePickerFromDate.Value > dateTimePickerEndDate.Value)
       {
-        DisplayMessageOk(GetTranslatedString("The end date is earlier than the start date"),
-          GetTranslatedString("End date too early"), MessageBoxButtons.OK);
+        DisplayMessageOk(Translate("The end date is earlier than the start date"),
+          Translate("End date too early"), MessageBoxButtons.OK);
         return;
       }
 
       // test if today is a weekend, if so, move to the last Friday if no weekend print
-      if (!editionDuringWeekEnd)
+      if (!_editionDuringWeekEnd)
       {
         if (IsWeekEnd(dateTimePickerSelectDate.Value))
         {
@@ -264,7 +264,7 @@ namespace ManualPaperBoy
           {
             listOfDates.Add(selectedDate);
           }
-          else if (editionDuringWeekEnd)
+          else if (_editionDuringWeekEnd)
           {
             listOfDates.Add(selectedDate);
           }
@@ -276,8 +276,8 @@ namespace ManualPaperBoy
       string result = string.Empty;
       if (listOfDates.Count == 0)
       {
-        DisplayMessageOk(GetTranslatedString("There is no selected day in the period"),
-          GetTranslatedString("No selection"), MessageBoxButtons.OK);
+        DisplayMessageOk(Translate("There is no selected day in the period"),
+          Translate("No selection"), MessageBoxButtons.OK);
         return;
       }
 
@@ -292,7 +292,7 @@ namespace ManualPaperBoy
           string fileName = GetEditionFileName(selectedEditionInListBox, dateEnglish);
           url = AddEditionToUrl(url, GetEditionCode(selectedEditionInListBox));
           url = AddDateToUrl(url, dateTimeInRange);
-          result = GetWebClientBinaries(url, Path.Combine(textBoxSaveFilePath.Text, fileName)) ? GetTranslatedString("download ok and file saved") : GetTranslatedString("error while downloading");
+          result = GetWebClientBinaries(url, Path.Combine(textBoxSaveFilePath.Text, fileName)) ? Translate("download ok and file saved") : Translate("error while downloading");
           Thread.Sleep(5000);
           long fileSize = FileGetSize(Path.Combine(textBoxSaveFilePath.Text, fileName));
           if (fileSize == 0)
@@ -307,18 +307,18 @@ namespace ManualPaperBoy
       //formWait.Close();
       if (fileDeleted)
       {
-        DisplayMessageOk(GetTranslatedString("The download file has a size of zero byte so it has been deleted"),
-          GetTranslatedString("File deleted"), MessageBoxButtons.OK);
+        DisplayMessageOk(Translate("The download file has a size of zero byte so it has been deleted"),
+          Translate("File deleted"), MessageBoxButtons.OK);
       }
       else
       {
-        string tmpMsg0 = Plural(numberOfdownloadedFile, GetTranslatedString("The"));
-        string tmpMsg1 = Plural(numberOfdownloadedFile, GetTranslatedString("download"));
+        string tmpMsg0 = Plural(numberOfdownloadedFile, Translate("The"));
+        string tmpMsg1 = Plural(numberOfdownloadedFile, Translate("download"));
         string tmpMsg2 = Space();
-        string tmpMsg3 = Plural(numberOfdownloadedFile, GetTranslatedString("is"));
-        string tmpMsg4 = GetTranslatedString("done");
+        string tmpMsg3 = Plural(numberOfdownloadedFile, Translate("is"));
+        string tmpMsg4 = Translate("done");
         string message = string.Format("{0}{2}{1}{2}{3}{2}{4}", tmpMsg0, tmpMsg1, tmpMsg2, tmpMsg3, tmpMsg4);
-        DisplayMessageOk(message, GetTranslatedString("Download is over"), MessageBoxButtons.OK);
+        DisplayMessageOk(message, Translate("Download is over"), MessageBoxButtons.OK);
       }
     }
 
@@ -437,16 +437,16 @@ namespace ManualPaperBoy
     {
       if (listBoxSelectedEdition.Items.Count == 0)
       {
-        DisplayMessageOk(GetTranslatedString("There is no element in the list") + period + newLine +
-          GetTranslatedString("Please select an edition first") + period,
-          GetTranslatedString("No element to choose from"), MessageBoxButtons.OK);
+        DisplayMessageOk(Translate("There is no element in the list") + Period + NewLine +
+          Translate("Please select an edition first") + Period,
+          Translate("No element to choose from"), MessageBoxButtons.OK);
         return;
       }
 
       if (listBoxSelectedEdition.SelectedIndex == -1)
       {
-        DisplayMessageOk(GetTranslatedString("No edition has been selected") + period,
-          GetTranslatedString("No selection"), MessageBoxButtons.OK);
+        DisplayMessageOk(Translate("No edition has been selected") + Period,
+          Translate("No selection"), MessageBoxButtons.OK);
         return;
       }
 
@@ -463,8 +463,8 @@ namespace ManualPaperBoy
     {
       if (listBoxSelectedEdition.Items.Count == 0)
       {
-        DisplayMessageOk(GetTranslatedString("There is no element in the list") + period + newLine +
-          GetTranslatedString("Please select an edition first"), GetTranslatedString("No element to choose from"),
+        DisplayMessageOk(Translate("There is no element in the list") + Period + NewLine +
+          Translate("Please select an edition first"), Translate("No element to choose from"),
           MessageBoxButtons.OK);
         return;
       }
@@ -476,7 +476,7 @@ namespace ManualPaperBoy
 
       if (listBoxSelectedEdition.SelectedIndex == -1)
       {
-        DisplayMessageOk(GetTranslatedString("No edition has been selected") + period, GetTranslatedString("No selection"),
+        DisplayMessageOk(Translate("No edition has been selected") + Period, Translate("No selection"),
           MessageBoxButtons.OK);
         return;
       }
@@ -493,27 +493,27 @@ namespace ManualPaperBoy
           }
           else
           {
-            DisplayMessageOk(GetTranslatedString("The file") + Space() + Path.Combine(textBoxSaveFilePath.Text, fileName) +
-              Space() + GetTranslatedString("doesn't exist"), GetTranslatedString("No file"), MessageBoxButtons.OK);
+            DisplayMessageOk(Translate("The file") + Space() + Path.Combine(textBoxSaveFilePath.Text, fileName) +
+              Space() + Translate("doesn't exist"), Translate("No file"), MessageBoxButtons.OK);
           }
         }
         else
         {
-          DisplayMessageOk(GetTranslatedString("The directory") + Space() + textBoxSaveFilePath.Text +
-              Space() + GetTranslatedString("doesn't exist"), GetTranslatedString("No directory"), MessageBoxButtons.OK);
+          DisplayMessageOk(Translate("The directory") + Space() + textBoxSaveFilePath.Text +
+              Space() + Translate("doesn't exist"), Translate("No directory"), MessageBoxButtons.OK);
         }
       }
       catch (Exception exception)
       {
-        DisplayMessageOk(GetTranslatedString("There was an error while trying to open the selected edition") +
+        DisplayMessageOk(Translate("There was an error while trying to open the selected edition") +
           exception.Message,
-          GetTranslatedString("Error"), MessageBoxButtons.OK);
+          Translate("Error"), MessageBoxButtons.OK);
       }
     }
 
     private void checkBoxEditionDuringWeekEnd_CheckedChanged(object sender, EventArgs e)
     {
-      editionDuringWeekEnd = checkBoxEditionDuringWeekEnd.Checked;
+      _editionDuringWeekEnd = checkBoxEditionDuringWeekEnd.Checked;
     }
 
     public static string Plural(int number, string irregularNoun = "")
@@ -601,9 +601,9 @@ namespace ManualPaperBoy
         case "is":
           return number > 1 ? "are" : "is"; // without a space before
         case "The":
-          return number > 1 ? "The" : "The"; // CAPITAL
+          return "The"; // CAPITAL usefull for french plural which is different le less
         case "the":
-          return number > 1 ? "the" : "the"; // lower case
+          return "the"; // lower case usefull for french plural which is different le less
         default:
           return number > 1 ? "s" : string.Empty;
       }
@@ -611,12 +611,12 @@ namespace ManualPaperBoy
 
     private void cutToolStripMenuItem_Click(object sender, EventArgs e)
     {
-      CutToClipboard(textBoxSaveFilePath, GetTranslatedString("no text"));
+      CutToClipboard(textBoxSaveFilePath, Translate("no text"));
     }
 
     private void copyToolStripMenuItem_Click(object sender, EventArgs e)
     {
-      CopytToClipboard(textBoxSaveFilePath, GetTranslatedString("no text"));
+      CopytToClipboard(textBoxSaveFilePath, Translate("no text"));
     }
 
     private void pasteToolStripMenuItem_Click(object sender, EventArgs e)
@@ -637,7 +637,7 @@ namespace ManualPaperBoy
       if (tb != ActiveControl) return;
       if (tb.Text == string.Empty)
       {
-        DisplayMessageOk(GetTranslatedString("There is nothing to copy"), message, MessageBoxButtons.OK);
+        DisplayMessageOk(Translate("There is nothing to copy"), message, MessageBoxButtons.OK);
         return;
       }
 
@@ -649,14 +649,14 @@ namespace ManualPaperBoy
       if (tb != ActiveControl) return;
       if (tb.Text == string.Empty)
       {
-        DisplayMessageOk(GetTranslatedString("There is") + OneSpace + errorMessage + OneSpace +
-          GetTranslatedString("to cut") + OneSpace, errorMessage, MessageBoxButtons.OK);
+        DisplayMessageOk(Translate("There is") + OneSpace + errorMessage + OneSpace +
+          Translate("to cut") + OneSpace, errorMessage, MessageBoxButtons.OK);
         return;
       }
 
       if (tb.SelectedText == string.Empty)
       {
-        DisplayMessageOk(GetTranslatedString("No text has been selected"), errorMessage, MessageBoxButtons.OK);
+        DisplayMessageOk(Translate("No text has been selected"), errorMessage, MessageBoxButtons.OK);
         return;
       }
 
@@ -697,16 +697,23 @@ namespace ManualPaperBoy
       XDocument xDoc = XDocument.Load(Settings.Default.LanguageFileName);
       var result = from node in xDoc.Descendants("term")
                    where node.HasElements
+                   let xElementName = node.Element("name")
+                   where xElementName != null
+                   let xElementEnglish = node.Element("englishValue")
+                   where xElementEnglish != null
+                   let xElementFrench = node.Element("frenchValue")
+                   where xElementFrench != null
                    select new
                    {
-                     name = node.Element("name").Value,
-                     englishValue = node.Element("englishValue").Value,
-                     frenchValue = node.Element("frenchValue").Value
+                     name = xElementName.Value,
+                     englishValue = xElementEnglish.Value,
+                     frenchValue = xElementFrench.Value
                    };
-      foreach (var i in result)
+
+      foreach (var xElement in result)
       {
-        languageDicoEn.Add(i.name, i.englishValue);
-        languageDicoFr.Add(i.name, i.frenchValue);
+        _languageDicoEn.Add(xElement.name, xElement.englishValue);
+        _languageDicoFr.Add(xElement.name, xElement.frenchValue);
       }
     }
 
@@ -744,94 +751,94 @@ namespace ManualPaperBoy
         case "English":
           frenchToolStripMenuItem.Checked = false;
           englishToolStripMenuItem.Checked = true;
-          fileToolStripMenuItem.Text = languageDicoEn["MenuFile"];
-          newToolStripMenuItem.Text = languageDicoEn["MenuFileNew"];
-          openToolStripMenuItem.Text = languageDicoEn["MenuFileOpen"];
-          saveToolStripMenuItem.Text = languageDicoEn["MenuFileSave"];
-          saveasToolStripMenuItem.Text = languageDicoEn["MenuFileSaveAs"];
-          printPreviewToolStripMenuItem.Text = languageDicoEn["MenuFilePrint"];
-          printPreviewToolStripMenuItem.Text = languageDicoEn["MenufilePageSetup"];
-          quitToolStripMenuItem.Text = languageDicoEn["MenufileQuit"];
-          editToolStripMenuItem.Text = languageDicoEn["MenuEdit"];
-          cancelToolStripMenuItem.Text = languageDicoEn["MenuEditCancel"];
-          redoToolStripMenuItem.Text = languageDicoEn["MenuEditRedo"];
-          cutToolStripMenuItem.Text = languageDicoEn["MenuEditCut"];
-          copyToolStripMenuItem.Text = languageDicoEn["MenuEditCopy"];
-          pasteToolStripMenuItem.Text = languageDicoEn["MenuEditPaste"];
-          selectAllToolStripMenuItem.Text = languageDicoEn["MenuEditSelectAll"];
-          toolsToolStripMenuItem.Text = languageDicoEn["MenuTools"];
-          personalizeToolStripMenuItem.Text = languageDicoEn["MenuToolsCustomize"];
-          optionsToolStripMenuItem.Text = languageDicoEn["MenuToolsOptions"];
-          languagetoolStripMenuItem.Text = languageDicoEn["MenuLanguage"];
-          englishToolStripMenuItem.Text = languageDicoEn["MenuLanguageEnglish"];
-          frenchToolStripMenuItem.Text = languageDicoEn["MenuLanguageFrench"];
-          helpToolStripMenuItem.Text = languageDicoEn["MenuHelp"];
-          summaryToolStripMenuItem.Text = languageDicoEn["MenuHelpSummary"];
-          indexToolStripMenuItem.Text = languageDicoEn["MenuHelpIndex"];
-          searchToolStripMenuItem.Text = languageDicoEn["MenuHelpSearch"];
-          aboutToolStripMenuItem.Text = languageDicoEn["MenuHelpAbout"];
+          fileToolStripMenuItem.Text = _languageDicoEn["MenuFile"];
+          newToolStripMenuItem.Text = _languageDicoEn["MenuFileNew"];
+          openToolStripMenuItem.Text = _languageDicoEn["MenuFileOpen"];
+          saveToolStripMenuItem.Text = _languageDicoEn["MenuFileSave"];
+          saveasToolStripMenuItem.Text = _languageDicoEn["MenuFileSaveAs"];
+          printPreviewToolStripMenuItem.Text = _languageDicoEn["MenuFilePrint"];
+          printPreviewToolStripMenuItem.Text = _languageDicoEn["MenufilePageSetup"];
+          quitToolStripMenuItem.Text = _languageDicoEn["MenufileQuit"];
+          editToolStripMenuItem.Text = _languageDicoEn["MenuEdit"];
+          cancelToolStripMenuItem.Text = _languageDicoEn["MenuEditCancel"];
+          redoToolStripMenuItem.Text = _languageDicoEn["MenuEditRedo"];
+          cutToolStripMenuItem.Text = _languageDicoEn["MenuEditCut"];
+          copyToolStripMenuItem.Text = _languageDicoEn["MenuEditCopy"];
+          pasteToolStripMenuItem.Text = _languageDicoEn["MenuEditPaste"];
+          selectAllToolStripMenuItem.Text = _languageDicoEn["MenuEditSelectAll"];
+          toolsToolStripMenuItem.Text = _languageDicoEn["MenuTools"];
+          personalizeToolStripMenuItem.Text = _languageDicoEn["MenuToolsCustomize"];
+          optionsToolStripMenuItem.Text = _languageDicoEn["MenuToolsOptions"];
+          languagetoolStripMenuItem.Text = _languageDicoEn["MenuLanguage"];
+          englishToolStripMenuItem.Text = _languageDicoEn["MenuLanguageEnglish"];
+          frenchToolStripMenuItem.Text = _languageDicoEn["MenuLanguageFrench"];
+          helpToolStripMenuItem.Text = _languageDicoEn["MenuHelp"];
+          summaryToolStripMenuItem.Text = _languageDicoEn["MenuHelpSummary"];
+          indexToolStripMenuItem.Text = _languageDicoEn["MenuHelpIndex"];
+          searchToolStripMenuItem.Text = _languageDicoEn["MenuHelpSearch"];
+          aboutToolStripMenuItem.Text = _languageDicoEn["MenuHelpAbout"];
 
-          labelSaveFilePath.Text = languageDicoEn["Save File Path:"];
-          labelSelectNewspaper.Text = languageDicoEn["Select Newspaper:"];
-          labelSelectEdition.Text = languageDicoEn["Select Edition:"];
-          buttonSelectEdition.Text = languageDicoEn["Select ->"];
-          labelSelectDate.Text = languageDicoEn["Select date:"];
-          buttonRemove.Text = languageDicoEn["Remove"];
-          checkBoxEditionDuringWeekEnd.Text = languageDicoEn["Edition during the weekend"];
-          groupBoxMultiSelectionDate.Text = languageDicoEn["Time period"];
-          radioButtoSingleDate.Text = languageDicoEn["Single selected date"];
-          radioButtonSeveralDates.Text = languageDicoEn["Several dates"];
-          labelFromDate.Text = languageDicoEn["Start date:"];
-          labelEndDate.Text = languageDicoEn["End date:"];
-          buttonDownloadEditions.Text = languageDicoEn["Download selected editions"];
-          buttonLaunchSelectedEdition.Text = languageDicoEn["Launch selected editions"];
-          buttonLaunchTargetDirectory.Text = languageDicoEn["Launch target directory"];
+          labelSaveFilePath.Text = _languageDicoEn["Save File Path:"];
+          labelSelectNewspaper.Text = _languageDicoEn["Select Newspaper:"];
+          labelSelectEdition.Text = _languageDicoEn["Select Edition:"];
+          buttonSelectEdition.Text = _languageDicoEn["Select ->"];
+          labelSelectDate.Text = _languageDicoEn["Select date:"];
+          buttonRemove.Text = _languageDicoEn["Remove"];
+          checkBoxEditionDuringWeekEnd.Text = _languageDicoEn["Edition during the weekend"];
+          groupBoxMultiSelectionDate.Text = _languageDicoEn["Time period"];
+          radioButtoSingleDate.Text = _languageDicoEn["Single selected date"];
+          radioButtonSeveralDates.Text = _languageDicoEn["Several dates"];
+          labelFromDate.Text = _languageDicoEn["Start date:"];
+          labelEndDate.Text = _languageDicoEn["End date:"];
+          buttonDownloadEditions.Text = _languageDicoEn["Download selected editions"];
+          buttonLaunchSelectedEdition.Text = _languageDicoEn["Launch selected editions"];
+          buttonLaunchTargetDirectory.Text = _languageDicoEn["Launch target directory"];
           break;
         case "French":
           frenchToolStripMenuItem.Checked = true;
           englishToolStripMenuItem.Checked = false;
-          fileToolStripMenuItem.Text = languageDicoFr["MenuFile"];
-          newToolStripMenuItem.Text = languageDicoFr["MenuFileNew"];
-          openToolStripMenuItem.Text = languageDicoFr["MenuFileOpen"];
-          saveToolStripMenuItem.Text = languageDicoFr["MenuFileSave"];
-          saveasToolStripMenuItem.Text = languageDicoFr["MenuFileSaveAs"];
-          printPreviewToolStripMenuItem.Text = languageDicoFr["MenuFilePrint"];
-          printPreviewToolStripMenuItem.Text = languageDicoFr["MenufilePageSetup"];
-          quitToolStripMenuItem.Text = languageDicoFr["MenufileQuit"];
-          editToolStripMenuItem.Text = languageDicoFr["MenuEdit"];
-          cancelToolStripMenuItem.Text = languageDicoFr["MenuEditCancel"];
-          redoToolStripMenuItem.Text = languageDicoFr["MenuEditRedo"];
-          cutToolStripMenuItem.Text = languageDicoFr["MenuEditCut"];
-          copyToolStripMenuItem.Text = languageDicoFr["MenuEditCopy"];
-          pasteToolStripMenuItem.Text = languageDicoFr["MenuEditPaste"];
-          selectAllToolStripMenuItem.Text = languageDicoFr["MenuEditSelectAll"];
-          toolsToolStripMenuItem.Text = languageDicoFr["MenuTools"];
-          personalizeToolStripMenuItem.Text = languageDicoFr["MenuToolsCustomize"];
-          optionsToolStripMenuItem.Text = languageDicoFr["MenuToolsOptions"];
-          languagetoolStripMenuItem.Text = languageDicoFr["MenuLanguage"];
-          englishToolStripMenuItem.Text = languageDicoFr["MenuLanguageEnglish"];
-          frenchToolStripMenuItem.Text = languageDicoFr["MenuLanguageFrench"];
-          helpToolStripMenuItem.Text = languageDicoFr["MenuHelp"];
-          summaryToolStripMenuItem.Text = languageDicoFr["MenuHelpSummary"];
-          indexToolStripMenuItem.Text = languageDicoFr["MenuHelpIndex"];
-          searchToolStripMenuItem.Text = languageDicoFr["MenuHelpSearch"];
-          aboutToolStripMenuItem.Text = languageDicoFr["MenuHelpAbout"];
+          fileToolStripMenuItem.Text = _languageDicoFr["MenuFile"];
+          newToolStripMenuItem.Text = _languageDicoFr["MenuFileNew"];
+          openToolStripMenuItem.Text = _languageDicoFr["MenuFileOpen"];
+          saveToolStripMenuItem.Text = _languageDicoFr["MenuFileSave"];
+          saveasToolStripMenuItem.Text = _languageDicoFr["MenuFileSaveAs"];
+          printPreviewToolStripMenuItem.Text = _languageDicoFr["MenuFilePrint"];
+          printPreviewToolStripMenuItem.Text = _languageDicoFr["MenufilePageSetup"];
+          quitToolStripMenuItem.Text = _languageDicoFr["MenufileQuit"];
+          editToolStripMenuItem.Text = _languageDicoFr["MenuEdit"];
+          cancelToolStripMenuItem.Text = _languageDicoFr["MenuEditCancel"];
+          redoToolStripMenuItem.Text = _languageDicoFr["MenuEditRedo"];
+          cutToolStripMenuItem.Text = _languageDicoFr["MenuEditCut"];
+          copyToolStripMenuItem.Text = _languageDicoFr["MenuEditCopy"];
+          pasteToolStripMenuItem.Text = _languageDicoFr["MenuEditPaste"];
+          selectAllToolStripMenuItem.Text = _languageDicoFr["MenuEditSelectAll"];
+          toolsToolStripMenuItem.Text = _languageDicoFr["MenuTools"];
+          personalizeToolStripMenuItem.Text = _languageDicoFr["MenuToolsCustomize"];
+          optionsToolStripMenuItem.Text = _languageDicoFr["MenuToolsOptions"];
+          languagetoolStripMenuItem.Text = _languageDicoFr["MenuLanguage"];
+          englishToolStripMenuItem.Text = _languageDicoFr["MenuLanguageEnglish"];
+          frenchToolStripMenuItem.Text = _languageDicoFr["MenuLanguageFrench"];
+          helpToolStripMenuItem.Text = _languageDicoFr["MenuHelp"];
+          summaryToolStripMenuItem.Text = _languageDicoFr["MenuHelpSummary"];
+          indexToolStripMenuItem.Text = _languageDicoFr["MenuHelpIndex"];
+          searchToolStripMenuItem.Text = _languageDicoFr["MenuHelpSearch"];
+          aboutToolStripMenuItem.Text = _languageDicoFr["MenuHelpAbout"];
 
-          labelSaveFilePath.Text = languageDicoFr["Save File Path:"];
-          labelSelectNewspaper.Text = languageDicoFr["Select Newspaper:"];
-          labelSelectEdition.Text = languageDicoFr["Select Edition:"];
-          buttonSelectEdition.Text = languageDicoFr["Select ->"];
-          labelSelectDate.Text = languageDicoFr["Select date:"];
-          buttonRemove.Text = languageDicoFr["Remove"];
-          checkBoxEditionDuringWeekEnd.Text = languageDicoFr["Edition during the weekend"];
-          groupBoxMultiSelectionDate.Text = languageDicoFr["Time period"];
-          radioButtoSingleDate.Text = languageDicoFr["Single selected date"];
-          radioButtonSeveralDates.Text = languageDicoFr["Several dates"];
-          labelFromDate.Text = languageDicoFr["Start date:"];
-          labelEndDate.Text = languageDicoFr["End date:"];
-          buttonDownloadEditions.Text = languageDicoFr["Download selected editions"];
-          buttonLaunchSelectedEdition.Text = languageDicoFr["Launch selected editions"];
-          buttonLaunchTargetDirectory.Text = languageDicoFr["Launch target directory"];
+          labelSaveFilePath.Text = _languageDicoFr["Save File Path:"];
+          labelSelectNewspaper.Text = _languageDicoFr["Select Newspaper:"];
+          labelSelectEdition.Text = _languageDicoFr["Select Edition:"];
+          buttonSelectEdition.Text = _languageDicoFr["Select ->"];
+          labelSelectDate.Text = _languageDicoFr["Select date:"];
+          buttonRemove.Text = _languageDicoFr["Remove"];
+          checkBoxEditionDuringWeekEnd.Text = _languageDicoFr["Edition during the weekend"];
+          groupBoxMultiSelectionDate.Text = _languageDicoFr["Time period"];
+          radioButtoSingleDate.Text = _languageDicoFr["Single selected date"];
+          radioButtonSeveralDates.Text = _languageDicoFr["Several dates"];
+          labelFromDate.Text = _languageDicoFr["Start date:"];
+          labelEndDate.Text = _languageDicoFr["End date:"];
+          buttonDownloadEditions.Text = _languageDicoFr["Download selected editions"];
+          buttonLaunchSelectedEdition.Text = _languageDicoFr["Launch selected editions"];
+          buttonLaunchTargetDirectory.Text = _languageDicoFr["Launch target directory"];
           break;
       }
     }
@@ -853,14 +860,7 @@ namespace ManualPaperBoy
 
     private void UpdateButtons()
     {
-      if (listBoxSelectedEdition.Items.Count == 0)
-      {
-        buttonLaunchSelectedEdition.Enabled = false;
-      }
-      else
-      {
-        buttonLaunchSelectedEdition.Enabled = true;
-      }
+      buttonLaunchSelectedEdition.Enabled = listBoxSelectedEdition.Items.Count != 0;
     }
 
     private void listBoxSelectedEdition_SelectedIndexChanged(object sender, EventArgs e)
@@ -868,7 +868,7 @@ namespace ManualPaperBoy
       UpdateButtons();
     }
 
-    private string GetTranslatedString(string index)
+    private string Translate(string index)
     {
       string result = string.Empty;
       string language = frenchToolStripMenuItem.Checked ? "french" : "english";
@@ -876,16 +876,16 @@ namespace ManualPaperBoy
       switch (language.ToLower())
       {
         case "english":
-          result = languageDicoEn.ContainsKey(index) ? languageDicoEn[index] :
-           GetTranslatedString("the term") + Colon + doubleQuote + index + doubleQuote + OneSpace +
-           GetTranslatedString("has not been translated yet") + period + newLine +
-           GetTranslatedString("Please add an entry in the translation XML file or tell the developer to translate this term");
+          result = _languageDicoEn.ContainsKey(index) ? _languageDicoEn[index] :
+           Translate("the term") + Colon + DoubleQuote + index + DoubleQuote + OneSpace +
+           Translate("has not been translated yet") + Period + NewLine +
+           Translate("Please add an entry in the translation XML file or tell the developer to translate this term");
           break;
         case "french":
-          result = languageDicoFr.ContainsKey(index) ? languageDicoFr[index] :
-            GetTranslatedString("the term") + Colon + doubleQuote + index + doubleQuote + OneSpace +
-           GetTranslatedString("has not been translated yet") + period + newLine +
-           GetTranslatedString("Please add an entry in the translation XML file or tell the developer to translate this term");
+          result = _languageDicoFr.ContainsKey(index) ? _languageDicoFr[index] :
+            Translate("the term") + Colon + DoubleQuote + index + DoubleQuote + OneSpace +
+           Translate("has not been translated yet") + Period + NewLine +
+           Translate("Please add an entry in the translation XML file or tell the developer to translate this term");
           break;
       }
 
