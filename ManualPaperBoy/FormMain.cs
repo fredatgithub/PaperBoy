@@ -41,10 +41,7 @@ namespace ManualPaperBoy
 
     readonly Dictionary<string, string> _languageDicoEn = new Dictionary<string, string>();
     readonly Dictionary<string, string> _languageDicoFr = new Dictionary<string, string>();
-
     private bool _editionDuringWeekEnd;
-    private const string NewLine = "\n";
-    private const string DoubleQuote = "\"";
 
     private static string Space(int number = 1)
     {
@@ -435,7 +432,8 @@ namespace ManualPaperBoy
     {
       if (listBoxSelectedEdition.Items.Count == 0)
       {
-        DisplayMessageOk(Translate("There is no element in the list") + Punctuation.Period + NewLine +
+        DisplayMessageOk(Translate("There is no element in the list") + Punctuation.Period + 
+          Punctuation.CrLf +
           Translate("Please select an edition first") + Punctuation.Period,
           Translate("No element to choose from"), MessageBoxButtons.OK);
         return;
@@ -884,8 +882,10 @@ namespace ManualPaperBoy
           break;
         case "french":
           result = _languageDicoFr.ContainsKey(index) ? _languageDicoFr[index] :
-            Translate("the term") + Punctuation.Colon + DoubleQuote + index + DoubleQuote +
-            Punctuation.OneSpace + Translate("has not been translated yet") + Punctuation.Period + NewLine +
+            Translate("the term") + Punctuation.Colon + Punctuation.DoubleQuote + index +
+           Punctuation.DoubleQuote +
+            Punctuation.OneSpace + Translate("has not been translated yet") + Punctuation.Period + 
+            Punctuation.CrLf +
            Translate("Please add an entry in the translation XML file or tell the developer to translate this term");
           break;
       }
