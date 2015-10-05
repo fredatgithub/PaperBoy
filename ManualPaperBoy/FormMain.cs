@@ -296,6 +296,7 @@ namespace ManualPaperBoy
             fileDeleted = true;
           }
           numberOfdownloadedFile++;
+          Application.DoEvents();
         }
       }
 
@@ -309,7 +310,7 @@ namespace ManualPaperBoy
       {
         string tmpMsg0 = Plural(numberOfdownloadedFile, Translate("The"));
         string tmpMsg1 = Plural(numberOfdownloadedFile, Translate("download"));
-        string tmpMsg2 = Space();
+        string tmpMsg2 = Punctuation.OneSpace;
         string tmpMsg3 = Plural(numberOfdownloadedFile, Translate("is"));
         string tmpMsg4 = Translate("done");
         string message = string.Format("{0}{2}{1}{2}{3}{2}{4}", tmpMsg0, tmpMsg1, tmpMsg2, tmpMsg3, tmpMsg4);
@@ -598,9 +599,9 @@ namespace ManualPaperBoy
         case "is":
           return number > 1 ? "are" : "is"; // without a space before
         case "The":
-          return "The"; // CAPITAL usefull for french plural which is different le less
+          return "The"; // CAPITAL usefull for french plural which is different le les
         case "the":
-          return "the"; // lower case usefull for french plural which is different le less
+          return "the"; // lower case usefull for french plural which is different le les
         default:
           return number > 1 ? "s" : string.Empty;
       }
