@@ -42,6 +42,7 @@ namespace ManualPaperBoy
     readonly Dictionary<string, string> _languageDicoEn = new Dictionary<string, string>();
     readonly Dictionary<string, string> _languageDicoFr = new Dictionary<string, string>();
     private bool _editionDuringWeekEnd;
+    private string _currentLanguage;
 
     private static string Space(int number = 1)
     {
@@ -91,6 +92,7 @@ namespace ManualPaperBoy
 
     private static void LoadNewspaper(ComboBox cb)
     {
+      // TODO should be an XML file
       cb.Items.Clear();
       cb.Items.Add("Direct Matin");
       cb.Items.Add("20 minutes");
@@ -99,6 +101,7 @@ namespace ManualPaperBoy
 
     private static void LoadComboBox(ComboBox cb)
     {
+      // TODO should be an XML file
       cb.Items.Clear();
       cb.Items.Add("Direct Matin Edition Nationale");
       cb.Items.Add("Direct Matin Bordeaux");
@@ -120,6 +123,9 @@ namespace ManualPaperBoy
       Top = Settings.Default.WindowTop < 0 ? 0 : Settings.Default.WindowTop;
       Left = Settings.Default.WindowLeft < 0 ? 0 : Settings.Default.WindowLeft;
       textBoxSaveFilePath.Text = Settings.Default.TextSaveFilePath;
+      _currentLanguage = Settings.Default.LastLanguageUsed;
+      radioButtoSingleDate.Checked = Settings.Default.radioButtoSingleDate;
+      radioButtonSeveralDates.Checked = !Settings.Default.radioButtoSingleDate;
     }
 
     private void SaveWindowValue()
@@ -129,7 +135,8 @@ namespace ManualPaperBoy
       Settings.Default.WindowLeft = Left;
       Settings.Default.WindowTop = Top;
       Settings.Default.TextSaveFilePath = textBoxSaveFilePath.Text;
-      Settings.Default.LastLanguageUsed = frenchToolStripMenuItem.Checked ? "French" : "English";
+      Settings.Default.LastLanguageUsed = _currentLanguage;
+      Settings.Default.radioButtoSingleDate = radioButtoSingleDate.Checked;
       Settings.Default.Save();
     }
 
@@ -205,28 +212,28 @@ namespace ManualPaperBoy
     {
       if (textBoxSaveFilePath.Text == string.Empty)
       {
-        DisplayMessageOk(Translate("The save file path cannot be empty"),
+        DisplayMessage(Translate("The save file path cannot be empty"),
           Translate("Empty field"), MessageBoxButtons.OK);
         return;
       }
 
       if (listBoxSelectedEdition.Items.Count == 0)
       {
-        DisplayMessageOk(Translate("You have not selected any edition"),
+        DisplayMessage(Translate("You have not selected any edition"),
           Translate("Empty selection"), MessageBoxButtons.OK);
         return;
       }
 
       if (!Directory.Exists(textBoxSaveFilePath.Text))
       {
-        DisplayMessageOk(Translate("The directory doesn't exist"),
+        DisplayMessage(Translate("The directory doesn't exist"),
           Translate("Directory not correct"), MessageBoxButtons.OK);
         return;
       }
 
       if (radioButtonSeveralDates.Checked && dateTimePickerFromDate.Value > dateTimePickerEndDate.Value)
       {
-        DisplayMessageOk(Translate("The end date is earlier than the start date"),
+        DisplayMessage(Translate("The end date is earlier than the start date"),
           Translate("End date too early"), MessageBoxButtons.OK);
         return;
       }
@@ -271,7 +278,7 @@ namespace ManualPaperBoy
       string result = string.Empty;
       if (listOfDates.Count == 0)
       {
-        DisplayMessageOk(Translate("There is no selected day in the period"),
+        DisplayMessage(Translate("There is no selected day in the period"),
           Translate("No selection"), MessageBoxButtons.OK);
         return;
       }
@@ -288,6 +295,7 @@ namespace ManualPaperBoy
           url = AddEditionToUrl(url, GetEditionCode(selectedEditionInListBox));
           url = AddDateToUrl(url, dateTimeInRange);
           result = GetWebClientBinaries(url, Path.Combine(textBoxSaveFilePath.Text, fileName)) ? Translate("download ok and file saved") : Translate("error while downloading");
+          Application.DoEvents();
           Thread.Sleep(5000);
           long fileSize = FileGetSize(Path.Combine(textBoxSaveFilePath.Text, fileName));
           if (fileSize == 0)
@@ -303,19 +311,24 @@ namespace ManualPaperBoy
       //formWait.Close();
       if (fileDeleted)
       {
-        DisplayMessageOk(Translate("The download file has a size of zero byte so it has been deleted"),
+        DisplayMessage(Translate("The download file has a size of zero byte so it has been deleted"),
           Translate("File deleted"), MessageBoxButtons.OK);
       }
       else
       {
-        string tmpMsg0 = Plural(numberOfdownloadedFile, Translate("The"));
-        string tmpMsg1 = Plural(numberOfdownloadedFile, Translate("download"));
-        string tmpMsg2 = Punctuation.OneSpace;
+        string tmpMsg0 = Translate("The") + FrenchPlural(numberOfdownloadedFile, _currentLanguage );
+        string tmpMsg1 = Translate("download") + Plural(numberOfdownloadedFile, Translate("download"));
+        const string tmpMsg2 = Punctuation.OneSpace;
         string tmpMsg3 = Plural(numberOfdownloadedFile, Translate("is"));
-        string tmpMsg4 = Translate("done");
+        string tmpMsg4 = Translate("done") + FrenchPlural(numberOfdownloadedFile, _currentLanguage);
         string message = string.Format("{0}{2}{1}{2}{3}{2}{4}", tmpMsg0, tmpMsg1, tmpMsg2, tmpMsg3, tmpMsg4);
-        DisplayMessageOk(message, Translate("Download is over"), MessageBoxButtons.OK);
+        DisplayMessage(message, Translate("Download is over"), MessageBoxButtons.OK);
       }
+    }
+
+    public static string FrenchPlural(int number, string currentLanguage = "english")
+    {
+      return (number > 1 && currentLanguage.ToLower() == "french") ? "s" : string.Empty;
     }
 
     private static long FileGetSize(string filePath)
@@ -395,7 +408,7 @@ namespace ManualPaperBoy
       return result;
     }
 
-    private void DisplayMessageOk(string message, string title, MessageBoxButtons buttons)
+    private void DisplayMessage(string message, string title, MessageBoxButtons buttons)
     {
       MessageBox.Show(this, message, title, buttons);
     }
@@ -433,7 +446,7 @@ namespace ManualPaperBoy
     {
       if (listBoxSelectedEdition.Items.Count == 0)
       {
-        DisplayMessageOk(Translate("There is no element in the list") + Punctuation.Period + 
+        DisplayMessage(Translate("There is no element in the list") + Punctuation.Period + 
           Punctuation.CrLf +
           Translate("Please select an edition first") + Punctuation.Period,
           Translate("No element to choose from"), MessageBoxButtons.OK);
@@ -442,7 +455,7 @@ namespace ManualPaperBoy
 
       if (listBoxSelectedEdition.SelectedIndex == -1)
       {
-        DisplayMessageOk(Translate("No edition has been selected") + Punctuation.Period,
+        DisplayMessage(Translate("No edition has been selected") + Punctuation.Period,
           Translate("No selection"), MessageBoxButtons.OK);
         return;
       }
@@ -460,7 +473,7 @@ namespace ManualPaperBoy
     {
       if (listBoxSelectedEdition.Items.Count == 0)
       {
-        DisplayMessageOk(Translate("There is no element in the list") + Punctuation.Period + 
+        DisplayMessage(Translate("There is no element in the list") + Punctuation.Period + 
           Punctuation.CrLf +
           Translate("Please select an edition first"), Translate("No element to choose from"),
           MessageBoxButtons.OK);
@@ -474,7 +487,7 @@ namespace ManualPaperBoy
 
       if (listBoxSelectedEdition.SelectedIndex == -1)
       {
-        DisplayMessageOk(Translate("No edition has been selected") + Punctuation.Period,
+        DisplayMessage(Translate("No edition has been selected") + Punctuation.Period,
           Translate("No selection"), MessageBoxButtons.OK);
         return;
       }
@@ -491,19 +504,19 @@ namespace ManualPaperBoy
           }
           else
           {
-            DisplayMessageOk(Translate("The file") + Space() + Path.Combine(textBoxSaveFilePath.Text, fileName) +
+            DisplayMessage(Translate("The file") + Space() + Path.Combine(textBoxSaveFilePath.Text, fileName) +
               Space() + Translate("doesn't exist"), Translate("No file"), MessageBoxButtons.OK);
           }
         }
         else
         {
-          DisplayMessageOk(Translate("The directory") + Space() + textBoxSaveFilePath.Text +
+          DisplayMessage(Translate("The directory") + Space() + textBoxSaveFilePath.Text +
               Space() + Translate("doesn't exist"), Translate("No directory"), MessageBoxButtons.OK);
         }
       }
       catch (Exception exception)
       {
-        DisplayMessageOk(Translate("There was an error while trying to open the selected edition") +
+        DisplayMessage(Translate("There was an error while trying to open the selected edition") +
           exception.Message,
           Translate("Error"), MessageBoxButtons.OK);
       }
@@ -635,7 +648,7 @@ namespace ManualPaperBoy
       if (tb != ActiveControl) return;
       if (tb.Text == string.Empty)
       {
-        DisplayMessageOk(Translate("There is nothing to copy"), message, MessageBoxButtons.OK);
+        DisplayMessage(Translate("There is nothing to copy"), message, MessageBoxButtons.OK);
         return;
       }
 
@@ -647,7 +660,7 @@ namespace ManualPaperBoy
       if (tb != ActiveControl) return;
       if (tb.Text == string.Empty)
       {
-        DisplayMessageOk(Translate("There is") + Punctuation.OneSpace + errorMessage + 
+        DisplayMessage(Translate("There is") + Punctuation.OneSpace + errorMessage + 
           Punctuation.OneSpace + Translate("to cut") + Punctuation.OneSpace, 
           errorMessage, MessageBoxButtons.OK);
         return;
@@ -655,7 +668,7 @@ namespace ManualPaperBoy
 
       if (tb.SelectedText == string.Empty)
       {
-        DisplayMessageOk(Translate("No text has been selected"), errorMessage, MessageBoxButtons.OK);
+        DisplayMessage(Translate("No text has been selected"), errorMessage, MessageBoxButtons.OK);
         return;
       }
 
@@ -745,9 +758,9 @@ namespace ManualPaperBoy
 
     private void SetLanguage(string myLanguage)
     {
-      switch (myLanguage)
+      switch (myLanguage.ToLower())
       {
-        case "English":
+        case "english":
           frenchToolStripMenuItem.Checked = false;
           englishToolStripMenuItem.Checked = true;
           fileToolStripMenuItem.Text = _languageDicoEn["MenuFile"];
@@ -776,7 +789,6 @@ namespace ManualPaperBoy
           indexToolStripMenuItem.Text = _languageDicoEn["MenuHelpIndex"];
           searchToolStripMenuItem.Text = _languageDicoEn["MenuHelpSearch"];
           aboutToolStripMenuItem.Text = _languageDicoEn["MenuHelpAbout"];
-
           labelSaveFilePath.Text = _languageDicoEn["Save File Path:"];
           labelSelectNewspaper.Text = _languageDicoEn["Select Newspaper:"];
           labelSelectEdition.Text = _languageDicoEn["Select Edition:"];
@@ -792,8 +804,9 @@ namespace ManualPaperBoy
           buttonDownloadEditions.Text = _languageDicoEn["Download selected editions"];
           buttonLaunchSelectedEdition.Text = _languageDicoEn["Launch selected editions"];
           buttonLaunchTargetDirectory.Text = _languageDicoEn["Launch target directory"];
+          _currentLanguage = "english";
           break;
-        case "French":
+        case "french":
           frenchToolStripMenuItem.Checked = true;
           englishToolStripMenuItem.Checked = false;
           fileToolStripMenuItem.Text = _languageDicoFr["MenuFile"];
@@ -822,7 +835,6 @@ namespace ManualPaperBoy
           indexToolStripMenuItem.Text = _languageDicoFr["MenuHelpIndex"];
           searchToolStripMenuItem.Text = _languageDicoFr["MenuHelpSearch"];
           aboutToolStripMenuItem.Text = _languageDicoFr["MenuHelpAbout"];
-
           labelSaveFilePath.Text = _languageDicoFr["Save File Path:"];
           labelSelectNewspaper.Text = _languageDicoFr["Select Newspaper:"];
           labelSelectEdition.Text = _languageDicoFr["Select Edition:"];
@@ -838,6 +850,7 @@ namespace ManualPaperBoy
           buttonDownloadEditions.Text = _languageDicoFr["Download selected editions"];
           buttonLaunchSelectedEdition.Text = _languageDicoFr["Launch selected editions"];
           buttonLaunchTargetDirectory.Text = _languageDicoFr["Launch target directory"];
+          _currentLanguage = "french";
           break;
       }
     }

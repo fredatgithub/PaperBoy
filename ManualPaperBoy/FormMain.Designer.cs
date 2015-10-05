@@ -295,14 +295,14 @@
       // frenchToolStripMenuItem
       // 
       this.frenchToolStripMenuItem.Name = "frenchToolStripMenuItem";
-      this.frenchToolStripMenuItem.Size = new System.Drawing.Size(137, 26);
+      this.frenchToolStripMenuItem.Size = new System.Drawing.Size(181, 26);
       this.frenchToolStripMenuItem.Text = "Français";
       this.frenchToolStripMenuItem.Click += new System.EventHandler(this.frenchToolStripMenuItem_Click_1);
       // 
       // englishToolStripMenuItem
       // 
       this.englishToolStripMenuItem.Name = "englishToolStripMenuItem";
-      this.englishToolStripMenuItem.Size = new System.Drawing.Size(137, 26);
+      this.englishToolStripMenuItem.Size = new System.Drawing.Size(181, 26);
       this.englishToolStripMenuItem.Text = "Anglais";
       this.englishToolStripMenuItem.Click += new System.EventHandler(this.englishToolStripMenuItem_Click_1);
       // 
@@ -496,6 +496,7 @@
       this.dateTimePickerEndDate.Name = "dateTimePickerEndDate";
       this.dateTimePickerEndDate.Size = new System.Drawing.Size(233, 22);
       this.dateTimePickerEndDate.TabIndex = 16;
+      
       // 
       // labelEndDate
       // 
@@ -514,6 +515,7 @@
       this.dateTimePickerFromDate.Size = new System.Drawing.Size(233, 22);
       this.dateTimePickerFromDate.TabIndex = 15;
       this.dateTimePickerFromDate.Value = new System.DateTime(2015, 4, 15, 0, 0, 0, 0);
+      
       // 
       // labelFromDate
       // 
