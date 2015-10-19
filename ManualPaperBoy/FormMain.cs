@@ -168,22 +168,22 @@ namespace ManualPaperBoy
       }
     }
 
-    public static bool OutsideWeekEnd(DateTime dt)
+    private static bool OutsideWeekEnd(DateTime dt)
     {
       return (dt.DayOfWeek != DayOfWeek.Sunday) && (dt.DayOfWeek != DayOfWeek.Saturday);
     }
 
-    public static bool IsWeekEnd(DateTime dt)
+    private static bool IsWeekEnd(DateTime dt)
     {
       return !OutsideWeekEnd(dt);
     }
 
-    public static bool OutsideWeekEnd()
+    private static bool OutsideWeekEnd()
     {
       return (DateTime.Now.DayOfWeek != DayOfWeek.Sunday) && (DateTime.Now.DayOfWeek != DayOfWeek.Saturday);
     }
 
-    public static bool IsWeekEnd()
+    private static bool IsWeekEnd()
     {
       return !OutsideWeekEnd();
     }
@@ -326,7 +326,7 @@ namespace ManualPaperBoy
       }
     }
 
-    public static string FrenchPlural(int number, string currentLanguage = "english")
+    private static string FrenchPlural(int number, string currentLanguage = "english")
     {
       return (number > 1 && currentLanguage.ToLower() == "french") ? "s" : string.Empty;
     }
@@ -527,7 +527,7 @@ namespace ManualPaperBoy
       _editionDuringWeekEnd = checkBoxEditionDuringWeekEnd.Checked;
     }
 
-    public static string Plural(int number, string irregularNoun = "")
+    private static string Plural(int number, string irregularNoun = "")
     {
       switch (irregularNoun)
       {
@@ -692,7 +692,7 @@ namespace ManualPaperBoy
       }
     }
 
-    public enum Language
+    private enum Language
     {
       French,
       English
@@ -706,7 +706,17 @@ namespace ManualPaperBoy
       }
 
       // read the translation file and feed the language
-      XDocument xDoc = XDocument.Load(Settings.Default.LanguageFileName);
+      XDocument xDoc;
+      try
+      {
+        xDoc = XDocument.Load(Settings.Default.LanguageFileName);
+      }
+      catch (Exception exception)
+      {
+        MessageBox.Show("Error while loading xml file " + exception.Message);
+        CreateLanguageFile();
+        return;
+      }
       var result = from node in xDoc.Descendants("term")
                    where node.HasElements
                    let xElementName = node.Element("name")
@@ -721,11 +731,26 @@ namespace ManualPaperBoy
                      englishValue = xElementEnglish.Value,
                      frenchValue = xElementFrench.Value
                    };
-
-      foreach (var xElement in result)
+      foreach (var i in result)
       {
-        _languageDicoEn.Add(xElement.name, xElement.englishValue);
-        _languageDicoFr.Add(xElement.name, xElement.frenchValue);
+        //_languageDicoEn.Add(i.name, i.englishValue); // keep to search this line in all my previous projects
+        if (!_languageDicoEn.ContainsKey(i.name))
+        {
+          _languageDicoEn.Add(i.name, i.englishValue);
+        }
+        else
+        {
+          MessageBox.Show("Your xml file has duplicate like: " + i.name);
+        }
+
+        if (!_languageDicoFr.ContainsKey(i.name))
+        {
+          _languageDicoFr.Add(i.name, i.frenchValue);
+        }
+        else
+        {
+          MessageBox.Show("Your xml file has duplicate like: " + i.name);
+        }
       }
     }
 
@@ -733,19 +758,14 @@ namespace ManualPaperBoy
     {
       List<string> minimumVersion = new List<string>
       {
-        "<?xml version=\"1.0\" encoding=\"utf - 8\" ?>",
-        "<Document>",
-        "<DocumentVersion>",
-        "<version> 1.0 </version>",
-        "</DocumentVersion>",
+        "<?xml version=\"1.0\" encoding=\"utf-8\" ?>",
         "<terms>",
          "<term>",
         "<name>MenuFile</name>",
         "<englishValue>File</englishValue>",
         "<frenchValue>Fichier</frenchValue>",
         "</term>",
-        "  </terms>",
-        "</Document>"
+        "  </terms>"
       };
       StreamWriter sw = new StreamWriter(Settings.Default.LanguageFileName);
       foreach (string item in minimumVersion)
