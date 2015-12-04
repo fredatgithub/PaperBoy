@@ -252,7 +252,7 @@ namespace ManualPaperBoy
       //formWait.ShowDialog();
       bool fileDeleted = false;
       int numberOfdownloadedFile = 0;
-      List<DateTime> listOfDates = new List<DateTime>();
+      var listOfDates = new List<DateTime>();
       if (radioButtoSingleDate.Checked)
       {
         listOfDates.Add(dateTimePickerSelectDate.Value);
@@ -272,7 +272,7 @@ namespace ManualPaperBoy
           }
 
           selectedDate = selectedDate.Add(new TimeSpan(1, 0, 0, 0));
-        } while (selectedDate < dateTimePickerEndDate.Value);
+        } while (selectedDate <= dateTimePickerEndDate.Value);
       }
 
       string result = string.Empty;

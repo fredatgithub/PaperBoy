@@ -100,7 +100,7 @@
   <ItemGroup>
     <Content Include="paperboy-icon.ico" />
     <Content Include="Translations.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
