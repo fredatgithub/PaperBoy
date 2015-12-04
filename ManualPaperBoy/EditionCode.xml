@@ -1,0 +1,43 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<editions>
+  <edition>
+    <name>Direct Matin Edition Nationale</name>
+    <code>NEP</code>
+  </edition>
+  <edition>
+    <name>Direct Matin Bordeaux</name>
+    <code>BDX</code>
+  </edition>
+  <edition>
+    <name>Direct Matin Lille</name>
+    <code>LIL</code>
+  </edition>
+  <edition>
+    <name>Direct Matin Lyon</name>
+    <code>LYO</code>
+  </edition>
+  <edition>
+    <name>Direct Matin Provence</name>
+    <code>PRO</code>
+  </edition>
+  <edition>
+    <name>Direct Matin Montpellier</name>
+    <code>MTP</code>
+  </edition>
+  <edition>
+    <name>Direct Matin Grand ouest</name>
+    <code>VP1</code>
+  </edition>
+  <edition>
+    <name>Direct Matin Côte-d'azur</name>
+    <code>NP</code>
+  </edition>
+  <edition>
+    <name>Direct Matin Strasbourg</name>
+    <code>SP</code>
+  </edition>
+  <edition>
+    <name>Direct Matin Toulouse</name>
+    <code>TP</code>
+  </edition>
+</editions>

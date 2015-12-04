@@ -418,8 +418,7 @@ namespace ManualPaperBoy
       return number < 10 ? "0" + number : number.ToString();
     }
 
-    private static bool GetWebClientBinaries(string url = "http://www.google.com/",
-      string fileName = "untitled-file.pdf")
+    private static bool GetWebClientBinaries(string url = "http://www.google.com/", string fileName = "untitled-file.pdf")
     {
       WebClient client = new WebClient();
       bool result = false;
@@ -705,7 +704,6 @@ namespace ManualPaperBoy
         CreateLanguageFile();
       }
 
-      // read the translation file and feed the language
       XDocument xDoc;
       try
       {
@@ -756,7 +754,7 @@ namespace ManualPaperBoy
 
     private static void CreateLanguageFile()
     {
-      List<string> minimumVersion = new List<string>
+      var minimumVersion = new List<string>
       {
         "<?xml version=\"1.0\" encoding=\"utf-8\" ?>",
         "<terms>",
@@ -917,8 +915,7 @@ namespace ManualPaperBoy
         case "french":
           result = _languageDicoFr.ContainsKey(index) ? _languageDicoFr[index] :
             Translate("the term") + Punctuation.Colon + Punctuation.DoubleQuote + index +
-           Punctuation.DoubleQuote +
-            Punctuation.OneSpace + Translate("has not been translated yet") + Punctuation.Period + 
+           Punctuation.DoubleQuote + Punctuation.OneSpace + Translate("has not been translated yet") + Punctuation.Period + 
             Punctuation.CrLf +
            Translate("Please add an entry in the translation XML file or tell the developer to translate this term");
           break;
