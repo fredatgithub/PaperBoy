@@ -157,6 +157,11 @@ namespace ManualPaperBoy
         comboBoxSelectEdition.SelectedIndex = comboBoxSelectEdition.SelectedIndex + 1;
       }
 
+      if (listBoxSelectedEdition.Items.Count == 1)
+      {
+        listBoxSelectedEdition.SelectedIndex = 0;
+      }
+
       UpdateButtons();
     }
 
