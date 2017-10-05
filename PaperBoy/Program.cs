@@ -6,9 +6,9 @@ using System.Threading;
 
 namespace PaperBoy
 {
-  class Program
+  internal static class Program
   {
-    static void Main(string[] arguments)
+    private static void Main(string[] arguments)
     {
       Action<string> display = Console.WriteLine;
       string saveFilePath = string.Empty;
@@ -80,6 +80,7 @@ namespace PaperBoy
         else
         {
           display("Waiting for Internet connexion ...");
+          numberOfLoop  = numberOfLoop >= int.MaxValue ? 1 : numberOfLoop++;
           Thread.Sleep(numberOfLoop++ * 1000);
         }
       }
@@ -221,7 +222,7 @@ namespace PaperBoy
       return result;
     }
 
-    private void DisplayMessageOk(string message)
+    private static void DisplayMessageOk(string message)
     {
       Console.WriteLine(message);
     }
