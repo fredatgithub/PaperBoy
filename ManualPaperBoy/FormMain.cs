@@ -1,23 +1,4 @@
-﻿/*
-The MIT License(MIT)
-Copyright(c) 2015 Freddy Juhel
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
-*/
-using System;
+﻿using System;
 using System.Diagnostics;
 using System.Reflection;
 using System.Windows.Forms;
@@ -72,6 +53,7 @@ namespace ManualPaperBoy
       Assembly assembly = Assembly.GetExecutingAssembly();
       FileVersionInfo fvi = FileVersionInfo.GetVersionInfo(assembly.Location);
       Text += string.Format(" V{0}.{1}.{2}.{3}", fvi.FileMajorPart, fvi.FileMinorPart, fvi.FileBuildPart, fvi.FilePrivatePart);
+      //Text += $" V{fvi.FileMajorPart}.{fvi.FileMinorPart}.{fvi.FileBuildPart}.{fvi.FilePrivatePart}";
     }
 
     private void FormMain_Load(object sender, EventArgs e)
@@ -277,14 +259,14 @@ namespace ManualPaperBoy
           }
 
           selectedDate = selectedDate.Add(new TimeSpan(1, 0, 0, 0));
+
         } while (selectedDate <= dateTimePickerEndDate.Value);
       }
 
       string result = string.Empty;
       if (listOfDates.Count == 0)
       {
-        DisplayMessage(Translate("There is no selected day in the period"),
-          Translate("No selection"), MessageBoxButtons.OK);
+        DisplayMessage(Translate("There is no selected day in the period"), Translate("No selection"), MessageBoxButtons.OK);
         return;
       }
 
@@ -308,6 +290,7 @@ namespace ManualPaperBoy
             File.Delete(Path.Combine(textBoxSaveFilePath.Text, fileName));
             fileDeleted = true;
           }
+
           numberOfdownloadedFile++;
           Application.DoEvents();
         }
@@ -321,7 +304,7 @@ namespace ManualPaperBoy
       }
       else
       {
-        string tmpMsg0 = Translate("The") + FrenchPlural(numberOfdownloadedFile, _currentLanguage );
+        string tmpMsg0 = Translate("The") + FrenchPlural(numberOfdownloadedFile, _currentLanguage);
         string tmpMsg1 = Translate("download") + Plural(numberOfdownloadedFile, Translate("download"));
         const string tmpMsg2 = Punctuation.OneSpace;
         string tmpMsg3 = Plural(numberOfdownloadedFile, Translate("is"));
@@ -450,7 +433,7 @@ namespace ManualPaperBoy
     {
       if (listBoxSelectedEdition.Items.Count == 0)
       {
-        DisplayMessage(Translate("There is no element in the list") + Punctuation.Period + 
+        DisplayMessage(Translate("There is no element in the list") + Punctuation.Period +
           Punctuation.CrLf +
           Translate("Please select an edition first") + Punctuation.Period,
           Translate("No element to choose from"), MessageBoxButtons.OK);
@@ -477,7 +460,7 @@ namespace ManualPaperBoy
     {
       if (listBoxSelectedEdition.Items.Count == 0)
       {
-        DisplayMessage(Translate("There is no element in the list") + Punctuation.Period + 
+        DisplayMessage(Translate("There is no element in the list") + Punctuation.Period +
           Punctuation.CrLf +
           Translate("Please select an edition first"), Translate("No element to choose from"),
           MessageBoxButtons.OK);
@@ -649,7 +632,11 @@ namespace ManualPaperBoy
 
     private void CopytToClipboard(TextBoxBase tb, string message = "Nothing")
     {
-      if (tb != ActiveControl) return;
+      if (tb != ActiveControl)
+      {
+        return;
+      }
+
       if (tb.Text == string.Empty)
       {
         DisplayMessage(Translate("There is nothing to copy"), message, MessageBoxButtons.OK);
@@ -661,11 +648,15 @@ namespace ManualPaperBoy
 
     private void CutToClipboard(TextBoxBase tb, string errorMessage = "Nothing")
     {
-      if (tb != ActiveControl) return;
+      if (tb != ActiveControl)
+      {
+        return;
+      }
+
       if (tb.Text == string.Empty)
       {
-        DisplayMessage(Translate("There is") + Punctuation.OneSpace + errorMessage + 
-          Punctuation.OneSpace + Translate("to cut") + Punctuation.OneSpace, 
+        DisplayMessage(Translate("There is") + Punctuation.OneSpace + errorMessage +
+          Punctuation.OneSpace + Translate("to cut") + Punctuation.OneSpace,
           errorMessage, MessageBoxButtons.OK);
         return;
       }
@@ -682,7 +673,11 @@ namespace ManualPaperBoy
 
     private void PasteFromClipboard(TextBoxBase tb)
     {
-      if (tb != ActiveControl) return;
+      if (tb != ActiveControl)
+      {
+        return;
+      }
+
       var selectionIndex = tb.SelectionStart;
       tb.SelectedText = Clipboard.GetText();
       tb.SelectionStart = selectionIndex + Clipboard.GetText().Length;
@@ -1038,14 +1033,14 @@ namespace ManualPaperBoy
         case "english":
           result = _languageDicoEn.ContainsKey(index) ? _languageDicoEn[index] :
            Translate("the term") + Punctuation.Colon + Punctuation.DoubleQuote + index +
-           Punctuation.DoubleQuote + Punctuation.OneSpace + 
+           Punctuation.DoubleQuote + Punctuation.OneSpace +
            Translate("has not been translated yet") + Punctuation.Period + Punctuation.CrLf +
            Translate("Please add an entry in the translation XML file or tell the developer to translate this term");
           break;
         case "french":
           result = _languageDicoFr.ContainsKey(index) ? _languageDicoFr[index] :
             Translate("the term") + Punctuation.Colon + Punctuation.DoubleQuote + index +
-           Punctuation.DoubleQuote + Punctuation.OneSpace + Translate("has not been translated yet") + Punctuation.Period + 
+           Punctuation.DoubleQuote + Punctuation.OneSpace + Translate("has not been translated yet") + Punctuation.Period +
             Punctuation.CrLf +
            Translate("Please add an entry in the translation XML file or tell the developer to translate this term");
           break;
