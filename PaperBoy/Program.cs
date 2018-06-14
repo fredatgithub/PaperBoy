@@ -56,11 +56,15 @@ namespace PaperBoy
 
       display("Getting Direct Matin electronic PDF newspaper");
       // http://kiosque.directmatin.fr/Pdf.aspx?edition=NEP&date=20150415
-      string url = "http://kiosque.directmatin.fr/Pdf.aspx?edition=";
+      // change of address on 14-06-2018
+      // rss.cnews.fr/pdf/NEP/20180614
+      // old address string url = "http://kiosque.directmatin.fr/Pdf.aspx?edition=";
+      // new url address starting on 14-06-2018
+      string url = "http://rss.cnews.fr/pdf";
       string dateEnglish = DateTime.Now.Year +
         ToTwoDigits(DateTime.Now.Month) +
         ToTwoDigits(DateTime.Now.Day);
-      url += editionRequested + "&date=";
+      url += $"/{editionRequested}/";
       url += dateEnglish;
       string editionName = string.Empty;
       editionName = GetEditionName(editionRequested).Replace(" ", "_").Replace("'", "_");
@@ -89,13 +93,13 @@ namespace PaperBoy
       string result = string.Empty;
       if (File.Exists(fileName) && FileGetSize(fileName) >= 99)
       {
-        result = "The file " + fileName + " has already been downloaded.";
+        result = $"The file:{Environment.NewLine}{fileName}{Environment.NewLine}has already been downloaded.";
       }
       else       // exclude week-end
       {
         if (OutsideWeekEnd())
         {
-          result = GetWebClientBinaries(url, fileName) ? string.Format("download ok and file saved in {0}{2}The size of the file is {1:n0} bytes.", fileName,
+          result = GetWebClientBinaries(url, fileName) ? string.Format("Download ok{2}{2}File saved in the following directory:{2}{0}{2}{2}The size of the file is {1:n0} bytes.", fileName,
              FileGetSize(fileName), Environment.NewLine) : "error while downloading";
         }
         else
@@ -112,9 +116,10 @@ namespace PaperBoy
         fileDeleted = true;
       }
 
+      display(string.Empty);
       display(fileDeleted ? "The download file has a size of zero byte so it has been deleted" : result);
 
-      display("Press a key to exit:");
+      display($"{Environment.NewLine}Press a key to exit:");
       Console.ReadKey();
     }
 
@@ -129,6 +134,7 @@ namespace PaperBoy
 
       try
       {
+        // variable response not used but useful to check for exception
         HttpWebResponse response = (HttpWebResponse)request.GetResponse();
         return true;
       }
@@ -141,25 +147,25 @@ namespace PaperBoy
     private static void Usage()
     {
       Action<string> display = Console.WriteLine;
-      display("paperboy is an application to get your electronic newspaper automatically");
+      display("Paperboy is an application to get your electronic newspaper automatically");
       display("Application created by Freddy juhel in April 2015. Copyright (c) 2015 MIT");
-      display("");
+      display(string.Empty);
       display("Usage:");
-      display("");
+      display(string.Empty);
       display("paperboy -help");
       display("paperboy -?");
       display("paperboy -Help");
       display("This help");
-      display("");
+      display(string.Empty);
       display("paperboy -path=<path to save the PDF file.> -edition=<edition code>");
       display("Example: ");
-      display("");
+      display(string.Empty);
       display("paperboy -path=c:\\temp -edition=NEP");
-      display("");
+      display(string.Empty);
       display("Direct Matin editions Code in UPPERCASE:");
       display("----------------------------------------");
       display("Direct Matin Edition Nationale is the default edition");
-      display("");
+      display(string.Empty);
       display("Direct Matin Edition Nationale NEP");
       display("Direct Matin Bordeaux          BDX");
       display("Direct Matin Lille             LIL");
@@ -170,7 +176,7 @@ namespace PaperBoy
       display("Direct Matin Côte-d'azur       NP");
       display("Direct Matin Strasbourg        SP");
       display("Direct Matin Toulouse          TP");
-      display("");
+      display(string.Empty);
       display("Press a key to exit:");
       Console.ReadKey();
     }
@@ -244,7 +250,7 @@ namespace PaperBoy
       return number < 10 ? "0" + number : number.ToString();
     }
 
-    private static bool GetWebClientBinaries(string url = "http://www.google.com/",
+    private static bool GetWebClientBinaries(string url = "http://www.google.fr/",
       string fileName = "untitled-file.pdf")
     {
       WebClient client = new WebClient();
