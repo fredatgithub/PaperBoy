@@ -22,7 +22,8 @@ namespace PaperBoy
           return;
         }
 
-        saveFilePath = Directory.Exists(arguments[0].Substring(6)) ? arguments[0].Substring(6) : Properties.Settings.Default.saveFilePath;
+        //saveFilePath = Directory.Exists(arguments[0].Substring(6)) ? arguments[0].Substring(6) : Properties.Settings.Default.saveFilePath;
+        saveFilePath = Properties.Settings.Default.saveFilePath;
 
         if (arguments.Length >= 2)
         {
