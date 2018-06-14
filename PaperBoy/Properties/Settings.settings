@@ -3,7 +3,7 @@
   <Profiles />
   <Settings>
     <Setting Name="saveFilePath" Type="System.String" Scope="User">
-      <Value Profile="(Default)">C:\Users\fred\Cloud Drive\Magazines\Direct_matin</Value>
+      <Value Profile="(Default)">C:\Users\fred\Documents\MEGA\Magazine\Direct_Matin</Value>
     </Setting>
   </Settings>
 </SettingsFile>

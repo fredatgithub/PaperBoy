@@ -79,7 +79,7 @@ namespace PaperBoy
         if (IsInternetConnected())
         {
           internetConnexion = true;
-          display("Now connected to Internet.");
+          display($"{Environment.NewLine}Now connected to Internet.");
         }
         else
         {
