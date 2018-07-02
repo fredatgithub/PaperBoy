@@ -119,7 +119,11 @@ namespace PaperBoy
 
       display(string.Empty);
       display(fileDeleted ? "The download file has a size of zero byte so it has been deleted" : result);
-
+      display(string.Empty);
+      display($"The url is {url}");
+      display(string.Empty);
+      display($"The  filename is {fileName}");
+      display(string.Empty);
       display($"{Environment.NewLine}Press a key to exit:");
       Console.ReadKey();
     }
