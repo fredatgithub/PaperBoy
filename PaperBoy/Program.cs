@@ -122,7 +122,7 @@ namespace PaperBoy
       display(string.Empty);
       display($"The url is {url}");
       display(string.Empty);
-      display($"The  filename is {fileName}");
+      display($"The  filename is :{Environment.NewLine}{fileName}");
       display(string.Empty);
       display($"{Environment.NewLine}Press a key to exit:");
       Console.ReadKey();
@@ -264,6 +264,7 @@ namespace PaperBoy
       client.Headers.Add("user-agent", "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; .NET CLR 1.0.3705;)");
       try
       {
+        Thread.Sleep(2000);
         client.DownloadFile(url, fileName);
         result = true;
       }
