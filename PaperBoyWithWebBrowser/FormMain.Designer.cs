@@ -65,6 +65,10 @@
       this.searchToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
       this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
       this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+      this.webBrowserMain = new System.Windows.Forms.WebBrowser();
+      this.textBoxUrl = new System.Windows.Forms.TextBox();
+      this.labelUrl = new System.Windows.Forms.Label();
+      this.buttonWebGo = new System.Windows.Forms.Button();
       this.menuStrip1.SuspendLayout();
       this.SuspendLayout();
       // 
@@ -81,7 +85,7 @@
       this.menuStrip1.Location = new System.Drawing.Point(0, 0);
       this.menuStrip1.Name = "menuStrip1";
       this.menuStrip1.Padding = new System.Windows.Forms.Padding(4, 2, 0, 2);
-      this.menuStrip1.Size = new System.Drawing.Size(683, 24);
+      this.menuStrip1.Size = new System.Drawing.Size(946, 24);
       this.menuStrip1.TabIndex = 1;
       this.menuStrip1.Text = "menuStrip1";
       // 
@@ -364,14 +368,53 @@
       this.aboutToolStripMenuItem.Text = "À &propos de...";
       this.aboutToolStripMenuItem.Click += new System.EventHandler(this.AboutToolStripMenuItem_Click);
       // 
+      // webBrowserMain
+      // 
+      this.webBrowserMain.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+      this.webBrowserMain.Location = new System.Drawing.Point(12, 117);
+      this.webBrowserMain.MinimumSize = new System.Drawing.Size(20, 20);
+      this.webBrowserMain.Name = "webBrowserMain";
+      this.webBrowserMain.Size = new System.Drawing.Size(922, 589);
+      this.webBrowserMain.TabIndex = 2;
+      // 
+      // textBoxUrl
+      // 
+      this.textBoxUrl.Location = new System.Drawing.Point(74, 75);
+      this.textBoxUrl.Name = "textBoxUrl";
+      this.textBoxUrl.Size = new System.Drawing.Size(740, 20);
+      this.textBoxUrl.TabIndex = 3;
+      // 
+      // labelUrl
+      // 
+      this.labelUrl.AutoSize = true;
+      this.labelUrl.Location = new System.Drawing.Point(22, 75);
+      this.labelUrl.Name = "labelUrl";
+      this.labelUrl.Size = new System.Drawing.Size(35, 13);
+      this.labelUrl.TabIndex = 4;
+      this.labelUrl.Text = "URL :";
+      // 
+      // buttonWebGo
+      // 
+      this.buttonWebGo.Location = new System.Drawing.Point(820, 75);
+      this.buttonWebGo.Name = "buttonWebGo";
+      this.buttonWebGo.Size = new System.Drawing.Size(40, 23);
+      this.buttonWebGo.TabIndex = 5;
+      this.buttonWebGo.Text = "Go";
+      this.buttonWebGo.UseVisualStyleBackColor = true;
+      // 
       // FormMain
       // 
       this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
       this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-      this.ClientSize = new System.Drawing.Size(683, 434);
+      this.ClientSize = new System.Drawing.Size(946, 718);
+      this.Controls.Add(this.buttonWebGo);
+      this.Controls.Add(this.labelUrl);
+      this.Controls.Add(this.textBoxUrl);
+      this.Controls.Add(this.webBrowserMain);
       this.Controls.Add(this.menuStrip1);
       this.MainMenuStrip = this.menuStrip1;
-      this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+      this.Margin = new System.Windows.Forms.Padding(2);
       this.Name = "FormMain";
       this.ShowIcon = false;
       this.Text = "PaperBoy with Web Browser";
@@ -423,5 +466,9 @@
     private System.Windows.Forms.ToolStripMenuItem SmallToolStripMenuItem;
     private System.Windows.Forms.ToolStripMenuItem MediumToolStripMenuItem;
     private System.Windows.Forms.ToolStripMenuItem LargeToolStripMenuItem;
+    private System.Windows.Forms.WebBrowser webBrowserMain;
+    private System.Windows.Forms.TextBox textBoxUrl;
+    private System.Windows.Forms.Label labelUrl;
+    private System.Windows.Forms.Button buttonWebGo;
   }
 }
