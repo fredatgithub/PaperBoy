@@ -264,7 +264,7 @@ namespace PaperBoy
       client.Headers.Add("user-agent", "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; .NET CLR 1.0.3705;)");
       try
       {
-        Thread.Sleep(2000);
+        Thread.Sleep(5000);
         client.DownloadFile(url, fileName);
         result = true;
       }
