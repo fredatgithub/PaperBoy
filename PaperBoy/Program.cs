@@ -15,8 +15,7 @@ namespace PaperBoy
       string editionRequested = string.Empty;
       if (arguments.Length != 0)
       {
-        if (arguments[0].Contains("help") || arguments[0].Contains("?") ||
-          arguments[0].Contains("Help") || arguments[0].Contains("HELP"))
+        if (arguments[0].ToLower().Contains("help") || arguments[0].Contains("?"))
         {
           Usage();
           return;
@@ -61,7 +60,7 @@ namespace PaperBoy
       // rss.cnews.fr/pdf/NEP/20180614
       // old address string url = "http://kiosque.directmatin.fr/Pdf.aspx?edition=";
       // new url address starting on 14-06-2018
-      string url = "http://rss.cnews.fr/pdf";
+      string url = "https://rss.cnews.fr/pdf";
       string dateEnglish = DateTime.Now.Year +
         ToTwoDigits(DateTime.Now.Month) +
         ToTwoDigits(DateTime.Now.Day);
@@ -260,8 +259,8 @@ namespace PaperBoy
     {
       WebClient client = new WebClient();
       bool result = false;
-      // set the user agent to IE6
-      client.Headers.Add("user-agent", "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; .NET CLR 1.0.3705;)");
+      // set the user agent to IE6 // now 03/09/2018 creates a 403 so comment it
+      //client.Headers.Add("user-agent", "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; .NET CLR 1.0.3705;)");
       try
       {
         Thread.Sleep(5000);
