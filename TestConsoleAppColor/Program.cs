@@ -6,10 +6,19 @@ namespace TestConsoleAppColor
   {
     private static void Main()
     {
-      WriteTextInColor(ConsoleColor.Red);
-      WriteTextInColor(ConsoleColor.Green);
       WriteTextInColor(ConsoleColor.DarkGreen);
       WriteTextInColor(ConsoleColor.White);
+      WriteTextInColor(ConsoleColor.Gray);
+      WriteTextInColor(ConsoleColor.Cyan);
+      WriteTextInColor(ConsoleColor.DarkBlue);
+      WriteTextInColor(ConsoleColor.DarkMagenta);
+      WriteTextInColor(ConsoleColor.DarkYellow);
+      WriteTextInColor(ConsoleColor.Blue);
+      WriteTextInColor(ConsoleColor.DarkGray);
+      WriteTextInColor(ConsoleColor.Magenta);
+      WriteTextInColor(ConsoleColor.Yellow);
+      WriteTextInColor(ConsoleColor.Red);
+      WriteTextInColor(ConsoleColor.Green);
 
       Console.ForegroundColor = ConsoleColor.White;
       Console.WriteLine("Press any key to exit:");
