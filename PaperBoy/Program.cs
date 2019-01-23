@@ -117,12 +117,15 @@ namespace PaperBoy
       }
 
       display(string.Empty);
+      Console.ForegroundColor = ConsoleColor.Red;
       display(fileDeleted ? "The download file has a size of zero byte so it has been deleted" : result);
       display(string.Empty);
+      Console.ForegroundColor = ConsoleColor.White;
       display($"The url is {url}");
       display(string.Empty);
       display($"The  filename is :{Environment.NewLine}{fileName}");
       display(string.Empty);
+      Console.ForegroundColor = ConsoleColor.Green;
       display($"{Environment.NewLine}Press a key to exit:");
       Console.ReadKey();
     }
@@ -152,7 +155,7 @@ namespace PaperBoy
     {
       Action<string> display = Console.WriteLine;
       display("Paperboy is an application to get your electronic newspaper automatically");
-      display("Application created by Freddy juhel in April 2015. Copyright (c) 2015 MIT");
+      display($"Application created by Freddy juhel in April 2015. Copyright (c) {DateTime.Now.Year} MIT");
       display(string.Empty);
       display("Usage:");
       display(string.Empty);
@@ -164,6 +167,7 @@ namespace PaperBoy
       display("paperboy -path=<path to save the PDF file.> -edition=<edition code>");
       display("Example: ");
       display(string.Empty);
+      Console.ForegroundColor = ConsoleColor.Green;
       display("paperboy -path=c:\\temp -edition=NEP");
       display(string.Empty);
       display("Direct Matin editions Code in UPPERCASE:");
