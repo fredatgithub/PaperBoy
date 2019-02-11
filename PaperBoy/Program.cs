@@ -99,8 +99,7 @@ namespace PaperBoy
       {
         if (OutsideWeekEnd())
         {
-          result = GetWebClientBinaries(url, fileName) ? string.Format("Download ok{2}{2}File saved in the following directory:{2}{0}{2}{2}The size of the file is {1:n0} bytes.", fileName,
-             FileGetSize(fileName), Environment.NewLine) : "error while downloading";
+          result = GetWebClientBinaries(url, fileName) ? string.Format("Download ok{2}{2}File saved in the following directory:{2}{0}{2}{2}The size of the file is {1:n0} bytes.", fileName, FileGetSize(fileName), Environment.NewLine) : "error while downloading";
         }
         else
         {
@@ -135,7 +134,7 @@ namespace PaperBoy
       return (DateTime.Now.DayOfWeek != DayOfWeek.Sunday) && (DateTime.Now.DayOfWeek != DayOfWeek.Saturday);
     }
 
-    private static bool IsInternetConnected()
+    public static bool IsInternetConnected()
     {
       HttpWebRequest request = (HttpWebRequest)WebRequest.Create("http://www.google.fr");
 
@@ -206,7 +205,7 @@ namespace PaperBoy
 
     private static Dictionary<string, string> LoadEditioncodes()
     {
-      // TODO could be an XML file or property settings
+      // TODO could be in an XML file or property settings
       var result = new Dictionary<string, string>
       {
         {"Direct Matin Edition Nationale", "NEP"},
@@ -258,7 +257,7 @@ namespace PaperBoy
       return number < 10 ? "0" + number : number.ToString();
     }
 
-    private static bool GetWebClientBinaries(string url = "http://www.google.fr/",
+    public static bool GetWebClientBinaries(string url = "http://www.google.fr/",
       string fileName = "untitled-file.pdf")
     {
       WebClient client = new WebClient();
@@ -271,14 +270,14 @@ namespace PaperBoy
         client.DownloadFile(url, fileName);
         result = true;
       }
-      catch (WebException we)
+      catch (WebException webException)
       {
-        Console.WriteLine(we.Message + "\n" + we.Status);
+        Console.WriteLine(webException.Message + "\n" + webException.Status);
         result = false;
       }
-      catch (NotSupportedException ne)
+      catch (NotSupportedException exception)
       {
-        Console.WriteLine(ne.Message);
+        Console.WriteLine(exception.Message);
         result = false;
       }
 
