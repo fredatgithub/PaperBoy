@@ -6,9 +6,9 @@ using System.Threading;
 
 namespace PaperBoy
 {
-  internal static class Program
+  public static class Program
   {
-    private static void Main(string[] arguments)
+    public static void Main(string[] arguments)
     {
       Action<string> display = Console.WriteLine;
       string saveFilePath = string.Empty;
@@ -263,7 +263,7 @@ namespace PaperBoy
       WebClient client = new WebClient();
       bool result = false;
       // set the user agent to IE6 // now 03/09/2018 creates a 403 so comment it
-      //client.Headers.Add("user-agent", "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; .NET CLR 1.0.3705;)");
+      client.Headers.Add("user-agent", "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; .NET CLR 1.0.3705;)");
       try
       {
         Thread.Sleep(5000);
@@ -275,9 +275,9 @@ namespace PaperBoy
         Console.WriteLine(webException.Message + "\n" + webException.Status);
         result = false;
       }
-      catch (NotSupportedException exception)
+      catch (NotSupportedException notSupportedException)
       {
-        Console.WriteLine(exception.Message);
+        Console.WriteLine(notSupportedException.Message);
         result = false;
       }
 
